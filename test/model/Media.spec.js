@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.Media();
+    instance = new SVRF.Media();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,85 +53,85 @@
   describe('Media', function() {
     it('should create an instance of Media', function() {
       // uncomment below and update the code to test Media
-      //var instane = new SvrfApi.Media();
-      //expect(instance).to.be.a(SvrfApi.Media);
+      //var instane = new SVRF.Media();
+      //expect(instance).to.be.a(SVRF.Media);
     });
 
     it('should have the property adult (base name: "adult")', function() {
       // uncomment below and update the code to test the property adult
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property authors (base name: "authors")', function() {
       // uncomment below and update the code to test the property authors
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property canonical (base name: "canonical")', function() {
       // uncomment below and update the code to test the property canonical
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property description (base name: "description")', function() {
       // uncomment below and update the code to test the property description
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property duration (base name: "duration")', function() {
       // uncomment below and update the code to test the property duration
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property files (base name: "files")', function() {
       // uncomment below and update the code to test the property files
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property height (base name: "height")', function() {
       // uncomment below and update the code to test the property height
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property id (base name: "id")', function() {
       // uncomment below and update the code to test the property id
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property site (base name: "site")', function() {
       // uncomment below and update the code to test the property site
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property title (base name: "title")', function() {
       // uncomment below and update the code to test the property title
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property url (base name: "url")', function() {
       // uncomment below and update the code to test the property url
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 
     it('should have the property width (base name: "width")', function() {
       // uncomment below and update the code to test the property width
-      //var instane = new SvrfApi.Media();
+      //var instane = new SVRF.Media();
       //expect(instance).to.be();
     });
 

@@ -1,4 +1,4 @@
-# SvrfApi.SearchMediaResponse
+# SVRF.SearchMediaResponse
 
 ## Properties
 Name | Type | Description | Notes

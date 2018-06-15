@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('../model/AuthResponse'), require('../model/Body'), require('../model/ErrorResponse'), require('../model/RateLimitResponse'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.AuthenticateApi = factory(root.SvrfApi.ApiClient, root.SvrfApi.AuthResponse, root.SvrfApi.Body, root.SvrfApi.ErrorResponse, root.SvrfApi.RateLimitResponse);
+    root.SVRF.AuthenticateApi = factory(root.SVRF.ApiClient, root.SVRF.AuthResponse, root.SVRF.Body, root.SVRF.ErrorResponse, root.SVRF.RateLimitResponse);
   }
 }(this, function(ApiClient, AuthResponse, Body, ErrorResponse, RateLimitResponse) {
   'use strict';
@@ -48,22 +48,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the appAuthenticatePost operation.
-     * @callback module:api/AuthenticateApi~appAuthenticatePostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/AuthResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Authenticate application
      * Authenticate an application&#39;s SVRF API Key to retrieve an access token to the SVRF API.
      * @param {module:model/Body} body 
-     * @param {module:api/AuthenticateApi~appAuthenticatePostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/AuthResponse}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthResponse} and HTTP response
      */
-    this.appAuthenticatePost = function(body, callback) {
+    this.appAuthenticatePostWithHttpInfo = function(body) {
       var postBody = body;
 
       // verify the required parameter 'body' is set
@@ -91,8 +83,21 @@
       return this.apiClient.callApi(
         '/app/authenticate', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Authenticate application
+     * Authenticate an application&#39;s SVRF API Key to retrieve an access token to the SVRF API.
+     * @param {module:model/Body} body 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AuthResponse}
+     */
+    this.appAuthenticatePost = function(body) {
+      return this.appAuthenticatePostWithHttpInfo(body)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 

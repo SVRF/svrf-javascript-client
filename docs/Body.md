@@ -1,4 +1,4 @@
-# SvrfApi.Body
+# SVRF.Body
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# SvrfApi.AuthenticateApi
+# SVRF.AuthenticateApi
 
 All URIs are relative to *https://api.svrf.com/v1*
 
@@ -17,21 +17,18 @@ Authenticate an application&#39;s SVRF API Key to retrieve an access token to th
 
 ### Example
 ```javascript
-var SvrfApi = require('svrf_api');
+var SVRF = require('svrf-client');
 
-var apiInstance = new SvrfApi.AuthenticateApi();
+var apiInstance = new SVRF.AuthenticateApi();
 
-var body = new SvrfApi.Body(); // Body | 
+var body = new SVRF.Body(); // Body | 
 
+apiInstance.appAuthenticatePost(body).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.appAuthenticatePost(body, callback);
 ```
 
 ### Parameters

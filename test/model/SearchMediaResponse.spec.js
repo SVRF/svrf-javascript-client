@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.SearchMediaResponse();
+    instance = new SVRF.SearchMediaResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,37 +53,37 @@
   describe('SearchMediaResponse', function() {
     it('should create an instance of SearchMediaResponse', function() {
       // uncomment below and update the code to test SearchMediaResponse
-      //var instane = new SvrfApi.SearchMediaResponse();
-      //expect(instance).to.be.a(SvrfApi.SearchMediaResponse);
+      //var instane = new SVRF.SearchMediaResponse();
+      //expect(instance).to.be.a(SVRF.SearchMediaResponse);
     });
 
     it('should have the property media (base name: "media")', function() {
       // uncomment below and update the code to test the property media
-      //var instane = new SvrfApi.SearchMediaResponse();
+      //var instane = new SVRF.SearchMediaResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property nextPageNum (base name: "nextPageNum")', function() {
       // uncomment below and update the code to test the property nextPageNum
-      //var instane = new SvrfApi.SearchMediaResponse();
+      //var instane = new SVRF.SearchMediaResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property pageNum (base name: "pageNum")', function() {
       // uncomment below and update the code to test the property pageNum
-      //var instane = new SvrfApi.SearchMediaResponse();
+      //var instane = new SVRF.SearchMediaResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property tookMs (base name: "tookMs")', function() {
       // uncomment below and update the code to test the property tookMs
-      //var instane = new SvrfApi.SearchMediaResponse();
+      //var instane = new SVRF.SearchMediaResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property totalNum (base name: "totalNum")', function() {
       // uncomment below and update the code to test the property totalNum
-      //var instane = new SvrfApi.SearchMediaResponse();
+      //var instane = new SVRF.SearchMediaResponse();
       //expect(instance).to.be();
     });
 

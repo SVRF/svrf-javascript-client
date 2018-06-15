@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('./MediaFiles'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.Media = factory(root.SvrfApi.ApiClient, root.SvrfApi.MediaFiles);
+    root.SVRF.Media = factory(root.SVRF.ApiClient, root.SVRF.MediaFiles);
   }
 }(this, function(ApiClient, MediaFiles) {
   'use strict';

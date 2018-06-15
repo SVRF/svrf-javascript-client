@@ -1,4 +1,4 @@
-# SvrfApi.SingleMediaResponse
+# SVRF.SingleMediaResponse
 
 ## Properties
 Name | Type | Description | Notes

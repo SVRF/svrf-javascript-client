@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.AuthResponse();
+    instance = new SVRF.AuthResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,25 +53,25 @@
   describe('AuthResponse', function() {
     it('should create an instance of AuthResponse', function() {
       // uncomment below and update the code to test AuthResponse
-      //var instane = new SvrfApi.AuthResponse();
-      //expect(instance).to.be.a(SvrfApi.AuthResponse);
+      //var instane = new SVRF.AuthResponse();
+      //expect(instance).to.be.a(SVRF.AuthResponse);
     });
 
     it('should have the property expiresIn (base name: "expiresIn")', function() {
       // uncomment below and update the code to test the property expiresIn
-      //var instane = new SvrfApi.AuthResponse();
+      //var instane = new SVRF.AuthResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instane = new SvrfApi.AuthResponse();
+      //var instane = new SVRF.AuthResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property token (base name: "token")', function() {
       // uncomment below and update the code to test the property token
-      //var instane = new SvrfApi.AuthResponse();
+      //var instane = new SVRF.AuthResponse();
       //expect(instance).to.be();
     });
 

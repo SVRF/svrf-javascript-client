@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/RateLimitResponse'), require('../model/SearchMediaResponse'), require('../model/SingleMediaResponse'), require('../model/TrendingResponse'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.MediaApi = factory(root.SvrfApi.ApiClient, root.SvrfApi.ErrorResponse, root.SvrfApi.RateLimitResponse, root.SvrfApi.SearchMediaResponse, root.SvrfApi.SingleMediaResponse, root.SvrfApi.TrendingResponse);
+    root.SVRF.MediaApi = factory(root.SVRF.ApiClient, root.SVRF.ErrorResponse, root.SVRF.RateLimitResponse, root.SVRF.SearchMediaResponse, root.SVRF.SingleMediaResponse, root.SVRF.TrendingResponse);
   }
 }(this, function(ApiClient, ErrorResponse, RateLimitResponse, SearchMediaResponse, SingleMediaResponse, TrendingResponse) {
   'use strict';
@@ -48,22 +48,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the vrIdGet operation.
-     * @callback module:api/MediaApi~vrIdGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SingleMediaResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Media by ID Endpoint
      * Fetch media by its ID.
      * @param {String} id ID of Media
-     * @param {module:api/MediaApi~vrIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/SingleMediaResponse}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SingleMediaResponse} and HTTP response
      */
-    this.vrIdGet = function(id, callback) {
+    this.vrIdGetWithHttpInfo = function(id) {
       var postBody = null;
 
       // verify the required parameter 'id' is set
@@ -92,17 +84,23 @@
       return this.apiClient.callApi(
         '/vr/{id}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the vrSearchGet operation.
-     * @callback module:api/MediaApi~vrSearchGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SearchMediaResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Media by ID Endpoint
+     * Fetch media by its ID.
+     * @param {String} id ID of Media
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SingleMediaResponse}
      */
+    this.vrIdGet = function(id) {
+      return this.vrIdGetWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Search Endpoint
@@ -113,10 +111,9 @@
      * @param {module:model/String} opts.stereoscopicType Search only for Media with a particular stereoscopic type
      * @param {Number} opts.size The number of results to return per-page, from 1 to 100 default: 10
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable
-     * @param {module:api/MediaApi~vrSearchGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/SearchMediaResponse}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SearchMediaResponse} and HTTP response
      */
-    this.vrSearchGet = function(q, opts, callback) {
+    this.vrSearchGetWithHttpInfo = function(q, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -150,17 +147,28 @@
       return this.apiClient.callApi(
         '/vr/search', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the vrTrendingGet operation.
-     * @callback module:api/MediaApi~vrTrendingGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TrendingResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Search Endpoint
+     * The SVRF Search Endpoint brings the power of immersive search found on [SVRF.com](https://www.svrf.com) to your app or project. SVRF&#39;s search engine enables your users to instantly find the immersive experience they&#39;re seeking. Content is sorted by the SVRF rating system, ensuring that the highest quality content and most prevalent search results are returned. 
+     * @param {String} q Url-encoded search query
+     * @param {Object} opts Optional parameters
+     * @param {module:model/String} opts.type The type of Media to be returned
+     * @param {module:model/String} opts.stereoscopicType Search only for Media with a particular stereoscopic type
+     * @param {Number} opts.size The number of results to return per-page, from 1 to 100 default: 10
+     * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SearchMediaResponse}
      */
+    this.vrSearchGet = function(q, opts) {
+      return this.vrSearchGetWithHttpInfo(q, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Trending Endpoint
@@ -168,10 +176,9 @@
      * @param {Object} opts Optional parameters
      * @param {Number} opts.size The number of results per page.
      * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
-     * @param {module:api/MediaApi~vrTrendingGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/TrendingResponse}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TrendingResponse} and HTTP response
      */
-    this.vrTrendingGet = function(opts, callback) {
+    this.vrTrendingGetWithHttpInfo = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -197,8 +204,23 @@
       return this.apiClient.callApi(
         '/vr/trending', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Trending Endpoint
+     * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.size The number of results per page.
+     * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TrendingResponse}
+     */
+    this.vrTrendingGet = function(opts) {
+      return this.vrTrendingGetWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 

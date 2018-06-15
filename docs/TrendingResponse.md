@@ -1,4 +1,4 @@
-# SvrfApi.TrendingResponse
+# SVRF.TrendingResponse
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# SvrfApi.MediaStereo
+# SVRF.MediaStereo
 
 ## Properties
 Name | Type | Description | Notes

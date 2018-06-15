@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.SingleMediaResponse();
+    instance = new SVRF.SingleMediaResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,13 +53,13 @@
   describe('SingleMediaResponse', function() {
     it('should create an instance of SingleMediaResponse', function() {
       // uncomment below and update the code to test SingleMediaResponse
-      //var instane = new SvrfApi.SingleMediaResponse();
-      //expect(instance).to.be.a(SvrfApi.SingleMediaResponse);
+      //var instane = new SVRF.SingleMediaResponse();
+      //expect(instance).to.be.a(SVRF.SingleMediaResponse);
     });
 
     it('should have the property media (base name: "media")', function() {
       // uncomment below and update the code to test the property media
-      //var instane = new SvrfApi.SingleMediaResponse();
+      //var instane = new SVRF.SingleMediaResponse();
       //expect(instance).to.be();
     });
 

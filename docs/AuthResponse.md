@@ -1,4 +1,4 @@
-# SvrfApi.AuthResponse
+# SVRF.AuthResponse
 
 ## Properties
 Name | Type | Description | Notes

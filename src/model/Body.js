@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.Body = factory(root.SvrfApi.ApiClient);
+    root.SVRF.Body = factory(root.SVRF.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';

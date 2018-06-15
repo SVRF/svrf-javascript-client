@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.APIKey();
+    instance = new SVRF.APIKey();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,31 +53,31 @@
   describe('APIKey', function() {
     it('should create an instance of APIKey', function() {
       // uncomment below and update the code to test APIKey
-      //var instane = new SvrfApi.APIKey();
-      //expect(instance).to.be.a(SvrfApi.APIKey);
+      //var instane = new SVRF.APIKey();
+      //expect(instance).to.be.a(SVRF.APIKey);
     });
 
     it('should have the property id (base name: "id")', function() {
       // uncomment below and update the code to test the property id
-      //var instane = new SvrfApi.APIKey();
+      //var instane = new SVRF.APIKey();
       //expect(instance).to.be();
     });
 
     it('should have the property key (base name: "key")', function() {
       // uncomment below and update the code to test the property key
-      //var instane = new SvrfApi.APIKey();
+      //var instane = new SVRF.APIKey();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instane = new SvrfApi.APIKey();
+      //var instane = new SVRF.APIKey();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new SvrfApi.APIKey();
+      //var instane = new SVRF.APIKey();
       //expect(instance).to.be();
     });
 

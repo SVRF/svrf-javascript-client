@@ -1,4 +1,4 @@
-# SvrfApi.SuccessResponse
+# SVRF.SuccessResponse
 
 ## Properties
 Name | Type | Description | Notes

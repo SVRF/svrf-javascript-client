@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.ErrorResponse();
+    instance = new SVRF.ErrorResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,19 +53,19 @@
   describe('ErrorResponse', function() {
     it('should create an instance of ErrorResponse', function() {
       // uncomment below and update the code to test ErrorResponse
-      //var instane = new SvrfApi.ErrorResponse();
-      //expect(instance).to.be.a(SvrfApi.ErrorResponse);
+      //var instane = new SVRF.ErrorResponse();
+      //expect(instance).to.be.a(SVRF.ErrorResponse);
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instane = new SvrfApi.ErrorResponse();
+      //var instane = new SVRF.ErrorResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property success (base name: "success")', function() {
       // uncomment below and update the code to test the property success
-      //var instane = new SvrfApi.ErrorResponse();
+      //var instane = new SVRF.ErrorResponse();
       //expect(instance).to.be();
     });
 

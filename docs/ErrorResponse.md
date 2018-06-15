@@ -1,4 +1,4 @@
-# SvrfApi.ErrorResponse
+# SVRF.ErrorResponse
 
 ## Properties
 Name | Type | Description | Notes

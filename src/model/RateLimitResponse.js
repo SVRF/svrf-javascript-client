@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('./ErrorResponse'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.RateLimitResponse = factory(root.SvrfApi.ApiClient, root.SvrfApi.ErrorResponse);
+    root.SVRF.RateLimitResponse = factory(root.SVRF.ApiClient, root.SVRF.ErrorResponse);
   }
 }(this, function(ApiClient, ErrorResponse) {
   'use strict';

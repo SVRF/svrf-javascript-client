@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.TrendingResponse();
+    instance = new SVRF.TrendingResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,19 +53,19 @@
   describe('TrendingResponse', function() {
     it('should create an instance of TrendingResponse', function() {
       // uncomment below and update the code to test TrendingResponse
-      //var instane = new SvrfApi.TrendingResponse();
-      //expect(instance).to.be.a(SvrfApi.TrendingResponse);
+      //var instane = new SVRF.TrendingResponse();
+      //expect(instance).to.be.a(SVRF.TrendingResponse);
     });
 
     it('should have the property media (base name: "media")', function() {
       // uncomment below and update the code to test the property media
-      //var instane = new SvrfApi.TrendingResponse();
+      //var instane = new SVRF.TrendingResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property nextPageCursor (base name: "nextPageCursor")', function() {
       // uncomment below and update the code to test the property nextPageCursor
-      //var instane = new SvrfApi.TrendingResponse();
+      //var instane = new SVRF.TrendingResponse();
       //expect(instance).to.be();
     });
 

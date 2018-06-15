@@ -1,4 +1,4 @@
-# SvrfApi.MediaFiles
+# SVRF.MediaFiles
 
 ## Properties
 Name | Type | Description | Notes

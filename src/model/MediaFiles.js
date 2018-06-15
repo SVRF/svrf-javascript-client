@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('./MediaImages'), require('./MediaStereo'), require('./MediaVideos'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.MediaFiles = factory(root.SvrfApi.ApiClient, root.SvrfApi.MediaImages, root.SvrfApi.MediaStereo, root.SvrfApi.MediaVideos);
+    root.SVRF.MediaFiles = factory(root.SVRF.ApiClient, root.SVRF.MediaImages, root.SVRF.MediaStereo, root.SVRF.MediaVideos);
   }
 }(this, function(ApiClient, MediaImages, MediaStereo, MediaVideos) {
   'use strict';

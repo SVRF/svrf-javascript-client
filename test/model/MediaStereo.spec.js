@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.MediaStereo();
+    instance = new SVRF.MediaStereo();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,43 +53,43 @@
   describe('MediaStereo', function() {
     it('should create an instance of MediaStereo', function() {
       // uncomment below and update the code to test MediaStereo
-      //var instane = new SvrfApi.MediaStereo();
-      //expect(instance).to.be.a(SvrfApi.MediaStereo);
+      //var instane = new SVRF.MediaStereo();
+      //expect(instance).to.be.a(SVRF.MediaStereo);
     });
 
     it('should have the property _848 (base name: "848")', function() {
       // uncomment below and update the code to test the property _848
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 
     it('should have the property _1440 (base name: "1440")', function() {
       // uncomment below and update the code to test the property _1440
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 
     it('should have the property _2160 (base name: "2160")', function() {
       // uncomment below and update the code to test the property _2160
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 
     it('should have the property _4096 (base name: "4096")', function() {
       // uncomment below and update the code to test the property _4096
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 
     it('should have the property hls (base name: "hls")', function() {
       // uncomment below and update the code to test the property hls
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 
     it('should have the property max (base name: "max")', function() {
       // uncomment below and update the code to test the property max
-      //var instane = new SvrfApi.MediaStereo();
+      //var instane = new SVRF.MediaStereo();
       //expect(instance).to.be();
     });
 

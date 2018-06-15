@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.RateLimitResponse();
+    instance = new SVRF.RateLimitResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,13 +53,13 @@
   describe('RateLimitResponse', function() {
     it('should create an instance of RateLimitResponse', function() {
       // uncomment below and update the code to test RateLimitResponse
-      //var instane = new SvrfApi.RateLimitResponse();
-      //expect(instance).to.be.a(SvrfApi.RateLimitResponse);
+      //var instane = new SVRF.RateLimitResponse();
+      //expect(instance).to.be.a(SVRF.RateLimitResponse);
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instane = new SvrfApi.RateLimitResponse();
+      //var instane = new SVRF.RateLimitResponse();
       //expect(instance).to.be();
     });
 

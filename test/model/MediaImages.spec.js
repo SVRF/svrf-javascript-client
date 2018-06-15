@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.MediaImages();
+    instance = new SVRF.MediaImages();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,67 +53,67 @@
   describe('MediaImages', function() {
     it('should create an instance of MediaImages', function() {
       // uncomment below and update the code to test MediaImages
-      //var instane = new SvrfApi.MediaImages();
-      //expect(instance).to.be.a(SvrfApi.MediaImages);
+      //var instane = new SVRF.MediaImages();
+      //expect(instance).to.be.a(SVRF.MediaImages);
     });
 
     it('should have the property _136 (base name: "136")', function() {
       // uncomment below and update the code to test the property _136
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _540 (base name: "540")', function() {
       // uncomment below and update the code to test the property _540
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _720 (base name: "720")', function() {
       // uncomment below and update the code to test the property _720
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _1080 (base name: "1080")', function() {
       // uncomment below and update the code to test the property _1080
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _4096 (base name: "4096")', function() {
       // uncomment below and update the code to test the property _4096
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _1080Watermarked (base name: "1080Watermarked")', function() {
       // uncomment below and update the code to test the property _1080Watermarked
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _720x405 (base name: "720x405")', function() {
       // uncomment below and update the code to test the property _720x405
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _720x540 (base name: "720x540")', function() {
       // uncomment below and update the code to test the property _720x540
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property _720x720 (base name: "720x720")', function() {
       // uncomment below and update the code to test the property _720x720
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 
     it('should have the property max (base name: "max")', function() {
       // uncomment below and update the code to test the property max
-      //var instane = new SvrfApi.MediaImages();
+      //var instane = new SVRF.MediaImages();
       //expect(instance).to.be();
     });
 

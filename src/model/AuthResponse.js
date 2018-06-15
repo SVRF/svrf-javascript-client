@@ -23,10 +23,10 @@
     module.exports = factory(require('../ApiClient'), require('./SuccessResponse'));
   } else {
     // Browser globals (root is window)
-    if (!root.SvrfApi) {
-      root.SvrfApi = {};
+    if (!root.SVRF) {
+      root.SVRF = {};
     }
-    root.SvrfApi.AuthResponse = factory(root.SvrfApi.ApiClient, root.SvrfApi.SuccessResponse);
+    root.SVRF.AuthResponse = factory(root.SVRF.ApiClient, root.SVRF.SuccessResponse);
   }
 }(this, function(ApiClient, SuccessResponse) {
   'use strict';

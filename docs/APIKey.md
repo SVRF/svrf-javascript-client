@@ -1,4 +1,4 @@
-# SvrfApi.APIKey
+# SVRF.APIKey
 
 ## Properties
 Name | Type | Description | Notes

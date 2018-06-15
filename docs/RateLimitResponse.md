@@ -1,4 +1,4 @@
-# SvrfApi.RateLimitResponse
+# SVRF.RateLimitResponse
 
 ## Properties
 Name | Type | Description | Notes

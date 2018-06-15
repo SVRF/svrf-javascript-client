@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.MediaVideos();
+    instance = new SVRF.MediaVideos();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,43 +53,43 @@
   describe('MediaVideos', function() {
     it('should create an instance of MediaVideos', function() {
       // uncomment below and update the code to test MediaVideos
-      //var instane = new SvrfApi.MediaVideos();
-      //expect(instance).to.be.a(SvrfApi.MediaVideos);
+      //var instane = new SVRF.MediaVideos();
+      //expect(instance).to.be.a(SVRF.MediaVideos);
     });
 
     it('should have the property _848 (base name: "848")', function() {
       // uncomment below and update the code to test the property _848
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 
     it('should have the property _1440 (base name: "1440")', function() {
       // uncomment below and update the code to test the property _1440
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 
     it('should have the property _2160 (base name: "2160")', function() {
       // uncomment below and update the code to test the property _2160
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 
     it('should have the property clip (base name: "clip")', function() {
       // uncomment below and update the code to test the property clip
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 
     it('should have the property hls (base name: "hls")', function() {
       // uncomment below and update the code to test the property hls
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 
     it('should have the property max (base name: "max")', function() {
       // uncomment below and update the code to test the property max
-      //var instane = new SvrfApi.MediaVideos();
+      //var instane = new SVRF.MediaVideos();
       //expect(instance).to.be();
     });
 

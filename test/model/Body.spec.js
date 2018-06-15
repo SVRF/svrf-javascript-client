@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.Body();
+    instance = new SVRF.Body();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,13 +53,13 @@
   describe('Body', function() {
     it('should create an instance of Body', function() {
       // uncomment below and update the code to test Body
-      //var instane = new SvrfApi.Body();
-      //expect(instance).to.be.a(SvrfApi.Body);
+      //var instane = new SVRF.Body();
+      //expect(instance).to.be.a(SVRF.Body);
     });
 
     it('should have the property apiKey (base name: "apiKey")', function() {
       // uncomment below and update the code to test the property apiKey
-      //var instane = new SvrfApi.Body();
+      //var instane = new SVRF.Body();
       //expect(instance).to.be();
     });
 

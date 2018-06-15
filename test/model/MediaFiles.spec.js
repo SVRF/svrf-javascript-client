@@ -23,15 +23,15 @@
     factory(require('expect.js'), require('../../src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SvrfApi);
+    factory(root.expect, root.SVRF);
   }
-}(this, function(expect, SvrfApi) {
+}(this, function(expect, SVRF) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new SvrfApi.MediaFiles();
+    instance = new SVRF.MediaFiles();
   });
 
   var getProperty = function(object, getter, property) {
@@ -53,25 +53,25 @@
   describe('MediaFiles', function() {
     it('should create an instance of MediaFiles', function() {
       // uncomment below and update the code to test MediaFiles
-      //var instane = new SvrfApi.MediaFiles();
-      //expect(instance).to.be.a(SvrfApi.MediaFiles);
+      //var instane = new SVRF.MediaFiles();
+      //expect(instance).to.be.a(SVRF.MediaFiles);
     });
 
     it('should have the property images (base name: "images")', function() {
       // uncomment below and update the code to test the property images
-      //var instane = new SvrfApi.MediaFiles();
+      //var instane = new SVRF.MediaFiles();
       //expect(instance).to.be();
     });
 
     it('should have the property stereo (base name: "stereo")', function() {
       // uncomment below and update the code to test the property stereo
-      //var instane = new SvrfApi.MediaFiles();
+      //var instane = new SVRF.MediaFiles();
       //expect(instance).to.be();
     });
 
     it('should have the property videos (base name: "videos")', function() {
       // uncomment below and update the code to test the property videos
-      //var instane = new SvrfApi.MediaFiles();
+      //var instane = new SVRF.MediaFiles();
       //expect(instance).to.be();
     });
 
