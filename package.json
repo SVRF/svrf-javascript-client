@@ -2,7 +2,7 @@
   "name": "svrf-client",
   "version": "1.0.0",
   "description": "SVRF API client",
-  "license": "Unlicense",
+  "license": "MIT",
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"

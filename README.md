@@ -1,8 +1,12 @@
-# svrf-client
-
-svrf-client - JavaScript client for SVRF
+# svrf-client - the JavaScript client library for the SVRF API
 
 For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
+
+## Getting Started
+
+SVRF's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
+
+The SVRF API Documentation is available at <https://developers.svrf.com>.
 
 ## Installation
 
@@ -17,40 +21,6 @@ Then install it via:
 
 ```shell
 npm install svrf-client --save
-```
-
-##### Local development
-
-To use the library locally without publishing to a remote npm registry, first install the dependencies by changing 
-into the directory containing `package.json` (and this README). Let's call this `JAVASCRIPT_CLIENT_DIR`. Then run:
-
-```shell
-npm install
-```
-
-Next, [link](https://docs.npmjs.com/cli/link) it globally in npm with the following, also from `JAVASCRIPT_CLIENT_DIR`:
-
-```shell
-npm link
-```
-
-Finally, switch to the directory you want to use your svrf-client from, and run:
-
-```shell
-npm link /path/to/<JAVASCRIPT_CLIENT_DIR>
-```
-
-You should now be able to `require('svrf-client')` in javascript files from the directory you ran the last 
-command above from.
-
-#### git
-#
-If the library is hosted at a git repository, e.g.
-https://github.com/GIT_USER_ID/GIT_REPO_ID
-then install it via:
-
-```shell
-    npm install GIT_USER_ID/GIT_REPO_ID --save
 ```
 
 ### For browser
