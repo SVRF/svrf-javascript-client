@@ -51,10 +51,10 @@
   }
 
   describe('AuthenticateApi', function() {
-    describe('appAuthenticatePost', function() {
-      it('should call appAuthenticatePost successfully', function(done) {
-        //uncomment below and update the code to test appAuthenticatePost
-        //instance.appAuthenticatePost(function(error) {
+    describe('authenticate', function() {
+      it('should call authenticate successfully', function(done) {
+        //uncomment below and update the code to test authenticate
+        //instance.authenticate(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

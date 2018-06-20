@@ -14,10 +14,7 @@ The SVRF API Documentation is available at <https://developers.svrf.com>.
 
 #### npm
 
-To publish the library as a [npm](https://www.npmjs.com/),
-please follow the procedure in ["Publishing npm packages"](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-Then install it via:
+Install it via:
 
 ```shell
 npm install svrf-client --save
@@ -65,7 +62,7 @@ var api = new SVRF.AuthenticateApi()
 
 var body = new SVRF.Body(); // {Body} 
 
-api.appAuthenticatePost(body).then(function(data) {
+api.authenticate(body).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -80,10 +77,10 @@ All URIs are relative to *https://api.svrf.com/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SVRF.AuthenticateApi* | [**appAuthenticatePost**](docs/AuthenticateApi.md#appAuthenticatePost) | **POST** /app/authenticate | Authenticate application
-*SVRF.MediaApi* | [**vrIdGet**](docs/MediaApi.md#vrIdGet) | **GET** /vr/{id} | Media by ID Endpoint
-*SVRF.MediaApi* | [**vrSearchGet**](docs/MediaApi.md#vrSearchGet) | **GET** /vr/search | Search Endpoint
-*SVRF.MediaApi* | [**vrTrendingGet**](docs/MediaApi.md#vrTrendingGet) | **GET** /vr/trending | Trending Endpoint
+*SVRF.AuthenticateApi* | [**authenticate**](docs/AuthenticateApi.md#authenticate) | **POST** /app/authenticate | Authenticate application
+*SVRF.MediaApi* | [**getById**](docs/MediaApi.md#getById) | **GET** /vr/{id} | Media by ID Endpoint
+*SVRF.MediaApi* | [**getTrending**](docs/MediaApi.md#getTrending) | **GET** /vr/trending | Trending Endpoint
+*SVRF.MediaApi* | [**search**](docs/MediaApi.md#search) | **GET** /vr/search | Search Endpoint
 
 
 ## Documentation for Models

@@ -51,30 +51,30 @@
   }
 
   describe('MediaApi', function() {
-    describe('vrIdGet', function() {
-      it('should call vrIdGet successfully', function(done) {
-        //uncomment below and update the code to test vrIdGet
-        //instance.vrIdGet(function(error) {
+    describe('getById', function() {
+      it('should call getById successfully', function(done) {
+        //uncomment below and update the code to test getById
+        //instance.getById(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('vrSearchGet', function() {
-      it('should call vrSearchGet successfully', function(done) {
-        //uncomment below and update the code to test vrSearchGet
-        //instance.vrSearchGet(function(error) {
+    describe('getTrending', function() {
+      it('should call getTrending successfully', function(done) {
+        //uncomment below and update the code to test getTrending
+        //instance.getTrending(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('vrTrendingGet', function() {
-      it('should call vrTrendingGet successfully', function(done) {
-        //uncomment below and update the code to test vrTrendingGet
-        //instance.vrTrendingGet(function(error) {
+    describe('search', function() {
+      it('should call search successfully', function(done) {
+        //uncomment below and update the code to test search
+        //instance.search(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

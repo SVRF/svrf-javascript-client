@@ -55,12 +55,12 @@
      * @param {module:model/Body} body 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthResponse} and HTTP response
      */
-    this.appAuthenticatePostWithHttpInfo = function(body) {
+    this.authenticateWithHttpInfo = function(body) {
       var postBody = body;
 
       // verify the required parameter 'body' is set
       if (body === undefined || body === null) {
-        throw new Error("Missing the required parameter 'body' when calling appAuthenticatePost");
+        throw new Error("Missing the required parameter 'body' when calling authenticate");
       }
 
 
@@ -93,8 +93,8 @@
      * @param {module:model/Body} body 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AuthResponse}
      */
-    this.appAuthenticatePost = function(body) {
-      return this.appAuthenticatePostWithHttpInfo(body)
+    this.authenticate = function(body) {
+      return this.authenticateWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

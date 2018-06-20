@@ -4,12 +4,12 @@ All URIs are relative to *https://api.svrf.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**appAuthenticatePost**](AuthenticateApi.md#appAuthenticatePost) | **POST** /app/authenticate | Authenticate application
+[**authenticate**](AuthenticateApi.md#authenticate) | **POST** /app/authenticate | Authenticate application
 
 
-<a name="appAuthenticatePost"></a>
-# **appAuthenticatePost**
-> AuthResponse appAuthenticatePost(body)
+<a name="authenticate"></a>
+# **authenticate**
+> AuthResponse authenticate(body)
 
 Authenticate application
 
@@ -23,7 +23,7 @@ var apiInstance = new SVRF.AuthenticateApi();
 
 var body = new SVRF.Body(); // Body | 
 
-apiInstance.appAuthenticatePost(body).then(function(data) {
+apiInstance.authenticate(body).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

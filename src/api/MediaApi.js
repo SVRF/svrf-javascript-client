@@ -55,12 +55,12 @@
      * @param {String} id ID of Media
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SingleMediaResponse} and HTTP response
      */
-    this.vrIdGetWithHttpInfo = function(id) {
+    this.getByIdWithHttpInfo = function(id) {
       var postBody = null;
 
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling vrIdGet");
+        throw new Error("Missing the required parameter 'id' when calling getById");
       }
 
 
@@ -94,8 +94,62 @@
      * @param {String} id ID of Media
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SingleMediaResponse}
      */
-    this.vrIdGet = function(id) {
-      return this.vrIdGetWithHttpInfo(id)
+    this.getById = function(id) {
+      return this.getByIdWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Trending Endpoint
+     * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.size The number of results per page.
+     * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TrendingResponse} and HTTP response
+     */
+    this.getTrendingWithHttpInfo = function(opts) {
+      opts = opts || {};
+      var postBody = null;
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+        'size': opts['size'],
+        'nextPageCursor': opts['nextPageCursor'],
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['XAppToken'];
+      var contentTypes = [];
+      var accepts = ['application/json'];
+      var returnType = TrendingResponse;
+
+      return this.apiClient.callApi(
+        '/vr/trending', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Trending Endpoint
+     * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.size The number of results per page.
+     * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TrendingResponse}
+     */
+    this.getTrending = function(opts) {
+      return this.getTrendingWithHttpInfo(opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -113,13 +167,13 @@
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SearchMediaResponse} and HTTP response
      */
-    this.vrSearchGetWithHttpInfo = function(q, opts) {
+    this.searchWithHttpInfo = function(q, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'q' is set
       if (q === undefined || q === null) {
-        throw new Error("Missing the required parameter 'q' when calling vrSearchGet");
+        throw new Error("Missing the required parameter 'q' when calling search");
       }
 
 
@@ -162,62 +216,8 @@
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SearchMediaResponse}
      */
-    this.vrSearchGet = function(q, opts) {
-      return this.vrSearchGetWithHttpInfo(q, opts)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Trending Endpoint
-     * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
-     * @param {Object} opts Optional parameters
-     * @param {Number} opts.size The number of results per page.
-     * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TrendingResponse} and HTTP response
-     */
-    this.vrTrendingGetWithHttpInfo = function(opts) {
-      opts = opts || {};
-      var postBody = null;
-
-
-      var pathParams = {
-      };
-      var queryParams = {
-        'size': opts['size'],
-        'nextPageCursor': opts['nextPageCursor'],
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['XAppToken'];
-      var contentTypes = [];
-      var accepts = ['application/json'];
-      var returnType = TrendingResponse;
-
-      return this.apiClient.callApi(
-        '/vr/trending', 'GET',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Trending Endpoint
-     * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
-     * @param {Object} opts Optional parameters
-     * @param {Number} opts.size The number of results per page.
-     * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TrendingResponse}
-     */
-    this.vrTrendingGet = function(opts) {
-      return this.vrTrendingGetWithHttpInfo(opts)
+    this.search = function(q, opts) {
+      return this.searchWithHttpInfo(q, opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
