@@ -81,6 +81,9 @@ XAppToken.apiKey = 'YOUR API KEY';
 var apiInstance = new SVRF.MediaApi();
 
 var opts = { 
+  'type': "type_example", // String | The type of Media to be returned.
+  'stereoscopicType': "stereoscopicType_example", // String | Search only for Media with a particular stereoscopic type.
+  'category': "category_example", // String | Search only for Media with a particular category.
   'size': 56, // Number | The number of results per page.
   'nextPageCursor': "nextPageCursor_example" // String | Pass this cursor ID to get the next page of results.
 };
@@ -96,6 +99,9 @@ apiInstance.getTrending(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **type** | **String**| The type of Media to be returned. | [optional] 
+ **stereoscopicType** | **String**| Search only for Media with a particular stereoscopic type. | [optional] 
+ **category** | **String**| Search only for Media with a particular category. | [optional] 
  **size** | **Number**| The number of results per page. | [optional] 
  **nextPageCursor** | **String**| Pass this cursor ID to get the next page of results. | [optional] 
 
@@ -133,13 +139,14 @@ XAppToken.apiKey = 'YOUR API KEY';
 
 var apiInstance = new SVRF.MediaApi();
 
-var q = "q_example"; // String | Url-encoded search query
+var q = "q_example"; // String | Url-encoded search query.
 
 var opts = { 
-  'type': "type_example", // String | The type of Media to be returned
-  'stereoscopicType': "stereoscopicType_example", // String | Search only for Media with a particular stereoscopic type
-  'size': 56, // Number | The number of results to return per-page, from 1 to 100 default: 10
-  'pageNum': 56 // Number | Pagination control to fetch the next page of results, if applicable
+  'type': "type_example", // String | The type of Media to be returned.
+  'stereoscopicType': "stereoscopicType_example", // String | Search only for Media with a particular stereoscopic type.
+  'category': "category_example", // String | Search only for Media with a particular category.
+  'size': 56, // Number | The number of results to return per-page, from 1 to 100 default: 10.
+  'pageNum': 56 // Number | Pagination control to fetch the next page of results, if applicable.
 };
 apiInstance.search(q, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -153,11 +160,12 @@ apiInstance.search(q, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **q** | **String**| Url-encoded search query | 
- **type** | **String**| The type of Media to be returned | [optional] 
- **stereoscopicType** | **String**| Search only for Media with a particular stereoscopic type | [optional] 
- **size** | **Number**| The number of results to return per-page, from 1 to 100 default: 10 | [optional] 
- **pageNum** | **Number**| Pagination control to fetch the next page of results, if applicable | [optional] 
+ **q** | **String**| Url-encoded search query. | 
+ **type** | **String**| The type of Media to be returned. | [optional] 
+ **stereoscopicType** | **String**| Search only for Media with a particular stereoscopic type. | [optional] 
+ **category** | **String**| Search only for Media with a particular category. | [optional] 
+ **size** | **Number**| The number of results to return per-page, from 1 to 100 default: 10. | [optional] 
+ **pageNum** | **Number**| Pagination control to fetch the next page of results, if applicable. | [optional] 
 
 ### Return type
 

@@ -16,53 +16,54 @@
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD.
-    define(['expect.js', '../../src/index'], factory);
+    // AMD. Register as an anonymous module.
+    define(['ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require('../../src/index'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.SVRF);
+    if (!root.SVRF) {
+      root.SVRF = {};
+    }
+    root.SVRF.MediaType = factory(root.SVRF.ApiClient);
   }
-}(this, function(expect, SVRF) {
+}(this, function(ApiClient) {
   'use strict';
 
-  var instance;
 
-  beforeEach(function() {
-    instance = new SVRF.SingleMediaResponse();
-  });
+  /**
+   * Enum class MediaType.
+   * @enum {}
+   * @readonly
+   */
+  var exports = {
+    /**
+     * value: "photo"
+     * @const
+     */
+    "photo": "photo",
+    /**
+     * value: "video"
+     * @const
+     */
+    "video": "video",
+    /**
+     * value: "3d"
+     * @const
+     */
+    "3d": "3d"  };
 
-  var getProperty = function(object, getter, property) {
-    // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === 'function')
-      return object[getter]();
-    else
-      return object[property];
+  /**
+   * Returns a <code>MediaType</code> enum value from a Javascript object name.
+   * @param {Object} data The plain JavaScript object containing the name of the enum value.
+   * @return {module:model/MediaType} The enum <code>MediaType</code> value.
+   */
+  exports.constructFromObject = function(object) {
+    return object;
   }
 
-  var setProperty = function(object, setter, property, value) {
-    // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === 'function')
-      object[setter](value);
-    else
-      object[property] = value;
-  }
-
-  describe('SingleMediaResponse', function() {
-    it('should create an instance of SingleMediaResponse', function() {
-      // uncomment below and update the code to test SingleMediaResponse
-      //var instane = new SVRF.SingleMediaResponse();
-      //expect(instance).to.be.a(SVRF.SingleMediaResponse);
-    });
-
-    it('should have the property media (base name: "media")', function() {
-      // uncomment below and update the code to test the property media
-      //var instane = new SVRF.SingleMediaResponse();
-      //expect(instance).to.be();
-    });
-
-  });
-
+  return exports;
 }));
+
+

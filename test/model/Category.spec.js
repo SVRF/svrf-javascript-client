@@ -31,7 +31,6 @@
   var instance;
 
   beforeEach(function() {
-    instance = new SVRF.SingleMediaResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,17 +49,11 @@
       object[property] = value;
   }
 
-  describe('SingleMediaResponse', function() {
-    it('should create an instance of SingleMediaResponse', function() {
-      // uncomment below and update the code to test SingleMediaResponse
-      //var instane = new SVRF.SingleMediaResponse();
-      //expect(instance).to.be.a(SVRF.SingleMediaResponse);
-    });
-
-    it('should have the property media (base name: "media")', function() {
-      // uncomment below and update the code to test the property media
-      //var instane = new SVRF.SingleMediaResponse();
-      //expect(instance).to.be();
+  describe('Category', function() {
+    it('should create an instance of Category', function() {
+      // uncomment below and update the code to test Category
+      //var instane = new SVRF.Category();
+      //expect(instance).to.be.a(SVRF.Category);
     });
 
   });
