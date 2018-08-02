@@ -37,7 +37,7 @@
   /**
    * The AuthResponse model module.
    * @module model/AuthResponse
-   * @version 1.0.0
+   * @version 1.1.0
    */
 
   /**

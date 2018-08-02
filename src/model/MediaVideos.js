@@ -37,7 +37,7 @@
   /**
    * The MediaVideos model module.
    * @module model/MediaVideos
-   * @version 1.0.0
+   * @version 1.1.0
    */
 
   /**

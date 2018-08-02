@@ -37,7 +37,7 @@
   /**
    * The SearchMediaResponse model module.
    * @module model/SearchMediaResponse
-   * @version 1.0.0
+   * @version 1.1.0
    */
 
   /**

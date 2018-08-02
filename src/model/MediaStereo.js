@@ -37,7 +37,7 @@
   /**
    * The MediaStereo model module.
    * @module model/MediaStereo
-   * @version 1.0.0
+   * @version 1.1.0
    */
 
   /**
