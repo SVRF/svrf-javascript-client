@@ -1,6 +1,6 @@
 {
   "name": "svrf-client",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "SVRF API client",
   "license": "MIT",
   "main": "src/index.js",
@@ -11,7 +11,7 @@
     "fs": false
   },
   "dependencies": {
-    "superagent": "3.5.2"
+    "superagent": "3.7.0"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
