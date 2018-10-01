@@ -39,10 +39,10 @@
    */
   var exports = {
     /**
-     * value: "Face Mask"
+     * value: "Face Filters"
      * @const
      */
-    "Mask": "Face Mask"  };
+    "Filters": "Face Filters"  };
 
   /**
    * Returns a <code>Category</code> enum value from a Javascript object name.

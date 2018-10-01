@@ -3,6 +3,6 @@
 ## Enum
 
 
-* `Mask` (value: `"Face Mask"`)
+* `Filters` (value: `"Face Filters"`)
 
 

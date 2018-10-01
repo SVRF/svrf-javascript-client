@@ -17,24 +17,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/RateLimitResponse', 'model/SearchMediaResponse', 'model/SingleMediaResponse', 'model/TrendingResponse'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/MediaType', 'model/RateLimitResponse', 'model/SearchMediaResponse', 'model/SingleMediaResponse', 'model/TrendingResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/RateLimitResponse'), require('../model/SearchMediaResponse'), require('../model/SingleMediaResponse'), require('../model/TrendingResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/MediaType'), require('../model/RateLimitResponse'), require('../model/SearchMediaResponse'), require('../model/SingleMediaResponse'), require('../model/TrendingResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.SVRF) {
       root.SVRF = {};
     }
-    root.SVRF.MediaApi = factory(root.SVRF.ApiClient, root.SVRF.ErrorResponse, root.SVRF.RateLimitResponse, root.SVRF.SearchMediaResponse, root.SVRF.SingleMediaResponse, root.SVRF.TrendingResponse);
+    root.SVRF.MediaApi = factory(root.SVRF.ApiClient, root.SVRF.ErrorResponse, root.SVRF.MediaType, root.SVRF.RateLimitResponse, root.SVRF.SearchMediaResponse, root.SVRF.SingleMediaResponse, root.SVRF.TrendingResponse);
   }
-}(this, function(ApiClient, ErrorResponse, RateLimitResponse, SearchMediaResponse, SingleMediaResponse, TrendingResponse) {
+}(this, function(ApiClient, ErrorResponse, MediaType, RateLimitResponse, SearchMediaResponse, SingleMediaResponse, TrendingResponse) {
   'use strict';
 
   /**
    * Media service.
    * @module api/MediaApi
-   * @version 1.1.1
+   * @version 1.2.0
    */
 
   /**
@@ -106,10 +106,10 @@
      * Trending Endpoint
      * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.type The type of Media to be returned.
+     * @param {Array.<module:model/MediaType>} opts.type The type(s) of Media to be returned (comma separated).
      * @param {String} opts.stereoscopicType Search only for Media with a particular stereoscopic type.
      * @param {String} opts.category Search only for Media with a particular category.
-     * @param {Number} opts.size The number of results per page.
+     * @param {Number} opts.size The number of results per page. (default to 10)
      * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TrendingResponse} and HTTP response
      */
@@ -121,13 +121,16 @@
       var pathParams = {
       };
       var queryParams = {
-        'type': opts['type'],
         'stereoscopicType': opts['stereoscopicType'],
         'category': opts['category'],
         'size': opts['size'],
         'nextPageCursor': opts['nextPageCursor'],
       };
       var collectionQueryParams = {
+        'type': {
+          value: opts['type'],
+          collectionFormat: 'csv'
+        },
       };
       var headerParams = {
       };
@@ -150,10 +153,10 @@
      * Trending Endpoint
      * The SVRF Trending Endpoint provides your app or project with the hottest immersive content curated by real humans. The experiences returned mirror the [SVRF homepage](https://www.svrf.com), from timely cultural content to trending pop-culture references. The trending experiences are updated regularly to ensure users always get fresh updates of immersive content.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.type The type of Media to be returned.
+     * @param {Array.<module:model/MediaType>} opts.type The type(s) of Media to be returned (comma separated).
      * @param {String} opts.stereoscopicType Search only for Media with a particular stereoscopic type.
      * @param {String} opts.category Search only for Media with a particular category.
-     * @param {Number} opts.size The number of results per page.
+     * @param {Number} opts.size The number of results per page. (default to 10)
      * @param {String} opts.nextPageCursor Pass this cursor ID to get the next page of results.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TrendingResponse}
      */
@@ -170,10 +173,10 @@
      * The SVRF Search Endpoint brings the power of immersive search found on [SVRF.com](https://www.svrf.com) to your app or project. SVRF&#39;s search engine enables your users to instantly find the immersive experience they&#39;re seeking. Content is sorted by the SVRF rating system, ensuring that the highest quality content and most prevalent search results are returned. 
      * @param {String} q Url-encoded search query.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.type The type of Media to be returned.
+     * @param {Array.<module:model/MediaType>} opts.type The type(s) of Media to be returned (comma separated).
      * @param {String} opts.stereoscopicType Search only for Media with a particular stereoscopic type.
      * @param {String} opts.category Search only for Media with a particular category.
-     * @param {Number} opts.size The number of results to return per-page, from 1 to 100 default: 10.
+     * @param {Number} opts.size The number of results to return per-page, from 1 to 100. (default to 10)
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SearchMediaResponse} and HTTP response
      */
@@ -191,13 +194,16 @@
       };
       var queryParams = {
         'q': q,
-        'type': opts['type'],
         'stereoscopicType': opts['stereoscopicType'],
         'category': opts['category'],
         'size': opts['size'],
         'pageNum': opts['pageNum'],
       };
       var collectionQueryParams = {
+        'type': {
+          value: opts['type'],
+          collectionFormat: 'csv'
+        },
       };
       var headerParams = {
       };
@@ -221,10 +227,10 @@
      * The SVRF Search Endpoint brings the power of immersive search found on [SVRF.com](https://www.svrf.com) to your app or project. SVRF&#39;s search engine enables your users to instantly find the immersive experience they&#39;re seeking. Content is sorted by the SVRF rating system, ensuring that the highest quality content and most prevalent search results are returned. 
      * @param {String} q Url-encoded search query.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.type The type of Media to be returned.
+     * @param {Array.<module:model/MediaType>} opts.type The type(s) of Media to be returned (comma separated).
      * @param {String} opts.stereoscopicType Search only for Media with a particular stereoscopic type.
      * @param {String} opts.category Search only for Media with a particular category.
-     * @param {Number} opts.size The number of results to return per-page, from 1 to 100 default: 10.
+     * @param {Number} opts.size The number of results to return per-page, from 1 to 100. (default to 10)
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SearchMediaResponse}
      */

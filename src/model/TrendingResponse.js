@@ -37,7 +37,7 @@
   /**
    * The TrendingResponse model module.
    * @module model/TrendingResponse
-   * @version 1.1.1
+   * @version 1.2.0
    */
 
   /**

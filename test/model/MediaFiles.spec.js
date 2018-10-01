@@ -57,6 +57,12 @@
       //expect(instance).to.be.a(SVRF.MediaFiles);
     });
 
+    it('should have the property glb (base name: "glb")', function() {
+      // uncomment below and update the code to test the property glb
+      //var instane = new SVRF.MediaFiles();
+      //expect(instance).to.be();
+    });
+
     it('should have the property images (base name: "images")', function() {
       // uncomment below and update the code to test the property images
       //var instane = new SVRF.MediaFiles();

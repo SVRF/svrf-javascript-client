@@ -37,7 +37,7 @@
   /**
    * The MediaFiles model module.
    * @module model/MediaFiles
-   * @version 1.1.1
+   * @version 1.2.0
    */
 
   /**
@@ -48,6 +48,7 @@
    */
   var exports = function() {
     var _this = this;
+
 
 
 
@@ -65,6 +66,9 @@
     if (data) {
       obj = obj || new exports();
 
+      if (data.hasOwnProperty('glb')) {
+        obj['glb'] = ApiClient.convertToType(data['glb'], 'String');
+      }
       if (data.hasOwnProperty('images')) {
         obj['images'] = MediaImages.constructFromObject(data['images']);
       }
@@ -78,6 +82,11 @@
     return obj;
   }
 
+  /**
+   * This is the binary glTF format that should be used by clients if the Media is a 3D object.
+   * @member {String} glb
+   */
+  exports.prototype['glb'] = undefined;
   /**
    * @member {module:model/MediaImages} images
    */

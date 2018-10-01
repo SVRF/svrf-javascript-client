@@ -37,7 +37,7 @@
   /**
    * The RateLimitResponse model module.
    * @module model/RateLimitResponse
-   * @version 1.1.1
+   * @version 1.2.0
    */
 
   /**

@@ -37,7 +37,7 @@
   /**
    * The APIKey model module.
    * @module model/APIKey
-   * @version 1.1.1
+   * @version 1.2.0
    */
 
   /**
