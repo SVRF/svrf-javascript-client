@@ -1,9 +1,13 @@
 {
   "name": "svrf-client",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "SVRF API client",
   "license": "MIT",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SVRF/svrf-javascript-client.git"
+  },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },

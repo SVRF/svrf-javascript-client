@@ -37,7 +37,7 @@
   /**
    * The MediaFiles model module.
    * @module model/MediaFiles
-   * @version 1.2.0
+   * @version 1.3.0
    */
 
   /**
@@ -48,6 +48,8 @@
    */
   var exports = function() {
     var _this = this;
+
+
 
 
 
@@ -69,6 +71,12 @@
       if (data.hasOwnProperty('glb')) {
         obj['glb'] = ApiClient.convertToType(data['glb'], 'String');
       }
+      if (data.hasOwnProperty('glb-draco')) {
+        obj['glb-draco'] = ApiClient.convertToType(data['glb-draco'], 'String');
+      }
+      if (data.hasOwnProperty('gltf')) {
+        obj['gltf'] = ApiClient.convertToType(data['gltf'], {'String': 'String'});
+      }
       if (data.hasOwnProperty('images')) {
         obj['images'] = MediaImages.constructFromObject(data['images']);
       }
@@ -83,10 +91,20 @@
   }
 
   /**
-   * This is the binary glTF format that should be used by clients if the Media is a 3D object.
+   * This is the binary glTF format that should be used by clients if the Media is a 3D object. This is the preferred format to use on end-user devices.
    * @member {String} glb
    */
   exports.prototype['glb'] = undefined;
+  /**
+   * This is the binary glTF format, with additional DRACO compression, that should be used by clients if the Media is a 3D object. Your renderer must support the KHR_draco_mesh_compression extension to use this model.
+   * @member {String} glb-draco
+   */
+  exports.prototype['glb-draco'] = undefined;
+  /**
+   * A map of file names to urls where those files are hosted. The file names are relative and their name heirarchy should be respected when saving them locally.
+   * @member {Object.<String, String>} gltf
+   */
+  exports.prototype['gltf'] = undefined;
   /**
    * @member {module:model/MediaImages} images
    */

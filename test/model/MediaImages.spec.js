@@ -87,6 +87,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property _8192 (base name: "8192")', function() {
+      // uncomment below and update the code to test the property _8192
+      //var instane = new SVRF.MediaImages();
+      //expect(instance).to.be();
+    });
+
     it('should have the property _1080Watermarked (base name: "1080Watermarked")', function() {
       // uncomment below and update the code to test the property _1080Watermarked
       //var instane = new SVRF.MediaImages();

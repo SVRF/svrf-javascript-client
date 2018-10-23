@@ -37,7 +37,7 @@
   /**
    * The ErrorResponse model module.
    * @module model/ErrorResponse
-   * @version 1.2.0
+   * @version 1.3.0
    */
 
   /**

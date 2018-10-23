@@ -63,6 +63,18 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property glbDraco (base name: "glb-draco")', function() {
+      // uncomment below and update the code to test the property glbDraco
+      //var instane = new SVRF.MediaFiles();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property gltf (base name: "gltf")', function() {
+      // uncomment below and update the code to test the property gltf
+      //var instane = new SVRF.MediaFiles();
+      //expect(instance).to.be();
+    });
+
     it('should have the property images (base name: "images")', function() {
       // uncomment below and update the code to test the property images
       //var instane = new SVRF.MediaFiles();

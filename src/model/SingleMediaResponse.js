@@ -37,7 +37,7 @@
   /**
    * The SingleMediaResponse model module.
    * @module model/SingleMediaResponse
-   * @version 1.2.0
+   * @version 1.3.0
    */
 
   /**

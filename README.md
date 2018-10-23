@@ -77,31 +77,31 @@ All URIs are relative to *https://api.svrf.com/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SVRF.AuthenticateApi* | [**authenticate**](docs/AuthenticateApi.md#authenticate) | **POST** /app/authenticate | Authenticate application
-*SVRF.MediaApi* | [**getById**](docs/MediaApi.md#getById) | **GET** /vr/{id} | Media by ID Endpoint
-*SVRF.MediaApi* | [**getTrending**](docs/MediaApi.md#getTrending) | **GET** /vr/trending | Trending Endpoint
-*SVRF.MediaApi* | [**search**](docs/MediaApi.md#search) | **GET** /vr/search | Search Endpoint
+*SVRF.AuthenticateApi* | [**authenticate**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/AuthenticateApi.md#authenticate) | **POST** /app/authenticate | Authenticate application
+*SVRF.MediaApi* | [**getById**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#getById) | **GET** /vr/{id} | Media by ID Endpoint
+*SVRF.MediaApi* | [**getTrending**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#getTrending) | **GET** /vr/trending | Trending Endpoint
+*SVRF.MediaApi* | [**search**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#search) | **GET** /vr/search | Search Endpoint
 
 
 ## Documentation for Models
 
- - [SVRF.APIKey](docs/APIKey.md)
- - [SVRF.Body](docs/Body.md)
- - [SVRF.Category](docs/Category.md)
- - [SVRF.ErrorResponse](docs/ErrorResponse.md)
- - [SVRF.Media](docs/Media.md)
- - [SVRF.MediaFiles](docs/MediaFiles.md)
- - [SVRF.MediaImages](docs/MediaImages.md)
- - [SVRF.MediaStereo](docs/MediaStereo.md)
- - [SVRF.MediaType](docs/MediaType.md)
- - [SVRF.MediaVideos](docs/MediaVideos.md)
- - [SVRF.StereoscopicType](docs/StereoscopicType.md)
- - [SVRF.SuccessResponse](docs/SuccessResponse.md)
- - [SVRF.AuthResponse](docs/AuthResponse.md)
- - [SVRF.RateLimitResponse](docs/RateLimitResponse.md)
- - [SVRF.SearchMediaResponse](docs/SearchMediaResponse.md)
- - [SVRF.SingleMediaResponse](docs/SingleMediaResponse.md)
- - [SVRF.TrendingResponse](docs/TrendingResponse.md)
+ - [SVRF.APIKey](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/APIKey.md)
+ - [SVRF.Body](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Body.md)
+ - [SVRF.Category](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Category.md)
+ - [SVRF.ErrorResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/ErrorResponse.md)
+ - [SVRF.Media](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Media.md)
+ - [SVRF.MediaFiles](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaFiles.md)
+ - [SVRF.MediaImages](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaImages.md)
+ - [SVRF.MediaStereo](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaStereo.md)
+ - [SVRF.MediaType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaType.md)
+ - [SVRF.MediaVideos](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaVideos.md)
+ - [SVRF.StereoscopicType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/StereoscopicType.md)
+ - [SVRF.SuccessResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SuccessResponse.md)
+ - [SVRF.AuthResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/AuthResponse.md)
+ - [SVRF.RateLimitResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/RateLimitResponse.md)
+ - [SVRF.SearchMediaResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SearchMediaResponse.md)
+ - [SVRF.SingleMediaResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SingleMediaResponse.md)
+ - [SVRF.TrendingResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/TrendingResponse.md)
 
 
 ## Documentation for Authorization

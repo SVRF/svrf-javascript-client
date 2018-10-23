@@ -37,7 +37,7 @@
   /**
    * The MediaImages model module.
    * @module model/MediaImages
-   * @version 1.2.0
+   * @version 1.3.0
    */
 
   /**
@@ -48,6 +48,7 @@
    */
   var exports = function() {
     var _this = this;
+
 
 
 
@@ -86,6 +87,9 @@
       }
       if (data.hasOwnProperty('4096')) {
         obj['4096'] = ApiClient.convertToType(data['4096'], 'String');
+      }
+      if (data.hasOwnProperty('8192')) {
+        obj['8192'] = ApiClient.convertToType(data['8192'], 'String');
       }
       if (data.hasOwnProperty('1080Watermarked')) {
         obj['1080Watermarked'] = ApiClient.convertToType(data['1080Watermarked'], 'String');
@@ -131,6 +135,11 @@
    * @member {String} 4096
    */
   exports.prototype['4096'] = undefined;
+  /**
+   * The image at a reasonably large resolution that can be used for a better desktop experience.
+   * @member {String} 8192
+   */
+  exports.prototype['8192'] = undefined;
   /**
    * 1080px wide watermarked image. This image should be used for sharing on social media.
    * @member {String} 1080Watermarked
