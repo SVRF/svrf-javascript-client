@@ -1,6 +1,6 @@
 {
   "name": "svrf-client",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "SVRF API client",
   "license": "MIT",
   "main": "src/index.js",

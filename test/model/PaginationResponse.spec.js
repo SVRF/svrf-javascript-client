@@ -26,7 +26,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new SVRF.ErrorResponse();
+    instance = new SVRF.PaginationResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -45,22 +45,22 @@
       object[property] = value;
   }
 
-  describe('ErrorResponse', function() {
-    it('should create an instance of ErrorResponse', function() {
-      // uncomment below and update the code to test ErrorResponse
-      //var instane = new SVRF.ErrorResponse();
-      //expect(instance).to.be.a(SVRF.ErrorResponse);
+  describe('PaginationResponse', function() {
+    it('should create an instance of PaginationResponse', function() {
+      // uncomment below and update the code to test PaginationResponse
+      //var instane = new SVRF.PaginationResponse();
+      //expect(instance).to.be.a(SVRF.PaginationResponse);
     });
 
-    it('should have the property message (base name: "message")', function() {
-      // uncomment below and update the code to test the property message
-      //var instane = new SVRF.ErrorResponse();
+    it('should have the property nextPageNum (base name: "nextPageNum")', function() {
+      // uncomment below and update the code to test the property nextPageNum
+      //var instane = new SVRF.PaginationResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property success (base name: "success")', function() {
-      // uncomment below and update the code to test the property success
-      //var instane = new SVRF.ErrorResponse();
+    it('should have the property pageNum (base name: "pageNum")', function() {
+      // uncomment below and update the code to test the property pageNum
+      //var instane = new SVRF.PaginationResponse();
       //expect(instance).to.be();
     });
 

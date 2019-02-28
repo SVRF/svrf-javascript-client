@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
  - [SVRF.MediaStereo](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaStereo.md)
  - [SVRF.MediaType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaType.md)
  - [SVRF.MediaVideos](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaVideos.md)
+ - [SVRF.PaginationResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/PaginationResponse.md)
  - [SVRF.StereoscopicType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/StereoscopicType.md)
  - [SVRF.SuccessResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SuccessResponse.md)
  - [SVRF.AuthResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/AuthResponse.md)

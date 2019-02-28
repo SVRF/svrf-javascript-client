@@ -21,7 +21,7 @@
     if (!root.SVRF) {
       root.SVRF = {};
     }
-    root.SVRF.ErrorResponse = factory(root.SVRF.ApiClient);
+    root.SVRF.PaginationResponse = factory(root.SVRF.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';
@@ -30,14 +30,14 @@
 
 
   /**
-   * The ErrorResponse model module.
-   * @module model/ErrorResponse
+   * The PaginationResponse model module.
+   * @module model/PaginationResponse
    * @version 1.4.0
    */
 
   /**
-   * Constructs a new <code>ErrorResponse</code>.
-   * @alias module:model/ErrorResponse
+   * Constructs a new <code>PaginationResponse</code>.
+   * @alias module:model/PaginationResponse
    * @class
    */
   var exports = function() {
@@ -48,36 +48,36 @@
   };
 
   /**
-   * Constructs a <code>ErrorResponse</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>PaginationResponse</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ErrorResponse} obj Optional instance to populate.
-   * @return {module:model/ErrorResponse} The populated <code>ErrorResponse</code> instance.
+   * @param {module:model/PaginationResponse} obj Optional instance to populate.
+   * @return {module:model/PaginationResponse} The populated <code>PaginationResponse</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('message')) {
-        obj['message'] = ApiClient.convertToType(data['message'], 'String');
+      if (data.hasOwnProperty('nextPageNum')) {
+        obj['nextPageNum'] = ApiClient.convertToType(data['nextPageNum'], 'Number');
       }
-      if (data.hasOwnProperty('success')) {
-        obj['success'] = ApiClient.convertToType(data['success'], 'Boolean');
+      if (data.hasOwnProperty('pageNum')) {
+        obj['pageNum'] = ApiClient.convertToType(data['pageNum'], 'Number');
       }
     }
     return obj;
   }
 
   /**
-   * Error message
-   * @member {String} message
+   * The next page to query to see more results, whether or not the next page actually exists.
+   * @member {Number} nextPageNum
    */
-  exports.prototype['message'] = undefined;
+  exports.prototype['nextPageNum'] = undefined;
   /**
-   * If the request was successful
-   * @member {Boolean} success
+   * The current page number
+   * @member {Number} pageNum
    */
-  exports.prototype['success'] = undefined;
+  exports.prototype['pageNum'] = undefined;
 
 
 

@@ -85,7 +85,8 @@ var opts = {
   'stereoscopicType': "stereoscopicType_example", // String | Search only for Media with a particular stereoscopic type.
   'category': "category_example", // String | Search only for Media with a particular category.
   'size': 10, // Number | The number of results per page.
-  'nextPageCursor': "nextPageCursor_example" // String | Pass this cursor ID to get the next page of results.
+  'minimumWidth': 56, // Number | The minimum width for video and photo Media, in pixels.
+  'pageNum': 56 // Number | Pagination control to fetch the next page of results, if applicable.
 };
 apiInstance.getTrending(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -103,7 +104,8 @@ Name | Type | Description  | Notes
  **stereoscopicType** | **String**| Search only for Media with a particular stereoscopic type. | [optional] 
  **category** | **String**| Search only for Media with a particular category. | [optional] 
  **size** | **Number**| The number of results per page. | [optional] [default to 10]
- **nextPageCursor** | **String**| Pass this cursor ID to get the next page of results. | [optional] 
+ **minimumWidth** | **Number**| The minimum width for video and photo Media, in pixels. | [optional] 
+ **pageNum** | **Number**| Pagination control to fetch the next page of results, if applicable. | [optional] 
 
 ### Return type
 
@@ -146,6 +148,7 @@ var opts = {
   'stereoscopicType': "stereoscopicType_example", // String | Search only for Media with a particular stereoscopic type.
   'category': "category_example", // String | Search only for Media with a particular category.
   'size': 10, // Number | The number of results to return per-page, from 1 to 100.
+  'minimumWidth': 56, // Number | The minimum width for video and photo Media, in pixels.
   'pageNum': 56 // Number | Pagination control to fetch the next page of results, if applicable.
 };
 apiInstance.search(q, opts).then(function(data) {
@@ -165,6 +168,7 @@ Name | Type | Description  | Notes
  **stereoscopicType** | **String**| Search only for Media with a particular stereoscopic type. | [optional] 
  **category** | **String**| Search only for Media with a particular category. | [optional] 
  **size** | **Number**| The number of results to return per-page, from 1 to 100. | [optional] [default to 10]
+ **minimumWidth** | **Number**| The minimum width for video and photo Media, in pixels. | [optional] 
  **pageNum** | **Number**| Pagination control to fetch the next page of results, if applicable. | [optional] 
 
 ### Return type
