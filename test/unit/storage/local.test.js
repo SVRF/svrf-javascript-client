@@ -5,9 +5,12 @@ const testValue = {a: 1, b: '2'};
 
 describe('LocalStorage', () => {
   beforeEach(() => {
-    jest.spyOn(localStorage, 'getItem').mockImplementation(() => {});
-    jest.spyOn(localStorage, 'setItem').mockImplementation(() => {});
-    jest.spyOn(localStorage, 'removeItem').mockImplementation(() => {});
+    // It's impossible to mock localStorage methods directly in the jsdom:
+    // https://github.com/facebook/jest/issues/6798
+    const localStorageProto = Object.getPrototypeOf(localStorage);
+    jest.spyOn(localStorageProto, 'getItem').mockImplementation(() => {});
+    jest.spyOn(localStorageProto, 'setItem').mockImplementation(() => {});
+    jest.spyOn(localStorageProto, 'removeItem').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -28,12 +31,12 @@ describe('LocalStorage', () => {
   it('sets value', () => {
     LocalStorage.set(testKey, testValue);
 
-    expect(localStorage.set).toHaveBeenCalledWith(testKey, testValue);
+    expect(localStorage.setItem).toHaveBeenCalledWith(testKey, testValue);
   });
 
   it('removes value', () => {
     LocalStorage.remove(testKey);
 
-    expect(localStorage.set).toHaveBeenCalledWith(testKey);
+    expect(localStorage.removeItem).toHaveBeenCalledWith(testKey);
   });
 });

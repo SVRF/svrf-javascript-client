@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validator validateMediaSearchOptions category fails for invalid category 1`] = `"\\"Category\\" must be one of [Face Filters]"`;
+
+exports[`Validator validateMediaSearchOptions fails for invalid fields 1`] = `"\\"sizeeeee\\" is not allowed"`;
+
+exports[`Validator validateMediaSearchOptions pageNum fails for negative page number 1`] = `"\\"Page Number\\" must be larger than or equal to 0"`;
+
+exports[`Validator validateMediaSearchOptions size fails for 0 page size 1`] = `"\\"Page Size\\" must be larger than or equal to 1"`;
+
+exports[`Validator validateMediaSearchOptions size fails for large page size 1`] = `"\\"Page Size\\" must be less than or equal to 100"`;
+
+exports[`Validator validateMediaSearchOptions size fails for negative page size 1`] = `"\\"Page Size\\" must be larger than or equal to 1"`;
+
+exports[`Validator validateMediaSearchOptions stereoscopicType fails for invalid stereotype 1`] = `"\\"Stereoscopic Type\\" must be one of [none, top-bottom, left-right]"`;
+
+exports[`Validator validateMediaSearchOptions type fails for invalid media type multiple value 1`] = `"\\"0\\" must be one of [photo, video, 3d]"`;
+
+exports[`Validator validateMediaSearchOptions type fails for invalid media type single value 1`] = `"\\"type\\" must be one of [photo, video, 3d]"`;
+
+exports[`Validator validateMediaSearchOptions type fails if one of the types is invalid 1`] = `"\\"1\\" must be one of [photo, video, 3d]"`;
