@@ -1,17 +1,17 @@
-import TokenService from '../services/token';
-
 class AuthenticateApi {
-  constructor(httpClient, apiKey) {
+  constructor(httpClient, tokenService, apiKey) {
     this.apiKey = apiKey;
-    this.tokenService = new TokenService();
+    this.tokenService = tokenService;
     this.httpClient = httpClient;
   }
 
   async authenticate() {
     const response = await this.httpClient.post('/app/authenticate', {apiKey: this.apiKey});
 
-    this.tokenService.setAppToken(response.token);
-    this.tokenService.setExpirationTime(new Date() + response.expiresIn);
+    const date = new Date();
+    date.setSeconds(date.getSeconds() + response.expiresIn);
+
+    this.tokenService.setAppTokenInfo({appToken: response.token, expirationTime: date});
   }
 }
 

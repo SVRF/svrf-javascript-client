@@ -20,7 +20,12 @@ export default [
       nodeResolve({
         jsnext: true,
       }),
-      babel(),
+      commonjs({
+        include: /node_modules/,
+      }),
+      babel({
+        runtimeHelpers: true,
+      }),
     ],
   },
 
@@ -36,7 +41,12 @@ export default [
       nodeResolve({
         jsnext: true,
       }),
-      babel(),
+      commonjs({
+        include: /node_modules/,
+      }),
+      babel({
+        runtimeHelpers: true,
+      }),
     ],
   },
 
@@ -55,6 +65,7 @@ export default [
       json(),
       babel({
         exclude: 'node_modules/**',
+        runtimeHelpers: true,
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify('production'),
@@ -69,7 +80,7 @@ export default [
     output: {
       file: 'dist/svrf-api.js',
       format: 'umd',
-      name: 'SVRF-API',
+      name: 'SVRF',
       indent: false,
     },
     plugins: [
@@ -83,6 +94,7 @@ export default [
       json(),
       babel({
         exclude: 'node_modules/**',
+        runtimeHelpers: true,
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify('development'),
@@ -96,7 +108,7 @@ export default [
     output: {
       file: 'dist/svrf-api.min.js',
       format: 'umd',
-      name: 'SVRF-API',
+      name: 'SVRF',
       indent: false,
     },
     plugins: [
@@ -110,6 +122,7 @@ export default [
       json(),
       babel({
         exclude: 'node_modules/**',
+        runtimeHelpers: true,
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify('production'),

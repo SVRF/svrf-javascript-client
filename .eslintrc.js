@@ -2,9 +2,10 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
+    jest: true,
   },
-  extends: 'airbnb',
+  extends: 'airbnb-base',
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'

@@ -1,13 +1,17 @@
+// We should use non static methods because MemoryStorage and LocalStorage
+// should implement the same interface.
+
+/* eslint-disable class-methods-use-this */
 class LocalStorage {
-  static get(key) {
+  get(key) {
     return localStorage.getItem(key);
   }
 
-  static set(key, value) {
+  set(key, value) {
     localStorage.setItem(key, value);
   }
 
-  static remove(key) {
+  remove(key) {
     localStorage.removeItem(key);
   }
 }

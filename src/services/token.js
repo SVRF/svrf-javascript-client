@@ -1,4 +1,4 @@
-import storage from '../storages';
+import getStorage from '../storages';
 
 const APP_TOKEN = 'svrf-app-token';
 const EXPIRATION_TIME = 'svrf-app-token-expiration-time';
@@ -11,28 +11,20 @@ class TokenService {
       return TokenService._instance;
     }
 
-    this.storage = storage;
+    this.storage = getStorage();
 
     TokenService._instance = this;
   }
 
-  isTokenExpired() {
-    return this.storage.get(APP_TOKEN) && this.getExpirationTime() < new Date();
+  getAppTokenInfo() {
+    return {
+      appToken: this.storage.get(APP_TOKEN),
+      expirationTime: this.storage.get(EXPIRATION_TIME),
+    };
   }
 
-  getAppToken() {
-    return this.storage.get(APP_TOKEN);
-  }
-
-  setAppToken(appToken) {
+  setAppTokenInfo({appToken, expirationTime}) {
     this.storage.set(APP_TOKEN, appToken);
-  }
-
-  getExpirationTime() {
-    return this.storage.get(EXPIRATION_TIME);
-  }
-
-  setExpirationTime(expirationTime) {
     this.storage.set(EXPIRATION_TIME, expirationTime);
   }
 

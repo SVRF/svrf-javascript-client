@@ -9,9 +9,9 @@ describe('authentication', () => {
   });
 
   it('throws an error if api key is not provided', () => {
-    expect(async () => {
+    expect((async () => {
       const api = new SVRF('abc');
       await api.auth.authenticate();
-    }).toThrow();
+    })()).rejects.toBeInstanceOf(Error);
   });
 });
