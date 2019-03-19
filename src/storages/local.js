@@ -1,4 +1,4 @@
-// We should use non static methods because MemoryStorage and LocalStorage
+// We should use instance methods because MemoryStorage and LocalStorage
 // should implement the same interface.
 
 /* eslint-disable class-methods-use-this */

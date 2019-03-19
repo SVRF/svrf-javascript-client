@@ -5,11 +5,11 @@ import HttpClient from '../http/http-client';
 import TokenService from '../services/token';
 
 class SvrfApiClient {
-  constructor(apiKey, {getAppTokenInfo, setAppTokenInfo, clear} = {}) {
-    const isTokenServiceProvided = getAppTokenInfo && setAppTokenInfo && clear;
+  constructor(apiKey, {getAppTokenInfo, setAppTokenInfo, clearAppTokenInfo} = {}) {
+    const isTokenServiceProvided = getAppTokenInfo && setAppTokenInfo && clearAppTokenInfo;
 
     const tokenService = isTokenServiceProvided
-      ? {getAppTokenInfo, setAppTokenInfo, clear}
+      ? {getAppTokenInfo, setAppTokenInfo, clearAppTokenInfo}
       : new TokenService();
 
     const httpClient = new HttpClient();

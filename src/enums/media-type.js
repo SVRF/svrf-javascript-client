@@ -1,5 +1,5 @@
 export default {
   PHOTO: 'photo',
   VIDEO: 'video',
-  _3D: '3d',
+  MODEL_3D: '3d',
 };

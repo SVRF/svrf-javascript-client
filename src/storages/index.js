@@ -1,8 +1,6 @@
-import LocalStorage from './local-storage';
-import MemoryStorage from './memory-storage';
+import LocalStorage from './local';
+import MemoryStorage from './memory';
 
-const getStorage = () => {
-  return typeof localStorage === 'undefined' ? new MemoryStorage() : new LocalStorage();
-};
+const StorageClass = typeof localStorage === 'undefined' ? MemoryStorage : LocalStorage;
 
-export default getStorage;
+export default new StorageClass();

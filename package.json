@@ -18,7 +18,9 @@
     "clean": "rimraf lib dist es",
     "build": "rollup -c",
     "lint": "eslint src",
-    "test": "jest ./test"
+    "test": "npm run test:unit",
+    "test:integration": "jest ./test/integration",
+    "test:unit": "jest ./test/unit"
   },
   "dependencies": {
     "axios": "^0.18.0"

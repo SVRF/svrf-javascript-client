@@ -1,7 +1,7 @@
-import getStorage from '../storages';
+import storage from '../storages';
 
-const APP_TOKEN = 'svrf-app-token';
-const EXPIRATION_TIME = 'svrf-app-token-expiration-time';
+const APP_TOKEN_KEY = 'svrf-app-token';
+const EXPIRATION_TIME_KEY = 'svrf-app-token-expiration-time';
 
 class TokenService {
   static _instance;
@@ -11,26 +11,26 @@ class TokenService {
       return TokenService._instance;
     }
 
-    this.storage = getStorage();
+    this.storage = storage;
 
     TokenService._instance = this;
   }
 
   getAppTokenInfo() {
     return {
-      appToken: this.storage.get(APP_TOKEN),
-      expirationTime: this.storage.get(EXPIRATION_TIME),
+      appToken: this.storage.get(APP_TOKEN_KEY),
+      expirationTime: this.storage.get(EXPIRATION_TIME_KEY),
     };
   }
 
   setAppTokenInfo({appToken, expirationTime}) {
-    this.storage.set(APP_TOKEN, appToken);
-    this.storage.set(EXPIRATION_TIME, expirationTime);
+    this.storage.set(APP_TOKEN_KEY, appToken);
+    this.storage.set(EXPIRATION_TIME_KEY, expirationTime);
   }
 
-  clear() {
-    this.storage.remove(APP_TOKEN);
-    this.storage.remove(EXPIRATION_TIME);
+  clearAppTokenInfo() {
+    this.storage.remove(APP_TOKEN_KEY);
+    this.storage.remove(EXPIRATION_TIME_KEY);
   }
 }
 
