@@ -1,4 +1,12 @@
 class Validator {
+  static validateStorage({get, set, remove}) {
+    if (get && set && remove) {
+      return;
+    }
+
+    throw new Error('You should implement all storage methods (get, set, remove)');
+  }
+
   static validateMediaSearchOptions(options) {
     if (!options) {
       return;

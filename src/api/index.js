@@ -4,15 +4,18 @@ import AppTokenHttpClient from '../http/app-token-http-client';
 import HttpClient from '../http/http-client';
 import TokenService from '../services/token';
 import enums from '../enums';
-import Storage from '../storage';
+import storage from '../storage';
+import Validator from '../services/validator';
 
 class SvrfApiClient {
   static enums = enums;
 
-  constructor(apiKey, {get, set, remove} = {}) {
-    const isTokenStorageProvided = get && set && remove;
+  constructor(apiKey, {userStorage} = {}) {
+    if (userStorage) {
+      Validator.validateStorage(userStorage);
+    }
 
-    const tokenStorage = isTokenStorageProvided ? {get, set, remove} : Storage;
+    const tokenStorage = userStorage || storage;
     const tokenService = new TokenService(tokenStorage);
 
     const httpClient = new HttpClient();

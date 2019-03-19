@@ -6,14 +6,20 @@ class TokenService {
     this.storage = storage;
   }
 
-  getAppTokenInfo() {
-    return {
-      appToken: this.storage.get(APP_TOKEN_KEY),
-      expirationTime: this.storage.get(EXPIRATION_TIME_KEY),
-    };
+  isTokenExpired() {
+    const appToken = this.getAppToken();
+    const expirationTime = this.storage.get(EXPIRATION_TIME_KEY);
+
+    return !appToken || !expirationTime || expirationTime < Date.now();
   }
 
-  setAppTokenInfo({appToken, expirationTime}) {
+  getAppToken() {
+    return this.storage.get(APP_TOKEN_KEY);
+  }
+
+  setAppTokenInfo({appToken, expiresIn}) {
+    const expirationTime = Date.now() + expiresIn;
+
     this.storage.set(APP_TOKEN_KEY, appToken);
     this.storage.set(EXPIRATION_TIME_KEY, expirationTime);
   }
