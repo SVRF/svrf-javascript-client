@@ -4,22 +4,13 @@ class AppTokenHttpClient extends HttpClient {
   constructor(authenticateApi, tokenService) {
     super();
 
-    this.api.interceptors.request.use((request) => {
-      const {appToken, expirationTime} = tokenService.getAppTokenInfo();
-      const isTokenExpired = Date.now() < expirationTime;
-
-      if (!isTokenExpired) {
+    this.api.interceptors.request.use((request) => authenticateApi.authenticate()
+      .then(() => {
+        const {appToken} = tokenService.getAppTokenInfo();
         request.headers['x-app-token'] = appToken;
-        return request;
-      }
-
-      return authenticateApi.authenticate()
-        .then(() => {
-          const {appToken: newAppToken} = tokenService.getAppTokenInfo();
-          request.headers['x-app-token'] = newAppToken;
-          return Promise.resolve(request);
-        });
-    });
+        return Promise.resolve(request);
+      })
+    );
   }
 }
 

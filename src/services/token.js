@@ -1,19 +1,9 @@
-import storage from '../storages';
-
 const APP_TOKEN_KEY = 'svrf-app-token';
 const EXPIRATION_TIME_KEY = 'svrf-app-token-expiration-time';
 
 class TokenService {
-  static _instance;
-
-  constructor() {
-    if (TokenService._instance) {
-      return TokenService._instance;
-    }
-
+  constructor(storage) {
     this.storage = storage;
-
-    TokenService._instance = this;
   }
 
   getAppTokenInfo() {

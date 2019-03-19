@@ -1,4 +1,4 @@
-import SVRF, {enums} from '../../src';
+import SVRF from '../../src';
 
 describe('the main module', () => {
   it('exports api client', () => {
@@ -6,6 +6,8 @@ describe('the main module', () => {
   });
 
   it('exports all enums', () => {
+    const {enums} = SVRF;
+
     expect(enums).toBeDefined();
 
     expect(enums.category).toBeDefined();

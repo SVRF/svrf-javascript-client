@@ -10,7 +10,7 @@ class MediaApi {
   }
 
   getTrending(options) {
-    Validator.checkMediaRequestOptions(options);
+    Validator.validateMediaSearchOptions(options);
     return this.httpClient.get('/vr/trending', options);
   }
 
@@ -19,7 +19,7 @@ class MediaApi {
       throw new Error('query should be provided');
     }
 
-    Validator.checkMediaRequestOptions(options);
+    Validator.validateMediaSearchOptions(options);
 
     return this.httpClient.get('/vr/search', {q: query, ...options});
   }

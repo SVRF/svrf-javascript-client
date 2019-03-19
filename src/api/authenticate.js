@@ -6,12 +6,17 @@ class AuthenticateApi {
   }
 
   async authenticate() {
+    const {expirationTime} = this.tokenService.getAppTokenInfo();
+    const isTokenExpired = !expirationTime || Date.now() > parseInt(expirationTime, 10);
+
+    if (!isTokenExpired) {
+      return;
+    }
+
     const response = await this.httpClient.post('/app/authenticate', {apiKey: this.apiKey});
 
-    const date = new Date();
-    date.setSeconds(date.getSeconds() + response.expiresIn);
-
-    this.tokenService.setAppTokenInfo({appToken: response.token, expirationTime: date});
+    const newExpirationTime = Date.now() + response.expiresIn;
+    this.tokenService.setAppTokenInfo({appToken: response.token, expirationTime: newExpirationTime});
   }
 }
 

@@ -9,10 +9,10 @@
   },
   "main": "lib/svrf-api.js",
   "files": [
-    "dist",
-    "lib",
-    "es",
-    "src"
+    "/dist",
+    "/lib",
+    "/es",
+    "/src"
   ],
   "scripts": {
     "clean": "rimraf lib dist es",
