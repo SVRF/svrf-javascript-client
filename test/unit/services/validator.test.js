@@ -17,7 +17,9 @@ describe('Validator', () => {
     it('fails for invalid fields', () => error({sizeeeee: 5}));
 
     describe('category', () => {
-      it('passes for allowed category', () => valid({category: enums.category.FACE_FILTERS}));
+      const {FACE_FILTERS} = enums.category;
+
+      it('passes for allowed category', () => valid({category: FACE_FILTERS}));
       it('fails for invalid category', () => error({category: 'face filterz'}));
     });
 
@@ -26,27 +28,21 @@ describe('Validator', () => {
     });
 
     describe('stereoscopicType', () => {
-      it('passes for allowed stereotype', () => (
-        valid({stereoscopicType: enums.stereoscopicType.TOP_BOTTOM})
-      ));
+      const {TOP_BOTTOM} = enums.stereoscopicType;
+
+      it('passes for allowed stereotype', () => valid({stereoscopicType: TOP_BOTTOM}));
       it('fails for invalid stereotype', () => error({stereoscopicType: 'top down'}));
     });
 
     describe('type', () => {
-      it('passes for allowed media type single value', () => (
-        valid({type: enums.mediaType.PHOTO})
-      ));
-      it('passes for allowed media type multiple value', () => (
-        valid({type: [enums.mediaType.PHOTO, enums.mediaType.VIDEO]})
-      ));
+      const {PHOTO, VIDEO} = enums.mediaType;
+
+      it('passes for allowed media type single value', () => valid({type: PHOTO}));
+      it('passes for allowed media type multiple value', () => valid({type: [PHOTO, VIDEO]}));
 
       it('fails for invalid media type single value', () => error({type: 'photoz'}));
-      it('fails for invalid media type multiple value', () => (
-        error({type: ['photoz', 'videoz']})
-      ));
-      it('fails if one of the types is invalid', () => (
-        error({type: [enums.mediaType.PHOTO, 'videoz']})
-      ));
+      it('fails for invalid media type multiple value', () => error({type: ['photoz', 'videoz']}));
+      it('fails if one of the types is invalid', () => error({type: [PHOTO, 'videoz']}));
     });
 
     describe('pageNum', () => {

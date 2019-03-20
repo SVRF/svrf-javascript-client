@@ -1,6 +1,5 @@
 import MemoryStorage from '../../../src/storage/memory';
 
-const testKey = 'value-key';
 const testValue = {a: 1, b: '2'};
 
 describe('MemoryStorage', () => {
@@ -9,25 +8,25 @@ describe('MemoryStorage', () => {
   });
 
   it('gets value', () => {
-    MemoryStorage.storage[testKey] = testValue;
+    MemoryStorage.appTokenInfo = testValue;
 
-    const value = MemoryStorage.get(testKey);
+    const value = MemoryStorage.get();
     expect(value).toEqual(testValue);
   });
 
   it('sets value', () => {
-    MemoryStorage.set(testKey, testValue);
+    MemoryStorage.set(testValue);
 
-    const value = MemoryStorage.storage[testKey];
+    const value = MemoryStorage.appTokenInfo;
     expect(value).toEqual(testValue);
   });
 
-  it('removes value', () => {
-    MemoryStorage.storage[testKey] = testValue;
+  it('clears value', () => {
+    MemoryStorage.appTokenInfo = testValue;
 
-    MemoryStorage.remove(testKey);
+    MemoryStorage.clear();
 
-    const value = MemoryStorage.storage[testKey];
-    expect(value).not.toBeDefined();
+    const value = MemoryStorage.appTokenInfo;
+    expect(value).toBeFalsy();
   });
 });

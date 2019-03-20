@@ -1,42 +1,58 @@
 import LocalStorage from '../../../src/storage/local';
 
-const testKey = 'value-key';
+const testValueString = '{a: 1, b: "2"}';
 const testValue = {a: 1, b: '2'};
 
 describe('LocalStorage', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     // It's impossible to mock localStorage methods directly in the jsdom:
     // https://github.com/facebook/jest/issues/6798
     const localStorageProto = Object.getPrototypeOf(localStorage);
-    jest.spyOn(localStorageProto, 'getItem').mockImplementation(() => {});
+    jest.spyOn(localStorageProto, 'getItem').mockReturnValue(testValueString);
     jest.spyOn(localStorageProto, 'setItem').mockImplementation(() => {});
     jest.spyOn(localStorageProto, 'removeItem').mockImplementation(() => {});
+
+    jest.spyOn(JSON, 'parse').mockReturnValue(testValue);
+    jest.spyOn(JSON, 'stringify').mockReturnValue(testValueString);
   });
 
   afterEach(() => {
+    localStorage.getItem.mockClear();
+    localStorage.setItem.mockClear();
+    localStorage.removeItem.mockClear();
+
+    JSON.parse.mockClear();
+    JSON.stringify.mockClear();
+  });
+
+  afterAll(() => {
     localStorage.getItem.mockRestore();
     localStorage.setItem.mockRestore();
     localStorage.removeItem.mockRestore();
+
+    JSON.parse.mockRestore();
+    JSON.stringify.mockRestore();
   });
 
   it('gets value', () => {
-    localStorage.getItem.mockReturnValue(testValue);
-
-    const value = LocalStorage.get(testKey);
+    const value = LocalStorage.get();
 
     expect(value).toEqual(testValue);
-    expect(localStorage.getItem).toHaveBeenCalledWith(testKey);
+    expect(JSON.parse).toHaveBeenCalledWith(testValueString);
+    expect(localStorage.getItem).toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY);
   });
 
   it('sets value', () => {
-    LocalStorage.set(testKey, testValue);
+    LocalStorage.set(testValue);
 
-    expect(localStorage.setItem).toHaveBeenCalledWith(testKey, testValue);
+    expect(JSON.stringify).toHaveBeenCalledWith(testValue);
+    expect(localStorage.setItem)
+      .toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY, testValueString);
   });
 
-  it('removes value', () => {
-    LocalStorage.remove(testKey);
+  it('clears value', () => {
+    LocalStorage.clear();
 
-    expect(localStorage.removeItem).toHaveBeenCalledWith(testKey);
+    expect(localStorage.removeItem).toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY);
   });
 });

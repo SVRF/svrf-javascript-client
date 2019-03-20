@@ -1,14 +1,18 @@
 class LocalStorage {
-  static get(key) {
-    return localStorage.getItem(key);
+  static LOCAL_STORAGE_KEY = 'svrf-app-token';
+
+  static get() {
+    const rawValue = localStorage.getItem(LocalStorage.LOCAL_STORAGE_KEY);
+    return JSON.parse(rawValue);
   }
 
-  static set(key, value) {
-    localStorage.setItem(key, value);
+  static set(value) {
+    const rawValue = JSON.stringify(value);
+    localStorage.setItem(LocalStorage.LOCAL_STORAGE_KEY, rawValue);
   }
 
-  static remove(key) {
-    localStorage.removeItem(key);
+  static clear() {
+    localStorage.removeItem(LocalStorage.LOCAL_STORAGE_KEY);
   }
 }
 

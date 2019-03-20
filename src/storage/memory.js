@@ -1,16 +1,16 @@
 class MemoryStorage {
-  static storage = {};
+  static appTokenInfo = null;
 
-  static get(key) {
-    return MemoryStorage.storage[key];
+  static get() {
+    return MemoryStorage.appTokenInfo;
   }
 
-  static set(key, value) {
-    MemoryStorage.storage[key] = value;
+  static set(value) {
+    MemoryStorage.appTokenInfo = value;
   }
 
-  static remove(key) {
-    delete MemoryStorage.storage[key];
+  static clear() {
+    MemoryStorage.appTokenInfo = null;
   }
 }
 

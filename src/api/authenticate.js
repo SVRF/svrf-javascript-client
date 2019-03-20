@@ -6,7 +6,7 @@ class AuthenticateApi {
   }
 
   async authenticate() {
-    if (!this.tokenService.isTokenExpired()) {
+    if (this.tokenService.isTokenValid()) {
       return;
     }
 
