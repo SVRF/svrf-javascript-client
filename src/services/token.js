@@ -1,4 +1,4 @@
-class TokenService {
+export default class TokenService {
   constructor(storage) {
     this.storage = storage;
   }
@@ -23,5 +23,3 @@ class TokenService {
     this.storage.clear();
   }
 }
-
-export default TokenService;

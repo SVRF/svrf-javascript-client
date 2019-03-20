@@ -1,4 +1,4 @@
-class MemoryStorage {
+export default class MemoryStorage {
   static appTokenInfo = null;
 
   static get() {
@@ -13,5 +13,3 @@ class MemoryStorage {
     MemoryStorage.appTokenInfo = null;
   }
 }
-
-export default MemoryStorage;

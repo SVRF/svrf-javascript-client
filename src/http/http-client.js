@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL} from '../config';
 
-class HttpClient {
+export default class HttpClient {
   constructor() {
     this.api = axios.create();
     this.api.defaults.baseURL = BASE_URL;
@@ -17,5 +17,3 @@ class HttpClient {
     return response.data;
   }
 }
-
-export default HttpClient;

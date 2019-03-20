@@ -1,5 +1,5 @@
 import MediaApi from './media';
-import AuthenticateApi from './authenticate';
+import AuthApi from './auth';
 import AppTokenHttpClient from '../http/app-token-http-client';
 import HttpClient from '../http/http-client';
 import TokenService from '../services/token';
@@ -7,7 +7,7 @@ import enums from '../enums';
 import storage from '../storage';
 import Validator from '../services/validator';
 
-class SvrfApiClient {
+export default class SvrfApiClient {
   static enums = enums;
 
   constructor(apiKey, {userStorage} = {}) {
@@ -19,12 +19,10 @@ class SvrfApiClient {
     const tokenService = new TokenService(tokenStorage);
 
     const httpClient = new HttpClient();
-    this.auth = new AuthenticateApi(httpClient, tokenService, apiKey);
+    this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
     const appTokenHttpClient = new AppTokenHttpClient(this.auth, tokenService);
 
     this.media = new MediaApi(appTokenHttpClient);
   }
 }
-
-export default SvrfApiClient;

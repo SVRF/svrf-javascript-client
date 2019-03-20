@@ -24,7 +24,7 @@ const optionsSchema = Joi.object().keys({
     .label('Media Type'),
 });
 
-class Validator {
+export default class Validator {
   static validateStorage({get, set, remove}) {
     if (get && set && remove) {
       return;
@@ -45,5 +45,3 @@ class Validator {
     }
   }
 }
-
-export default Validator;

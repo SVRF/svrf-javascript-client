@@ -1,4 +1,4 @@
-class LocalStorage {
+export default class LocalStorage {
   static LOCAL_STORAGE_KEY = 'svrf-app-token';
 
   static get() {
@@ -15,5 +15,3 @@ class LocalStorage {
     localStorage.removeItem(LocalStorage.LOCAL_STORAGE_KEY);
   }
 }
-
-export default LocalStorage;

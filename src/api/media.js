@@ -1,28 +1,34 @@
+import QueryService from '../services/query';
 import Validator from '../services/validator';
 
-class MediaApi {
+export default class MediaApi {
   constructor(httpClient) {
     this.httpClient = httpClient;
   }
 
-  getById(id) {
+  async getById(id) {
+    if (!id) {
+      throw new Error('Media Id should be provided');
+    }
+
     return this.httpClient.get(`/vr/${id}`);
   }
 
-  getTrending(options) {
-    Validator.validateMediaSearchOptions(options);
-    return this.httpClient.get('/vr/trending', options);
+  async getTrending(params) {
+    Validator.validateMediaSearchOptions(params);
+    const preparedParams = QueryService.prepareQueryParams(params);
+
+    return this.httpClient.get('/vr/trending', preparedParams);
   }
 
-  search(query, options) {
+  async search(query, params) {
     if (!query) {
       throw new Error('query should be provided');
     }
 
-    Validator.validateMediaSearchOptions(options);
+    Validator.validateMediaSearchOptions(params);
+    const preparedParams = QueryService.prepareQueryParams(params);
 
-    return this.httpClient.get('/vr/search', {q: query, ...options});
+    return this.httpClient.get('/vr/search', {q: query, ...preparedParams});
   }
 }
-
-export default MediaApi;

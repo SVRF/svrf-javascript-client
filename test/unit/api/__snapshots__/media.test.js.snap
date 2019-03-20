@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`authentication getById throws an error if media id is empty 1`] = `"Media Id should be provided"`;
+
+exports[`authentication getById throws an error if media id is not defined 1`] = `"Media Id should be provided"`;

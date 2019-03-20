@@ -1,3 +1,1 @@
-import SvrfApiClient from './api';
-
-export default SvrfApiClient;
+export {default} from './api';
