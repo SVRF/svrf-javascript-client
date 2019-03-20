@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     'no-underscore-dangle': 0,
+    'no-restricted-globals': 0,
     'object-curly-spacing': [2, 'never'],
     'arrow-parens': [2, 'always'],
   }

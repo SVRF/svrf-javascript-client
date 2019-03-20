@@ -23,8 +23,7 @@
     "test:unit": "jest ./test/unit"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "joi": "^14.3.1"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
