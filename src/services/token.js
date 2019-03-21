@@ -5,7 +5,9 @@ export default class TokenService {
 
   isTokenValid() {
     const {appToken, expirationTime} = this.getInfoFromStorage();
-    return appToken && expirationTime && (expirationTime > Date.now());
+    const isTokenValid = appToken && expirationTime && (expirationTime > Date.now());
+
+    return !!isTokenValid;
   }
 
   getAppToken() {
