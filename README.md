@@ -112,3 +112,18 @@ However, you may want us to store the token in some other kind of storage. You c
 ```
 
 Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
+
+### Enums
+
+You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
+
+```javascript
+const SVRF = require('svrf-client');
+
+const api = new SVRF('your API key');
+
+api.authenticate()
+  .then(() => api.getTrending({type: SVRF.enums.mediaType.PHOTO}))
+  .then(({media}) => /* only photos are here */)
+  .catch((err) => console.error(err));
+```
