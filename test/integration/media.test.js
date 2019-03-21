@@ -5,7 +5,7 @@ import TokenService from '../../src/services/token';
 const {SVRF_TEST_API_KEY} = process.env;
 const tokenService = new TokenService(storage);
 
-describe('authentication', () => {
+describe('media api', () => {
   const api = new SVRF(SVRF_TEST_API_KEY);
 
   beforeAll(async () => {

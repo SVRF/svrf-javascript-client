@@ -1,21 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Validator validateMediaSearchOptions category fails for invalid category 1`] = `"\\"Category\\" must be one of [Face Filters]"`;
+exports[`Validator validateAllowedKeys throws an error if one of passed keys is not allowed 1`] = `"hello is not allowed in the object schema"`;
 
-exports[`Validator validateMediaSearchOptions fails for invalid fields 1`] = `"\\"sizeeeee\\" is not allowed"`;
+exports[`Validator validateArrayOrSingleEnumString throws an error if value is neither a string or array 1`] = `"enum string array should be either an array or a string"`;
 
-exports[`Validator validateMediaSearchOptions pageNum fails for negative page number 1`] = `"\\"Page Number\\" must be larger than or equal to 0"`;
+exports[`Validator validateEnumString throws an error if passed enum values does not include value 1`] = `"enum string should be one of the following values: FIRST,SECOND"`;
 
-exports[`Validator validateMediaSearchOptions size fails for 0 page size 1`] = `"\\"Page Size\\" must be larger than or equal to 1"`;
+exports[`Validator validateEnumString throws an error if value is not a string 1`] = `"enum string should be a string"`;
 
-exports[`Validator validateMediaSearchOptions size fails for large page size 1`] = `"\\"Page Size\\" must be less than or equal to 100"`;
+exports[`Validator validateNumber throws an error if value is bigger than max value 1`] = `"number should be equal or less than 5"`;
 
-exports[`Validator validateMediaSearchOptions size fails for negative page size 1`] = `"\\"Page Size\\" must be larger than or equal to 1"`;
+exports[`Validator validateNumber throws an error if value is less than min value 1`] = `"number should be equal or more than 15"`;
 
-exports[`Validator validateMediaSearchOptions stereoscopicType fails for invalid stereotype 1`] = `"\\"Stereoscopic Type\\" must be one of [none, top-bottom, left-right]"`;
+exports[`Validator validateNumber throws an error if value is not an integer 1`] = `"number should be an integer"`;
 
-exports[`Validator validateMediaSearchOptions type fails for invalid media type multiple value 1`] = `"\\"0\\" must be one of [photo, video, 3d]"`;
+exports[`Validator validateObjectSchema throws an error if passed value is not an object 1`] = `"non-object should be an object"`;
 
-exports[`Validator validateMediaSearchOptions type fails for invalid media type single value 1`] = `"\\"type\\" must be one of [photo, video, 3d]"`;
-
-exports[`Validator validateMediaSearchOptions type fails if one of the types is invalid 1`] = `"\\"1\\" must be one of [photo, video, 3d]"`;
+exports[`Validator validateRequiredKeys throws an error if passed keys do not contain all required keys 1`] = `"second is required in the object schema"`;

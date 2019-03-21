@@ -43,6 +43,8 @@ describe('AuthApi', () => {
   });
 
   it('makes request with proper params', async () => {
+    httpClient.post.mockResolvedValue({token, expiresIn});
+
     await api.authenticate();
 
     expect(httpClient.post).toHaveBeenCalledWith('/app/authenticate', {apiKey});
@@ -53,6 +55,6 @@ describe('AuthApi', () => {
 
     await api.authenticate();
 
-    expect(tokenService.set).toHaveBeenCalledWith({appToken: token, expiresIn});
+    expect(tokenService.setAppTokenInfo).toHaveBeenCalledWith({appToken: token, expiresIn});
   });
 });

@@ -1,60 +1,169 @@
 import Validator from '../../../src/services/validator';
-import enums from '../../../src/enums';
 
 describe('Validator', () => {
-  describe('validateMediaSearchOptions', () => {
-    function valid(options) {
-      Validator.validateMediaSearchOptions(options);
+  function valid(callback) {
+    expect(callback).not.toThrow();
+  }
+
+  function error(callback) {
+    expect(callback).toThrowErrorMatchingSnapshot();
+  }
+
+  describe('validateObjectSchema', () => {
+    const name = 'object';
+    const value = {first: 'value'};
+    const allowedKeys = ['first', 'second'];
+
+    it('throws an error if passed value is not an object', () => {
+      error(() => Validator.validateObjectSchema('non-object', 'non-object', {allowedKeys: 'key'}));
+    });
+
+    it('invokes validateAllowedKeys if allowed keys are provided', () => {
+      jest.spyOn(Validator, 'validateAllowedKeys').mockReturnValue();
+
+      const keys = Object.keys(value);
+
+      Validator.validateObjectSchema(name, value, {allowedKeys});
+
+      expect(Validator.validateAllowedKeys).toHaveBeenCalledWith(name, keys, allowedKeys);
+      Validator.validateAllowedKeys.mockRestore();
+    });
+
+    it('invokes validateRequiredKeys if required keys are provided', () => {
+      jest.spyOn(Validator, 'validateRequiredKeys').mockReturnValue();
+
+      const requiredKeys = ['first'];
+      const keys = Object.keys(value);
+
+      Validator.validateObjectSchema(name, value, {requiredKeys});
+
+      expect(Validator.validateRequiredKeys).toHaveBeenCalledWith(name, keys, requiredKeys);
+
+      Validator.validateRequiredKeys.mockRestore();
+    });
+  });
+
+  describe('validateAllowedKeys', () => {
+    const name = 'object';
+    const allowedKeys = ['first', 'second'];
+
+    it('does not throw an error if all passed keys are allowed', () => {
+      valid(() => Validator.validateAllowedKeys(name, ['first', 'second'], allowedKeys));
+    });
+
+    it('does not throw an error if there is no passed keys', () => {
+      valid(() => Validator.validateAllowedKeys(name, [], allowedKeys));
+    });
+
+    it('throws an error if one of passed keys is not allowed', () => {
+      error(() => Validator.validateAllowedKeys(name, ['first', 'hello'], allowedKeys));
+    });
+  });
+
+  describe('validateRequiredKeys', () => {
+    const name = 'object';
+    const requiredKeys = ['first', 'second'];
+
+    it('does not throw an error if passed keys contain all required keys', () => {
+      valid(() => Validator.validateRequiredKeys(name, ['first', 'second', 'third'], requiredKeys));
+    });
+
+    it('throws an error if passed keys do not contain all required keys', () => {
+      error(() => Validator.validateRequiredKeys(name, ['first'], requiredKeys));
+    });
+  });
+
+  describe('validateNumber', () => {
+    const name = 'number';
+    const value = 10;
+
+    function validNumber(...args) {
+      valid(() => Validator.validateNumber(name, ...args));
     }
 
-    function error(options) {
-      expect(() => Validator.validateMediaSearchOptions(options))
-        .toThrowErrorMatchingSnapshot();
+    function errorNumber(...args) {
+      error(() => Validator.validateNumber(name, ...args));
     }
 
-    it('passes if options are not provided', () => valid());
-    it('passes for empty options object', () => valid({}));
-    it('fails for invalid fields', () => error({sizeeeee: 5}));
+    it('does not throw an error if value is not defined', () => validNumber());
+    it('throws an error if value is not an integer', () => errorNumber(10.5));
+    it('does not throw an error if value is bigger than min option', () => validNumber(value, {min: 5}));
+    it('does not throw an error if min option is not defined', () => validNumber(value, {max: 15}));
+    it('throws an error if value is less than min value', () => errorNumber(value, {min: 15}));
+    it('does not throw an error if value is less than max option', () => validNumber(value, {max: 15}));
+    it('does not throw an error if max option is not defined', () => validNumber(value, {min: 5}));
+    it('throws an error if value is bigger than max value', () => errorNumber(value, {max: 5}));
+    it('does not throw an error if min and max options are not defined', () => validNumber(value));
+  });
 
-    describe('category', () => {
-      const {FACE_FILTERS} = enums.category;
+  describe('validateEnumString', () => {
+    const name = 'enum string';
+    const enums = {FIRST: 'FIRST', SECOND: 'SECOND'};
 
-      it('passes for allowed category', () => valid({category: FACE_FILTERS}));
-      it('fails for invalid category', () => error({category: 'face filterz'}));
+    function validEnumString(...args) {
+      valid(() => Validator.validateEnumString(...args));
+    }
+
+    function errorEnumString(...args) {
+      error(() => Validator.validateEnumString(...args));
+    }
+
+    it('does not throw an error if value is not defined', () => validEnumString(name));
+    it('throws an error if value is not a string', () => errorEnumString(name, 10));
+    it('does not throw an error if passed enum values includes value', () => validEnumString(name, 'FIRST', enums));
+    it('throws an error if passed enum values does not include value', () => errorEnumString(name, 'TEST', enums));
+  });
+
+  describe('validateArrayOrSingleEnumString', () => {
+    const name = 'enum string array';
+    const enums = {FIRST: 'FIRST', SECOND: 'SECOND'};
+
+    beforeEach(() => {
+      jest.spyOn(Validator, 'validateEnumString').mockReturnValue();
     });
 
-    describe('minimumWidth', () => {
-      it('passes for valid width', () => valid({minimumWidth: 500}));
+    afterEach(() => {
+      Validator.validateEnumString.mockRestore();
     });
 
-    describe('stereoscopicType', () => {
-      const {TOP_BOTTOM} = enums.stereoscopicType;
-
-      it('passes for allowed stereotype', () => valid({stereoscopicType: TOP_BOTTOM}));
-      it('fails for invalid stereotype', () => error({stereoscopicType: 'top down'}));
+    it('does not throw an error if value is not defined', () => {
+      valid(() => Validator.validateArrayOrSingleEnumString(name));
     });
 
-    describe('type', () => {
-      const {PHOTO, VIDEO} = enums.mediaType;
-
-      it('passes for allowed media type single value', () => valid({type: PHOTO}));
-      it('passes for allowed media type multiple value', () => valid({type: [PHOTO, VIDEO]}));
-
-      it('fails for invalid media type single value', () => error({type: 'photoz'}));
-      it('fails for invalid media type multiple value', () => error({type: ['photoz', 'videoz']}));
-      it('fails if one of the types is invalid', () => error({type: [PHOTO, 'videoz']}));
+    it('throws an error if value is neither a string or array', () => {
+      error(() => Validator.validateArrayOrSingleEnumString(name, 10));
     });
 
-    describe('pageNum', () => {
-      it('passes for valid page number', () => valid({pageNum: 5}));
-      it('fails for negative page number', () => error({pageNum: -42}));
+    it('validates enum string if value is string', () => {
+      const value = 'FIRST';
+
+      Validator.validateArrayOrSingleEnumString(name, value, enums);
+
+      expect(Validator.validateEnumString).toHaveBeenCalledWith(name, value, enums);
     });
 
-    describe('size', () => {
-      it('passes for valid page size', () => valid({size: 5}));
-      it('fails for 0 page size', () => error({size: 0}));
-      it('fails for negative page size', () => error({size: -42}));
-      it('fails for large page size', () => error({size: 1000}));
+    it('validates enum string for each element in array', () => {
+      const value = ['FIRST', 'SECOND'];
+
+      Validator.validateArrayOrSingleEnumString(name, value, enums);
+
+      expect(Validator.validateEnumString).toHaveBeenCalledTimes(value.length);
+      expect(Validator.validateEnumString).toHaveBeenCalledWith(`${name}[0]`, value[0], enums);
+      expect(Validator.validateEnumString).toHaveBeenCalledWith(`${name}[1]`, value[1], enums);
+    });
+  });
+
+  describe('isString', () => {
+    it('returns true if value is a string', () => {
+      const isString = Validator.isString('test string');
+
+      expect(isString).toEqual(true);
+    });
+
+    it('returns false if value is not a string', () => {
+      const isString = Validator.isString(10);
+
+      expect(isString).toEqual(false);
     });
   });
 });

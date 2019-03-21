@@ -11,7 +11,7 @@ export default [
   // CommonJS
   {
     input: 'src/index.js',
-    output: {file: 'lib/svrf-api.js', format: 'cjs', indent: false},
+    output: {file: 'lib/svrf-client.js', format: 'cjs', indent: false},
     external: [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
@@ -32,7 +32,7 @@ export default [
   // ES
   {
     input: 'src/index.js',
-    output: {file: 'es/svrf-api.js', format: 'es', indent: false},
+    output: {file: 'es/svrf-client.js', format: 'es', indent: false},
     external: [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
@@ -53,7 +53,7 @@ export default [
   // ES for Browsers
   {
     input: 'src/index.js',
-    output: {file: 'es/svrf-api.mjs', format: 'es', indent: false},
+    output: {file: 'es/svrf-client.mjs', format: 'es', indent: false},
     plugins: [
       nodeResolve({
         jsnext: true,
@@ -78,7 +78,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/svrf-api.js',
+      file: 'dist/svrf-client.js',
       format: 'umd',
       name: 'SVRF',
       indent: false,
@@ -106,7 +106,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/svrf-api.min.js',
+      file: 'dist/svrf-client.min.js',
       format: 'umd',
       name: 'SVRF',
       indent: false,

@@ -1,5 +1,5 @@
 export default class Validator {
-  static validateNumber(name, value, {min, max}) {
+  static validateNumber(name, value, {min, max} = {}) {
     if (value === undefined) return;
 
     if (!Number.isInteger(value)) {
@@ -11,14 +11,14 @@ export default class Validator {
     }
 
     if (max !== undefined && value > max) {
-      throw new RangeError(`${name} should be equal or more than ${max}`);
+      throw new RangeError(`${name} should be equal or less than ${max}`);
     }
   }
 
-  static validateEnumString(name, value, enumObject) {
+  static validateEnumString(name, value, enumObject = {}) {
     if (value === undefined) return;
 
-    if (Validator.isString(value)) {
+    if (!Validator.isString(value)) {
       throw new TypeError(`${name} should be a string`);
     }
 

@@ -10,9 +10,14 @@ import Validator from '../services/validator';
 export default class SvrfApiClient {
   static enums = enums;
 
-  constructor(apiKey, {userStorage} = {}) {
+  constructor(apiKey, {storage: userStorage} = {}) {
     if (userStorage) {
-      Validator.validateStorage(userStorage);
+      const storageKeys = ['get', 'set', 'clear'];
+
+      Validator.validateObjectSchema('User Storage', userStorage, {
+        allowedKeys: storageKeys,
+        requiredKeys: storageKeys,
+      });
     }
 
     const tokenStorage = userStorage || storage;

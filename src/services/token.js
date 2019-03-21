@@ -4,12 +4,12 @@ export default class TokenService {
   }
 
   isTokenValid() {
-    const {appToken, expirationTime} = this.storage.get();
+    const {appToken, expirationTime} = this.getInfoFromStorage();
     return appToken && expirationTime && (expirationTime > Date.now());
   }
 
   getAppToken() {
-    const {appToken} = this.storage.get();
+    const {appToken} = this.getInfoFromStorage();
     return appToken;
   }
 
@@ -21,5 +21,9 @@ export default class TokenService {
 
   clearAppTokenInfo() {
     this.storage.clear();
+  }
+
+  getInfoFromStorage() {
+    return this.storage.get() || {};
   }
 }

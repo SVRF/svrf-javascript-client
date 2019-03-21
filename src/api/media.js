@@ -1,5 +1,4 @@
 import QueryService from '../services/query';
-import Validator from '../services/validator';
 
 export default class MediaApi {
   constructor(httpClient) {
@@ -15,7 +14,7 @@ export default class MediaApi {
   }
 
   async getTrending(params) {
-    Validator.validateMediaSearchOptions(params);
+    QueryService.validateParams(params);
     const preparedParams = QueryService.prepareQueryParams(params);
 
     return this.httpClient.get('/vr/trending', preparedParams);
@@ -26,7 +25,7 @@ export default class MediaApi {
       throw new Error('query should be provided');
     }
 
-    Validator.validateMediaSearchOptions(params);
+    QueryService.validateParams(params);
     const preparedParams = QueryService.prepareQueryParams(params);
 
     return this.httpClient.get('/vr/search', {q: query, ...preparedParams});
