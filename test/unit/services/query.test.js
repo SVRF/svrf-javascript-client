@@ -32,7 +32,7 @@ describe('QueryService', () => {
       QueryService.validateParams(params);
 
       expect(Validator.validateObjectSchema).toHaveBeenCalledWith('Query Params', params, {
-        allowedKeys: ['type', 'stereoscopicType', 'category', 'size', 'minimumWidth', 'pageNum'],
+        allowedKeys: ['category', 'minimumWidth', 'pageNum', 'size', 'stereoscopicType', 'type'],
       });
 
       expect(Validator.validateArrayOrSingleEnumString)

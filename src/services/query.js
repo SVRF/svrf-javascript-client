@@ -8,15 +8,22 @@ export default class QueryService {
     }
 
     Validator.validateObjectSchema('Query Params', params, {
-      allowedKeys: ['type', 'stereoscopicType', 'category', 'size', 'minimumWidth', 'pageNum'],
+      allowedKeys: [
+        'category',
+        'minimumWidth',
+        'pageNum',
+        'size',
+        'stereoscopicType',
+        'type',
+      ],
     });
 
-    Validator.validateArrayOrSingleEnumString('type', params.type, enums.mediaType);
-    Validator.validateEnumString('stereoscopic type', params.stereoscopicType, enums.stereoscopicType);
     Validator.validateEnumString('category', params.category, enums.category);
-    Validator.validateNumber('size', params.size, {min: 1, max: 100});
     Validator.validateNumber('minimumWidth', params.minimumWidth);
     Validator.validateNumber('pageNum', params.pageNum, {min: 0});
+    Validator.validateNumber('size', params.size, {min: 1, max: 100});
+    Validator.validateEnumString('stereoscopic type', params.stereoscopicType, enums.stereoscopicType);
+    Validator.validateArrayOrSingleEnumString('type', params.type, enums.mediaType);
   }
 
   static prepareQueryParams(params) {

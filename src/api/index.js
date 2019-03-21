@@ -1,11 +1,14 @@
-import MediaApi from './media';
 import AuthApi from './auth';
+import MediaApi from './media';
+
 import AppTokenHttpClient from '../http/app-token-http-client';
 import HttpClient from '../http/http-client';
+
 import TokenService from '../services/token';
+import Validator from '../services/validator';
+
 import enums from '../enums';
 import storage from '../storage';
-import Validator from '../services/validator';
 
 export default class SvrfApiClient {
   static enums = enums;
