@@ -23,7 +23,7 @@ npm install svrf-client --save
 or:
 
 ```shell
-yard add svrf-client
+yarn add svrf-client
 ```
 
 ### For browser
