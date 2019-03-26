@@ -8,15 +8,18 @@
     "url": "https://github.com/SVRF/svrf-javascript-client.git"
   },
   "main": "lib/svrf-api.js",
+  "typings": "./index.d.ts",
   "files": [
     "/dist",
     "/lib",
     "/es",
-    "/src"
+    "/src",
+    "index.d.ts"
   ],
   "scripts": {
+    "build": "rollup -c && npm run docs",
     "clean": "rimraf lib dist es",
-    "build": "rollup -c",
+    "docs": "jsdoc2md -f src/api/index.js src/api/auth.js src/api/media.js > docs/Api.md",
     "lint": "eslint src",
     "test": "npm run test:unit",
     "test:integration": "jest ./test/integration",
@@ -40,6 +43,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "jest": "^24.5.0",
+    "jsdoc-to-markdown": "^4.0.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.6.0",
     "rollup-plugin-babel": "^4.3.2",

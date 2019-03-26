@@ -127,3 +127,5 @@ api.authenticate()
   .then(({media}) => /* only photos are here */)
   .catch((err) => console.error(err));
 ```
+
+### [Api Reference](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Api.md)
