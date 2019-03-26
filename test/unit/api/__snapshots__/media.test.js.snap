@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`media api getById throws an error if http client throws it 1`] = `undefined`;
+
+exports[`media api getById throws an error if media id is empty 1`] = `"Media Id should be provided"`;
+
+exports[`media api getById throws an error if media id is not defined 1`] = `"Media Id should be provided"`;
+
+exports[`media api getTrending throws an error if http client throws it 1`] = `"error in http request"`;
+
+exports[`media api search throws an error if http client throws it 1`] = `"error in http request"`;
+
+exports[`media api search throws an error if query is empty 1`] = `"query should be provided"`;
+
+exports[`media api search throws an error if query is undefined 1`] = `"query should be provided"`;

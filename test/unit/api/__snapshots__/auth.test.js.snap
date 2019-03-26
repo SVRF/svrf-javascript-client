@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthApi throws an error if api key was not provided 1`] = `"Api Key should be provided for authentication"`;

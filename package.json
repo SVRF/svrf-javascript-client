@@ -1,25 +1,54 @@
 {
   "name": "svrf-client",
-  "version": "1.4.0",
+  "version": "2.0.0-alpha",
   "description": "SVRF API client",
   "license": "MIT",
-  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/SVRF/svrf-javascript-client.git"
   },
+  "main": "lib/svrf-api.js",
+  "files": [
+    "/dist",
+    "/lib",
+    "/es",
+    "/src"
+  ],
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive"
-  },
-  "browser": {
-    "fs": false
+    "clean": "rimraf lib dist es",
+    "build": "rollup -c",
+    "lint": "eslint src",
+    "test": "npm run test:unit",
+    "test:integration": "jest ./test/integration",
+    "test:unit": "jest ./test/unit"
   },
   "dependencies": {
-    "superagent": "3.7.0"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
-    "mocha": "~2.3.4",
-    "sinon": "1.17.3",
-    "expect.js": "~0.3.1"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-transform-async-to-generator": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/runtime": "^7.3.4",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^24.5.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }

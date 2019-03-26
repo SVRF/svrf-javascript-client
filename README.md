@@ -2,7 +2,7 @@
 
 For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
 
-## Getting Started
+## About SVRF
 
 SVRF's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
 
@@ -20,7 +20,23 @@ Install it via:
 npm install svrf-client --save
 ```
 
+or:
+
+```shell
+yarn add svrf-client
+```
+
 ### For browser
+
+#### Simple way
+
+```html
+<script src="https://unpkg.com/svrf-client@2.0.0-alpha/dist/svrf-api.min.js"></script>
+```
+
+#### Browserify
+
+TODO: Test it
 
 The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
 the above steps with Node.js and installing browserify with `npm install -g browserify`,
@@ -33,7 +49,9 @@ browserify main.js > bundle.js
 
 Then include *bundle.js* in the HTML pages.
 
-### Webpack Configuration
+#### Webpack Configuration
+
+TODO: Is it true?
 
 Using Webpack you may encounter the following error: "Module not found: Error:
 Cannot resolve module", most certainly you should disable AMD loader. Add/merge
@@ -56,61 +74,56 @@ module: {
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-var SVRF = require('svrf-client');
+const SVRF = require('svrf-client');
 
-var api = new SVRF.AuthenticateApi()
+const api = new SVRF('your API key');
 
-var body = new SVRF.Body(); // {Body} 
-
-api.authenticate(body).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+api.authenticate()
+  .then(() => api.getTrending())
+  .then(({media}) => /* you've got the best of the best media! */)
+  .catch((err) => console.error(err));
 
 ```
 
-## Documentation for API Endpoints
+### Storing the app-token
 
-All URIs are relative to *https://api.svrf.com/v1*
+You need to call `api.authenticate()` only once, then we'll do all authentication magic for you! It means you don't have to worry about storing token and checking its expiration time.
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*SVRF.AuthenticateApi* | [**authenticate**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/AuthenticateApi.md#authenticate) | **POST** /app/authenticate | Authenticate application
-*SVRF.MediaApi* | [**getById**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#getById) | **GET** /vr/{id} | Media by ID Endpoint
-*SVRF.MediaApi* | [**getTrending**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#getTrending) | **GET** /vr/trending | Trending Endpoint
-*SVRF.MediaApi* | [**search**](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaApi.md#search) | **GET** /vr/search | Search Endpoint
+If the `localStorage` is available, we save token there. If it's not available (Node.js for example), we save token in memory.
 
+However, you may want us to store the token in some other kind of storage. You can pass an object that implements `get`, `set` and `clear` methods as an additional option:
 
-## Documentation for Models
+```javascript
+  const options = {
+    storage: {
+      get() {
+        return yourCustomStorage.read();
+      },
+      set(value) {
+        return yourCustomStorage.write(value);
+      },
+      clear() {
+        return yourCustomStorage.clear();
+      }
+    }
+  };
 
- - [SVRF.APIKey](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/APIKey.md)
- - [SVRF.Body](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Body.md)
- - [SVRF.Category](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Category.md)
- - [SVRF.ErrorResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/ErrorResponse.md)
- - [SVRF.Media](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Media.md)
- - [SVRF.MediaFiles](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaFiles.md)
- - [SVRF.MediaImages](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaImages.md)
- - [SVRF.MediaStereo](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaStereo.md)
- - [SVRF.MediaType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaType.md)
- - [SVRF.MediaVideos](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/MediaVideos.md)
- - [SVRF.PaginationResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/PaginationResponse.md)
- - [SVRF.StereoscopicType](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/StereoscopicType.md)
- - [SVRF.SuccessResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SuccessResponse.md)
- - [SVRF.AuthResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/AuthResponse.md)
- - [SVRF.RateLimitResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/RateLimitResponse.md)
- - [SVRF.SearchMediaResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SearchMediaResponse.md)
- - [SVRF.SingleMediaResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/SingleMediaResponse.md)
- - [SVRF.TrendingResponse](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/TrendingResponse.md)
+  const api = new SVRF('your API key', options);
+```
 
+Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
 
-## Documentation for Authorization
+### Enums
 
+You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
 
-### XAppToken
+```javascript
+const SVRF = require('svrf-client');
 
-- **Type**: API key
-- **API key parameter name**: x-app-token
-- **Location**: HTTP header
+const api = new SVRF('your API key');
 
+api.authenticate()
+  .then(() => api.getTrending({type: SVRF.enums.mediaType.PHOTO}))
+  .then(({media}) => /* only photos are here */)
+  .catch((err) => console.error(err));
+```
