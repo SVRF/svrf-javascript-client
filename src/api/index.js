@@ -29,7 +29,7 @@ class SvrfApiClient {
   static enums = enums;
 
   /**
-   * @param {String} apiKey - App API Key
+   * @param {String} apiKey - API Key
    * @param {ApiOptions=} options - API options
    */
   constructor(apiKey, {storage: userStorage} = {}) {
