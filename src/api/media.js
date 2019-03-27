@@ -1,6 +1,16 @@
 import QueryService from '../services/query';
 
 /**
+ * @typedef {Object} HttpRequestParams
+ * @prop {String=} category - Media category
+ * @prop {Number=} minimumWidth - Media minimum width
+ * @prop {Number=} pageNum - Page number
+ * @prop {Number=} size - Page size
+ * @prop {String=} stereoscopicType - Media stereoscopic type
+ * @prop {(String|Array<String>)=} type - Media type
+ */
+
+/**
  * @typedef {Object} Media
  * @prop {String} id
  * @prop {String} src - Source file URL with original quality
@@ -37,6 +47,9 @@ import QueryService from '../services/query';
  * @typedef {Object} MultipleMediaApiResponse
  * @prop {Boolean} success
  * @prop {Array<Media>} media
+ * @prop {String} nextPageCursor
+ * @prop {Number} nextPageNum
+ * @prop {Number} pageNum
  */
 
 /**
@@ -67,13 +80,7 @@ class MediaApi {
 
   /**
    * Get trending media
-   * @param {Object=} params - Request params
-   * @param {String=} params.category - Media category
-   * @param {Number=} params.minimumWidth - Media minimum width
-   * @param {Number=} params.pageNum - Page number
-   * @param {Number=} params.size - Page size
-   * @param {String=} params.stereoscopicType - Media stereoscopic type
-   * @param {(String|Array<String>)=} params.type - Media type
+   * @param {HttpRequestParams=} params - Request params
    * @returns {Promise<MultipleMediaApiResponse>} Found trending media
    */
   async getTrending(params) {
@@ -86,13 +93,7 @@ class MediaApi {
   /**
    * Get media by query
    * @param {String} query - Query for searching media
-   * @param {Object=} params - Request params
-   * @param {String=} params.category - Media category
-   * @param {Number=} params.minimumWidth - Media minimum width
-   * @param {Number=} params.pageNum - Page number
-   * @param {Number=} params.size - Page size
-   * @param {String=} params.stereoscopicType - Media stereoscopic type
-   * @param {(String|Array<String>)=} params.type - Media type
+   * @param {HttpRequestParams=} params - Request params
    * @returns {Promise<MultipleMediaApiResponse>} - Found media by query
    * @throws {Error} query should be provided
    */

@@ -19,6 +19,8 @@
 <dd></dd>
 <dt><a href="#Storage">Storage</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#HttpRequestParams">HttpRequestParams</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#Media">Media</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#MediaFiles">MediaFiles</a> : <code>Object</code></dt>
@@ -47,7 +49,7 @@ SVRF API provider
 
 | Param | Type | Description |
 | --- | --- | --- |
-| apiKey | <code>String</code> | App API Key |
+| apiKey | <code>String</code> | API Key |
 | [options] | [<code>ApiOptions</code>](#ApiOptions) | API options |
 
 <a name="SvrfApiClient+auth"></a>
@@ -132,13 +134,7 @@ Get trending media
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [params] | <code>Object</code> | Request params |
-| [params.category] | <code>String</code> | Media category |
-| [params.minimumWidth] | <code>Number</code> | Media minimum width |
-| [params.pageNum] | <code>Number</code> | Page number |
-| [params.size] | <code>Number</code> | Page size |
-| [params.stereoscopicType] | <code>String</code> | Media stereoscopic type |
-| [params.type] | <code>String</code> \| <code>Array.&lt;String&gt;</code> | Media type |
+| [params] | [<code>HttpRequestParams</code>](#HttpRequestParams) | Request params |
 
 <a name="MediaApi+search"></a>
 
@@ -155,13 +151,7 @@ Get media by query
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>String</code> | Query for searching media |
-| [params] | <code>Object</code> | Request params |
-| [params.category] | <code>String</code> | Media category |
-| [params.minimumWidth] | <code>Number</code> | Media minimum width |
-| [params.pageNum] | <code>Number</code> | Page number |
-| [params.size] | <code>Number</code> | Page size |
-| [params.stereoscopicType] | <code>String</code> | Media stereoscopic type |
-| [params.type] | <code>String</code> \| <code>Array.&lt;String&gt;</code> | Media type |
+| [params] | [<code>HttpRequestParams</code>](#HttpRequestParams) | Request params |
 
 <a name="ApiOptions"></a>
 
@@ -184,6 +174,21 @@ Get media by query
 | get | <code>function</code> | get app token info from storage |
 | set | <code>function</code> | set app token info to storage |
 | clear | <code>function</code> | remove app token info from storage |
+
+<a name="HttpRequestParams"></a>
+
+## HttpRequestParams : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [category] | <code>String</code> | Media category |
+| [minimumWidth] | <code>Number</code> | Media minimum width |
+| [pageNum] | <code>Number</code> | Page number |
+| [size] | <code>Number</code> | Page size |
+| [stereoscopicType] | <code>String</code> | Media stereoscopic type |
+| [type] | <code>String</code> \| <code>Array.&lt;String&gt;</code> | Media type |
 
 <a name="Media"></a>
 
@@ -243,4 +248,7 @@ Get media by query
 | --- | --- |
 | success | <code>Boolean</code> | 
 | media | [<code>Array.&lt;Media&gt;</code>](#Media) | 
+| nextPageCursor | <code>String</code> | 
+| nextPageNum | <code>Number</code> | 
+| pageNum | <code>Number</code> | 
 

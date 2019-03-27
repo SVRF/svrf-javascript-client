@@ -2,85 +2,97 @@ declare enum Category {FACE_FILTERS = 'Face Filters'}
 declare enum StereoscopicType {NONE = 'none', TOP_BOTTOM = 'top-bottom', LEFT_RIGHT = 'left-right'}
 declare enum MediaType {PHOTO = 'photo', VIDEO = 'video', MODEL_3D = '3d'}
 
-declare interface MediaFiles {
-  images: Object;
-  videos: Object;
-  stereo: Object;
-}
+declare namespace SvrfApiClient {
+  export interface Enums {
+    category: typeof Category;
+    stereoscopicType: typeof StereoscopicType;
+    mediaType: typeof MediaType;
+  }
 
-declare interface Media {
-  id: string;
-  src: string;
-  title: string;
-  description: string;
-  authors: Array<string>;
-  site: string;
-  canonical: string;
-  url: string;
-  embedUrl: string;
-  embedHtml: string;
-  type: string;
-  adult: boolean;
-  width: number;
-  height: number;
-  duration: number | null;
-  metadata: Object;
-  files: MediaFiles;
-}
+  export interface MediaFiles {
+    images: Object;
+    videos: Object;
+    stereo: Object;
+  }
 
-declare interface SingleMediaApiResponse {
-  success: boolean;
-  media: Media;
-}
+  export interface Media {
+    id: string;
+    src: string;
+    title: string;
+    description: string;
+    authors: Array<string>;
+    site: string;
+    canonical: string;
+    url: string;
+    embedUrl: string;
+    embedHtml: string;
+    type: string;
+    adult: boolean;
+    width: number;
+    height: number;
+    duration: number | null;
+    metadata: Object;
+    files: MediaFiles;
+  }
 
-declare interface MultipleMediaApiResponse {
-  success: boolean;
-  media: Array<Media>;
-}
+  export interface SingleMediaApiResponse {
+    success: boolean;
+    media: Media;
+  }
 
-declare interface AppTokenSetInfo {
-  appToken: string,
-  expiresIn: number;
-}
+  export interface MultipleMediaApiResponse {
+    success: boolean;
+    media: Array<Media>;
+    nextPageCursor: string;
+    nextPageNum: number;
+    pageNum: number;
+  }
 
-declare interface AppTokenInfo {
-  appToken: string;
-  expirationTime: number;
-}
+  export interface AppTokenSetInfo {
+    appToken: string,
+    expiresIn: number;
+  }
 
-declare interface Storage {
-  get(): AppTokenInfo;
-  set(appTokenInfo: AppTokenSetInfo): void;
-  clear(): void;
-}
+  export interface AppTokenInfo {
+    appToken: string;
+    expirationTime: number;
+  }
 
-declare interface SvrfApiClientOptions {
-  storage: Storage;
-}
+  export interface Storage {
+    get(): AppTokenInfo;
+    set(appTokenInfo: AppTokenSetInfo): void;
+    clear(): void;
+  }
 
-declare interface HttpRequestParams {
-  category?: Category;
-  minimumWidth?: number;
-  pageNum?: number;
-  size?: number;
-  stereoscopicType?: StereoscopicType;
-  type?: MediaType | Array<MediaType>;
-}
+  export interface SvrfApiClientOptions {
+    storage: Storage;
+  }
 
-declare interface AuthApi {
-  authenticate(): Promise<void>;
-}
+  export interface HttpRequestParams {
+    category?: Category;
+    minimumWidth?: number;
+    pageNum?: number;
+    size?: number;
+    stereoscopicType?: StereoscopicType;
+    type?: MediaType | Array<MediaType>;
+  }
 
-declare interface MediaApi {
-  getById(id: number | string): Promise<SingleMediaApiResponse>;
-  getTrending(params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
-  search(query: string, params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
+  export interface AuthApi {
+    authenticate(): Promise<void>;
+  }
+
+  export interface MediaApi {
+    getById(id: number | string): Promise<SingleMediaApiResponse>;
+    getTrending(params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
+    search(query: string, params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
+  }
 }
 
 declare class SvrfApiClient {
-  constructor(apiKey: string, options: SvrfApiClientOptions);
-  auth: AuthApi;
-  media: MediaApi;
+  static enums: SvrfApiClient.Enums;
+  constructor(apiKey: string, options?: SvrfApiClient.SvrfApiClientOptions);
+  auth: SvrfApiClient.AuthApi;
+  media: SvrfApiClient.MediaApi;
 }
 
-export default SvrfApiClient;
+export = SvrfApiClient;
