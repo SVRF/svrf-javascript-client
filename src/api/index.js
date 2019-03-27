@@ -25,7 +25,7 @@ import storage from '../storage';
 /**
  * SVRF API provider
 */
-class SvrfApiClient {
+class Svrf {
   static enums = enums;
 
   /**
@@ -47,14 +47,20 @@ class SvrfApiClient {
 
     const httpClient = new HttpClient();
 
-    /** @type {AuthApi} */
+    /**
+     * AuthApi instance
+     * @type {AuthApi}
+     */
     this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
     const appTokenHttpClient = new AppTokenHttpClient(this.auth, tokenService);
 
-    /** @type {MediaApi} */
+    /**
+     * MediaApi instance
+     * @type {MediaApi}
+     */
     this.media = new MediaApi(appTokenHttpClient);
   }
 }
 
-export default SvrfApiClient;
+export default Svrf;

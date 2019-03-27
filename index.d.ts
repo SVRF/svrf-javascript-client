@@ -2,7 +2,7 @@ declare enum Category {FACE_FILTERS = 'Face Filters'}
 declare enum StereoscopicType {NONE = 'none', TOP_BOTTOM = 'top-bottom', LEFT_RIGHT = 'left-right'}
 declare enum MediaType {PHOTO = 'photo', VIDEO = 'video', MODEL_3D = '3d'}
 
-declare namespace SvrfApiClient {
+declare namespace Svrf {
   export interface Enums {
     category: typeof Category;
     stereoscopicType: typeof StereoscopicType;
@@ -64,7 +64,7 @@ declare namespace SvrfApiClient {
     clear(): void;
   }
 
-  export interface SvrfApiClientOptions {
+  export interface SvrfOptions {
     storage: Storage;
   }
 
@@ -88,11 +88,11 @@ declare namespace SvrfApiClient {
   }
 }
 
-declare class SvrfApiClient {
-  static enums: SvrfApiClient.Enums;
-  constructor(apiKey: string, options?: SvrfApiClient.SvrfApiClientOptions);
-  auth: SvrfApiClient.AuthApi;
-  media: SvrfApiClient.MediaApi;
+declare class Svrf {
+  static enums: Svrf.Enums;
+  constructor(apiKey: string, options?: Svrf.SvrfOptions);
+  auth: Svrf.AuthApi;
+  media: Svrf.MediaApi;
 }
 
-export = SvrfApiClient;
+export = Svrf;

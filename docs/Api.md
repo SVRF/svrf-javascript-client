@@ -1,7 +1,7 @@
 ## Classes
 
 <dl>
-<dt><a href="#SvrfApiClient">SvrfApiClient</a></dt>
+<dt><a href="#Svrf">Svrf</a></dt>
 <dd><p>SVRF API provider</p>
 </dd>
 <dt><a href="#AuthApi">AuthApi</a></dt>
@@ -31,35 +31,39 @@
 <dd></dd>
 </dl>
 
-<a name="SvrfApiClient"></a>
+<a name="Svrf"></a>
 
-## SvrfApiClient
+## Svrf
 SVRF API provider
 
 **Kind**: global class  
 
-* [SvrfApiClient](#SvrfApiClient)
-    * [new SvrfApiClient(apiKey, [options])](#new_SvrfApiClient_new)
-    * [.auth](#SvrfApiClient+auth) : [<code>AuthApi</code>](#AuthApi)
-    * [.media](#SvrfApiClient+media) : [<code>MediaApi</code>](#MediaApi)
+* [Svrf](#Svrf)
+    * [new Svrf(apiKey, [options])](#new_Svrf_new)
+    * [.auth](#Svrf+auth) : [<code>AuthApi</code>](#AuthApi)
+    * [.media](#Svrf+media) : [<code>MediaApi</code>](#MediaApi)
 
-<a name="new_SvrfApiClient_new"></a>
+<a name="new_Svrf_new"></a>
 
-### new SvrfApiClient(apiKey, [options])
+### new Svrf(apiKey, [options])
 
 | Param | Type | Description |
 | --- | --- | --- |
 | apiKey | <code>String</code> | API Key |
 | [options] | [<code>ApiOptions</code>](#ApiOptions) | API options |
 
-<a name="SvrfApiClient+auth"></a>
+<a name="Svrf+auth"></a>
 
-### svrfApiClient.auth : [<code>AuthApi</code>](#AuthApi)
-**Kind**: instance property of [<code>SvrfApiClient</code>](#SvrfApiClient)  
-<a name="SvrfApiClient+media"></a>
+### svrf.auth : [<code>AuthApi</code>](#AuthApi)
+AuthApi instance
 
-### svrfApiClient.media : [<code>MediaApi</code>](#MediaApi)
-**Kind**: instance property of [<code>SvrfApiClient</code>](#SvrfApiClient)  
+**Kind**: instance property of [<code>Svrf</code>](#Svrf)  
+<a name="Svrf+media"></a>
+
+### svrf.media : [<code>MediaApi</code>](#MediaApi)
+MediaApi instance
+
+**Kind**: instance property of [<code>Svrf</code>](#Svrf)  
 <a name="AuthApi"></a>
 
 ## AuthApi
