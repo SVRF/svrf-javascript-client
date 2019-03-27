@@ -56,9 +56,6 @@ import QueryService from '../services/query';
  * Media API provider
 */
 class MediaApi {
-  /**
-   * @param {HttpClient} httpClient - HTTP client for making requests
-   */
   constructor(httpClient) {
     /** @private */
     this.httpClient = httpClient;

@@ -70,21 +70,6 @@ MediaApi instance
 Authentication API provider
 
 **Kind**: global class  
-
-* [AuthApi](#AuthApi)
-    * [new AuthApi(httpClient, tokenService, apiKey)](#new_AuthApi_new)
-    * [.authenticate()](#AuthApi+authenticate) ⇒ <code>Promise.&lt;void&gt;</code>
-
-<a name="new_AuthApi_new"></a>
-
-### new AuthApi(httpClient, tokenService, apiKey)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| httpClient | <code>HttpClient</code> | HTTP client for making requests |
-| tokenService | <code>TokenService</code> | Service which provides methods for token storage |
-| apiKey | <code>String</code> | Application API Key |
-
 <a name="AuthApi+authenticate"></a>
 
 ### authApi.authenticate() ⇒ <code>Promise.&lt;void&gt;</code>
@@ -99,18 +84,9 @@ Media API provider
 **Kind**: global class  
 
 * [MediaApi](#MediaApi)
-    * [new MediaApi(httpClient)](#new_MediaApi_new)
     * [.getById(id)](#MediaApi+getById) ⇒ [<code>Promise.&lt;SingleMediaApiResponse&gt;</code>](#SingleMediaApiResponse)
     * [.getTrending([params])](#MediaApi+getTrending) ⇒ [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse)
     * [.search(query, [params])](#MediaApi+search) ⇒ [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse)
-
-<a name="new_MediaApi_new"></a>
-
-### new MediaApi(httpClient)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| httpClient | <code>HttpClient</code> | HTTP client for making requests |
 
 <a name="MediaApi+getById"></a>
 

@@ -2,11 +2,6 @@
  * Authentication API provider
 */
 class AuthApi {
-  /**
-   * @param {HttpClient} httpClient - HTTP client for making requests
-   * @param {TokenService} tokenService - Service which provides methods for token storage
-   * @param {String} apiKey - Application API Key
-   */
   constructor(httpClient, tokenService, apiKey) {
     /** @private */
     this.httpClient = httpClient;
