@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **files** | [**MediaFiles**](MediaFiles.md) |  | [optional] 
 **height** | **Number** | The height, in pixels, of the Media&#39;s source | [optional] 
 **id** | **String** | The unique ID of this Media | [optional] 
+**metadata** | [**MediaMetadata**](MediaMetadata.md) |  | [optional] 
 **site** | **String** | The site that this Media came from. This should be displayed when possible. | [optional] 
 **title** | **String** | The title of the Media, suitable for displaying | [optional] 
 **type** | [**MediaType**](MediaType.md) |  | [optional] 

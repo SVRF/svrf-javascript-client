@@ -32,7 +32,7 @@
   /**
    * The MediaFiles model module.
    * @module model/MediaFiles
-   * @version 1.4.0
+   * @version 1.5.0
    */
 
   /**

@@ -112,6 +112,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property metadata (base name: "metadata")', function() {
+      // uncomment below and update the code to test the property metadata
+      //var instane = new SVRF.Media();
+      //expect(instance).to.be();
+    });
+
     it('should have the property site (base name: "site")', function() {
       // uncomment below and update the code to test the property site
       //var instane = new SVRF.Media();

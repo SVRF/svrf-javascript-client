@@ -12,18 +12,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/SuccessResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./SuccessResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.SVRF) {
       root.SVRF = {};
     }
-    root.SVRF.PaginationResponse = factory(root.SVRF.ApiClient);
+    root.SVRF.PaginationResponse = factory(root.SVRF.ApiClient, root.SVRF.SuccessResponse);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, SuccessResponse) {
   'use strict';
 
 
@@ -32,17 +32,19 @@
   /**
    * The PaginationResponse model module.
    * @module model/PaginationResponse
-   * @version 1.4.0
+   * @version 1.5.0
    */
 
   /**
    * Constructs a new <code>PaginationResponse</code>.
    * @alias module:model/PaginationResponse
    * @class
+   * @implements module:model/SuccessResponse
    */
   var exports = function() {
     var _this = this;
 
+    SuccessResponse.call(_this);
 
 
   };
@@ -58,6 +60,7 @@
     if (data) {
       obj = obj || new exports();
 
+      SuccessResponse.constructFromObject(data, obj);
       if (data.hasOwnProperty('nextPageNum')) {
         obj['nextPageNum'] = ApiClient.convertToType(data['nextPageNum'], 'Number');
       }
@@ -78,6 +81,13 @@
    * @member {Number} pageNum
    */
   exports.prototype['pageNum'] = undefined;
+
+  // Implement SuccessResponse interface:
+  /**
+   * If the request was successful
+   * @member {Boolean} success
+   */
+exports.prototype['success'] = undefined;
 
 
 

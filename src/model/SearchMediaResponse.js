@@ -32,7 +32,7 @@
   /**
    * The SearchMediaResponse model module.
    * @module model/SearchMediaResponse
-   * @version 1.4.0
+   * @version 1.5.0
    */
 
   /**
@@ -92,6 +92,12 @@
   exports.prototype['totalNum'] = undefined;
 
   // Implement PaginationResponse interface:
+  /**
+   * If the request was successful
+   * @member {Boolean} success
+   */
+exports.prototype['success'] = undefined;
+
   /**
    * The next page to query to see more results, whether or not the next page actually exists.
    * @member {Number} nextPageNum

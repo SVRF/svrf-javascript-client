@@ -29,7 +29,7 @@
   /**
    * Media service.
    * @module api/MediaApi
-   * @version 1.4.0
+   * @version 1.5.0
    */
 
   /**
@@ -107,6 +107,9 @@
      * @param {Number} opts.size The number of results per page. (default to 10)
      * @param {Number} opts.minimumWidth The minimum width for video and photo Media, in pixels.
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
+     * @param {Boolean} opts.isFaceFilter Search only for Face Filters.
+     * @param {Boolean} opts.hasBlendShapes Search only for Media that has blend shapes.
+     * @param {Boolean} opts.requiresBlendShapes Search only for Media that requires blend shapes.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TrendingResponse} and HTTP response
      */
     this.getTrendingWithHttpInfo = function(opts) {
@@ -122,6 +125,9 @@
         'size': opts['size'],
         'minimumWidth': opts['minimumWidth'],
         'pageNum': opts['pageNum'],
+        'isFaceFilter': opts['isFaceFilter'],
+        'hasBlendShapes': opts['hasBlendShapes'],
+        'requiresBlendShapes': opts['requiresBlendShapes'],
       };
       var collectionQueryParams = {
         'type': {
@@ -156,6 +162,9 @@
      * @param {Number} opts.size The number of results per page. (default to 10)
      * @param {Number} opts.minimumWidth The minimum width for video and photo Media, in pixels.
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
+     * @param {Boolean} opts.isFaceFilter Search only for Face Filters.
+     * @param {Boolean} opts.hasBlendShapes Search only for Media that has blend shapes.
+     * @param {Boolean} opts.requiresBlendShapes Search only for Media that requires blend shapes.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TrendingResponse}
      */
     this.getTrending = function(opts) {
@@ -177,6 +186,9 @@
      * @param {Number} opts.size The number of results to return per-page, from 1 to 100. (default to 10)
      * @param {Number} opts.minimumWidth The minimum width for video and photo Media, in pixels.
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
+     * @param {Boolean} opts.isFaceFilter Search only for Face Filters.
+     * @param {Boolean} opts.hasBlendShapes Search only for Media that has blend shapes.
+     * @param {Boolean} opts.requiresBlendShapes Search only for Media that requires blend shapes.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SearchMediaResponse} and HTTP response
      */
     this.searchWithHttpInfo = function(q, opts) {
@@ -198,6 +210,9 @@
         'size': opts['size'],
         'minimumWidth': opts['minimumWidth'],
         'pageNum': opts['pageNum'],
+        'isFaceFilter': opts['isFaceFilter'],
+        'hasBlendShapes': opts['hasBlendShapes'],
+        'requiresBlendShapes': opts['requiresBlendShapes'],
       };
       var collectionQueryParams = {
         'type': {
@@ -233,6 +248,9 @@
      * @param {Number} opts.size The number of results to return per-page, from 1 to 100. (default to 10)
      * @param {Number} opts.minimumWidth The minimum width for video and photo Media, in pixels.
      * @param {Number} opts.pageNum Pagination control to fetch the next page of results, if applicable.
+     * @param {Boolean} opts.isFaceFilter Search only for Face Filters.
+     * @param {Boolean} opts.hasBlendShapes Search only for Media that has blend shapes.
+     * @param {Boolean} opts.requiresBlendShapes Search only for Media that requires blend shapes.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SearchMediaResponse}
      */
     this.search = function(q, opts) {

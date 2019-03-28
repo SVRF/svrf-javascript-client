@@ -12,12 +12,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/APIKey', 'model/Body', 'model/Category', 'model/ErrorResponse', 'model/Media', 'model/MediaFiles', 'model/MediaImages', 'model/MediaStereo', 'model/MediaType', 'model/MediaVideos', 'model/PaginationResponse', 'model/StereoscopicType', 'model/SuccessResponse', 'model/AuthResponse', 'model/RateLimitResponse', 'model/SearchMediaResponse', 'model/SingleMediaResponse', 'model/TrendingResponse', 'api/AuthenticateApi', 'api/MediaApi'], factory);
+    define(['ApiClient', 'model/APIKey', 'model/Body', 'model/Category', 'model/ErrorResponse', 'model/Media', 'model/MediaFiles', 'model/MediaImages', 'model/MediaMetadata', 'model/MediaStereo', 'model/MediaType', 'model/MediaVideos', 'model/StereoscopicType', 'model/SuccessResponse', 'model/AuthResponse', 'model/PaginationResponse', 'model/RateLimitResponse', 'model/SingleMediaResponse', 'model/SearchMediaResponse', 'model/TrendingResponse', 'api/AuthenticateApi', 'api/MediaApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/APIKey'), require('./model/Body'), require('./model/Category'), require('./model/ErrorResponse'), require('./model/Media'), require('./model/MediaFiles'), require('./model/MediaImages'), require('./model/MediaStereo'), require('./model/MediaType'), require('./model/MediaVideos'), require('./model/PaginationResponse'), require('./model/StereoscopicType'), require('./model/SuccessResponse'), require('./model/AuthResponse'), require('./model/RateLimitResponse'), require('./model/SearchMediaResponse'), require('./model/SingleMediaResponse'), require('./model/TrendingResponse'), require('./api/AuthenticateApi'), require('./api/MediaApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/APIKey'), require('./model/Body'), require('./model/Category'), require('./model/ErrorResponse'), require('./model/Media'), require('./model/MediaFiles'), require('./model/MediaImages'), require('./model/MediaMetadata'), require('./model/MediaStereo'), require('./model/MediaType'), require('./model/MediaVideos'), require('./model/StereoscopicType'), require('./model/SuccessResponse'), require('./model/AuthResponse'), require('./model/PaginationResponse'), require('./model/RateLimitResponse'), require('./model/SingleMediaResponse'), require('./model/SearchMediaResponse'), require('./model/TrendingResponse'), require('./api/AuthenticateApi'), require('./api/MediaApi'));
   }
-}(function(ApiClient, APIKey, Body, Category, ErrorResponse, Media, MediaFiles, MediaImages, MediaStereo, MediaType, MediaVideos, PaginationResponse, StereoscopicType, SuccessResponse, AuthResponse, RateLimitResponse, SearchMediaResponse, SingleMediaResponse, TrendingResponse, AuthenticateApi, MediaApi) {
+}(function(ApiClient, APIKey, Body, Category, ErrorResponse, Media, MediaFiles, MediaImages, MediaMetadata, MediaStereo, MediaType, MediaVideos, StereoscopicType, SuccessResponse, AuthResponse, PaginationResponse, RateLimitResponse, SingleMediaResponse, SearchMediaResponse, TrendingResponse, AuthenticateApi, MediaApi) {
   'use strict';
 
   /**
@@ -49,7 +49,7 @@
    * </pre>
    * </p>
    * @module index
-   * @version 1.4.0
+   * @version 1.5.0
    */
   var exports = {
     /**
@@ -93,6 +93,11 @@
      */
     MediaImages: MediaImages,
     /**
+     * The MediaMetadata model constructor.
+     * @property {module:model/MediaMetadata}
+     */
+    MediaMetadata: MediaMetadata,
+    /**
      * The MediaStereo model constructor.
      * @property {module:model/MediaStereo}
      */
@@ -107,11 +112,6 @@
      * @property {module:model/MediaVideos}
      */
     MediaVideos: MediaVideos,
-    /**
-     * The PaginationResponse model constructor.
-     * @property {module:model/PaginationResponse}
-     */
-    PaginationResponse: PaginationResponse,
     /**
      * The StereoscopicType model constructor.
      * @property {module:model/StereoscopicType}
@@ -128,20 +128,25 @@
      */
     AuthResponse: AuthResponse,
     /**
+     * The PaginationResponse model constructor.
+     * @property {module:model/PaginationResponse}
+     */
+    PaginationResponse: PaginationResponse,
+    /**
      * The RateLimitResponse model constructor.
      * @property {module:model/RateLimitResponse}
      */
     RateLimitResponse: RateLimitResponse,
     /**
-     * The SearchMediaResponse model constructor.
-     * @property {module:model/SearchMediaResponse}
-     */
-    SearchMediaResponse: SearchMediaResponse,
-    /**
      * The SingleMediaResponse model constructor.
      * @property {module:model/SingleMediaResponse}
      */
     SingleMediaResponse: SingleMediaResponse,
+    /**
+     * The SearchMediaResponse model constructor.
+     * @property {module:model/SearchMediaResponse}
+     */
+    SearchMediaResponse: SearchMediaResponse,
     /**
      * The TrendingResponse model constructor.
      * @property {module:model/TrendingResponse}

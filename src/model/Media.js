@@ -12,18 +12,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/MediaFiles', 'model/MediaType'], factory);
+    define(['ApiClient', 'model/MediaFiles', 'model/MediaMetadata', 'model/MediaType'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./MediaFiles'), require('./MediaType'));
+    module.exports = factory(require('../ApiClient'), require('./MediaFiles'), require('./MediaMetadata'), require('./MediaType'));
   } else {
     // Browser globals (root is window)
     if (!root.SVRF) {
       root.SVRF = {};
     }
-    root.SVRF.Media = factory(root.SVRF.ApiClient, root.SVRF.MediaFiles, root.SVRF.MediaType);
+    root.SVRF.Media = factory(root.SVRF.ApiClient, root.SVRF.MediaFiles, root.SVRF.MediaMetadata, root.SVRF.MediaType);
   }
-}(this, function(ApiClient, MediaFiles, MediaType) {
+}(this, function(ApiClient, MediaFiles, MediaMetadata, MediaType) {
   'use strict';
 
 
@@ -32,7 +32,7 @@
   /**
    * The Media model module.
    * @module model/Media
-   * @version 1.4.0
+   * @version 1.5.0
    */
 
   /**
@@ -42,6 +42,7 @@
    */
   var exports = function() {
     var _this = this;
+
 
 
 
@@ -100,6 +101,9 @@
       }
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+      if (data.hasOwnProperty('metadata')) {
+        obj['metadata'] = MediaMetadata.constructFromObject(data['metadata']);
       }
       if (data.hasOwnProperty('site')) {
         obj['site'] = ApiClient.convertToType(data['site'], 'String');
@@ -170,6 +174,10 @@
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
+  /**
+   * @member {module:model/MediaMetadata} metadata
+   */
+  exports.prototype['metadata'] = undefined;
   /**
    * The site that this Media came from. This should be displayed when possible.
    * @member {String} site
