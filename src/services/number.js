@@ -1,9 +1,16 @@
+/**
+ * Useful number functions that are missing in IE11.
+ */
 class NumberService {
+  /**
+   * Checks if value is an integer
+   * @param {Number} value
+   * @returns {Boolean} If value is an integer
+   */
   static isInteger(value) {
-    return (Number.isInteger && Number.isInteger(value))
-      || (typeof value === 'number'
+    return typeof value === 'number'
       && isFinite(value)
-      && Math.floor(value) === value);
+      && Math.floor(value) === value;
   }
 }
 

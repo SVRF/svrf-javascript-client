@@ -1,6 +1,5 @@
-
 /**
- * Useful functions that are missing in IE11.
+ * Useful array functions that are missing in IE11.
  * NOTE: These are not 100% polyfills. Their behavior may be different in some edge cases,
  * but this is enough for the current library to not overcomplicate the bundle.
  */
