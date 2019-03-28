@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`media api getting trending media gets trending media 1`] = `"Request failed with status code 404"`;

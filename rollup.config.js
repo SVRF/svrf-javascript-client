@@ -11,122 +11,55 @@ export default [
   // CommonJS
   {
     input: 'src/index.js',
-    output: {file: 'lib/svrf-client.js', format: 'cjs', indent: false},
+    output: {
+      file: 'lib/svrf-client.js',
+      format: 'cjs',
+      indent: false,
+    },
     external: [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ],
     plugins: [
-      nodeResolve({
-        jsnext: true,
-      }),
-      commonjs({
-        include: /node_modules/,
-      }),
-      babel({
-        runtimeHelpers: true,
-      }),
+      nodeResolve({jsnext: true}),
+      commonjs({include: /node_modules/}),
+      babel({exclude: 'node_modules/**', runtimeHelpers: true}),
     ],
   },
 
-  // ES
-  {
-    input: 'src/index.js',
-    output: {file: 'es/svrf-client.js', format: 'es', indent: false},
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
-    plugins: [
-      nodeResolve({
-        jsnext: true,
-      }),
-      commonjs({
-        include: /node_modules/,
-      }),
-      babel({
-        runtimeHelpers: true,
-      }),
-    ],
-  },
-
-  // ES for Browsers
-  {
-    input: 'src/index.js',
-    output: {file: 'es/svrf-client.mjs', format: 'es', indent: false},
-    plugins: [
-      nodeResolve({
-        jsnext: true,
-        browser: true,
-      }),
-      commonjs({
-        include: /node_modules/,
-      }),
-      json(),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true,
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
-      terser(),
-    ],
-  },
-
-  // UMD Development
+  // IIFE Development
   {
     input: 'src/index.js',
     output: {
       file: 'dist/svrf-client.js',
-      format: 'umd',
+      format: 'iife',
       name: 'SVRF',
       indent: false,
     },
     plugins: [
-      nodeResolve({
-        jsnext: true,
-        browser: true,
-      }),
-      commonjs({
-        include: /node_modules/,
-      }),
+      nodeResolve({jsnext: true, browser: true}),
+      commonjs({include: /node_modules/}),
       json(),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true,
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('development'),
-      }),
+      babel({runtimeHelpers: true}),
+      replace({'process.env.NODE_ENV': JSON.stringify('development')}),
     ],
   },
 
-  // UMD Production
+  // IIFE Production
   {
     input: 'src/index.js',
     output: {
       file: 'dist/svrf-client.min.js',
-      format: 'umd',
+      format: 'iife',
       name: 'SVRF',
       indent: false,
     },
     plugins: [
-      nodeResolve({
-        jsnext: true,
-        browser: true,
-      }),
-      commonjs({
-        include: /node_modules/,
-      }),
+      nodeResolve({jsnext: true, browser: true}),
+      commonjs({include: /node_modules/}),
       json(),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true,
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
+      babel({runtimeHelpers: true}),
+      replace({'process.env.NODE_ENV': JSON.stringify('production')}),
       terser(),
     ],
   },

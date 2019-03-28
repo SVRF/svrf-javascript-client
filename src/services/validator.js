@@ -1,3 +1,6 @@
+import NumberService from './number';
+import ArrayService from './array';
+
 /**
  * Service for validating values
 */
@@ -14,7 +17,7 @@ class Validator {
   static validateNumber(name, value, {min, max} = {}) {
     if (value === undefined) return;
 
-    if (!Number.isInteger(value)) {
+    if (!NumberService.isInteger(value)) {
       throw new TypeError(`${name} should be an integer`);
     }
 
@@ -42,8 +45,10 @@ class Validator {
       throw new TypeError(`${name} should be a string`);
     }
 
-    const enumValues = Object.values(enumObject);
-    if (!enumValues.includes(value)) {
+    const enumKeys = Object.keys(enumObject);
+    const enumValues = enumKeys.map((enumKey) => enumObject[enumKey]);
+
+    if (!ArrayService.includes(enumValues, value)) {
       throw new TypeError(`${name} should be one of the following values: ${enumValues.join(',')}`);
     }
   }
@@ -105,7 +110,7 @@ class Validator {
    * @throws {TypeError} Some key is not allowed in the object schema
    */
   static validateAllowedKeys(name, keys, allowedKeys) {
-    const forbiddenKey = keys.find((k) => !allowedKeys.includes(k));
+    const forbiddenKey = ArrayService.find(keys, (k) => !ArrayService.includes(allowedKeys, k));
     if (forbiddenKey) {
       throw new TypeError(`${forbiddenKey} is not allowed in the ${name} schema`);
     }
@@ -119,7 +124,7 @@ class Validator {
    * @throws {TypeError} Some key is required in the object schema
    */
   static validateRequiredKeys(name, keys, requiredKeys) {
-    const missingKey = requiredKeys.find((k) => !keys.includes(k));
+    const missingKey = ArrayService.find(requiredKeys, (k) => !ArrayService.includes(keys, k));
     if (missingKey) {
       throw new TypeError(`${missingKey} is required in the ${name} schema`);
     }

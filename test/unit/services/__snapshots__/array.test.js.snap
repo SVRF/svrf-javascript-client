@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArrayService find throws an error if array is not defined 1`] = `"Passed value is not an array"`;
+
+exports[`ArrayService find throws an error if array is null 1`] = `"Passed value is not an array"`;
+
+exports[`ArrayService find throws an error if passed callback is not a function 1`] = `"Callback must be a function"`;
+
+exports[`ArrayService find throws an error if passed value is not array 1`] = `"Passed value is not an array"`;
+
+exports[`ArrayService includes throws an error if array is not defined 1`] = `"Passed value is not an array"`;
+
+exports[`ArrayService includes throws an error if array is null 1`] = `"Passed value is not an array"`;
+
+exports[`ArrayService includes throws an error if passed value is not array 1`] = `"Passed value is not an array"`;
