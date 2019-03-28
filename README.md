@@ -8,6 +8,8 @@ SVRF's API allows you to supercharge your project or app with the first and larg
 
 The SVRF API Documentation is available at <https://developers.svrf.com>.
 
+## [Api Reference](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Api.md)
+
 ## Installation
 
 ### For [Node.js](https://nodejs.org/)
@@ -128,4 +130,6 @@ api.authenticate()
   .catch((err) => console.error(err));
 ```
 
-### [Api Reference](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Api.md)
+## IE support
+
+The library uses promises which are not supported by IE11. If you want to support it you have to use a polyfill (for example [es6-promise](https://github.com/stefanpenner/es6-promise))
