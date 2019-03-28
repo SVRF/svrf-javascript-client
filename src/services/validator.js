@@ -1,4 +1,16 @@
-export default class Validator {
+/**
+ * Service for validating values
+*/
+class Validator {
+  /**
+   * Validate integer number
+   * @param {String} name - Name of validating value
+   * @param {Number} value - Checked value
+   * @param {{min: Number=, max: Number=}=} range - Specify valid range for number
+   * @throws {TypeError} Provided value should be an integer
+   * @throws {RangeError} Provided value should be equal or more than min in range
+   * @throws {RangeError} Provided value should be equal or less than max in range
+   */
   static validateNumber(name, value, {min, max} = {}) {
     if (value === undefined) return;
 
@@ -15,6 +27,14 @@ export default class Validator {
     }
   }
 
+  /**
+   * Validate string which must be in enum
+   * @param {String} name - Name of validating value
+   * @param {String} value - Checked value
+   * @param {Object.<String, String>} enumObject - Checked enum
+   * @throws {TypeError} Provided value should be a string
+   * @throws {TypeError} Provided value should be one of enum
+   */
   static validateEnumString(name, value, enumObject = {}) {
     if (value === undefined) return;
 
@@ -28,6 +48,13 @@ export default class Validator {
     }
   }
 
+  /**
+   * Validate string or array of strings which must be in enum
+   * @param {String} name - Name of validating value
+   * @param {String|Array<String>} value - Checked value
+   * @param {Object.<String, String>} enumObject - Checked enum
+   * @throws {TypeError} Provided value should be either an array or a string
+   */
   static validateArrayOrSingleEnumString(name, value, enumObject) {
     if (value === undefined) return;
 
@@ -45,6 +72,15 @@ export default class Validator {
     ));
   }
 
+  /**
+   * Validate object schema
+   * @param {String} name - Name of validating value
+   * @param {Object} value - Checked value
+   * @param {Object} options - Object keys restrictions
+   * @param {Array<String>} options.allowedKeys - List of allowed keys in object
+   * @param {Array<String>} options.requiredKeys - List of required keys in object
+   * @throws {TypeError} Provided value should be an object
+   */
   static validateObjectSchema(name, value, {allowedKeys, requiredKeys}) {
     if (typeof value !== 'object') {
       throw new TypeError(`${name} should be an object`);
@@ -61,6 +97,13 @@ export default class Validator {
     }
   }
 
+  /**
+   * Validate object schema
+   * @param {String} name - Name of validating value
+   * @param {Object} value - Checked value
+   * @param {Array<String>} allowedKeys - List of allowed keys in object
+   * @throws {TypeError} Some key is not allowed in the object schema
+   */
   static validateAllowedKeys(name, keys, allowedKeys) {
     const forbiddenKey = keys.find((k) => !allowedKeys.includes(k));
     if (forbiddenKey) {
@@ -68,6 +111,13 @@ export default class Validator {
     }
   }
 
+  /**
+   * Validate object schema
+   * @param {String} name - Name of validating value
+   * @param {Object} value - Checked value
+   * @param {Array<String>} requiredKeys - List of required keys in object
+   * @throws {TypeError} Some key is required in the object schema
+   */
   static validateRequiredKeys(name, keys, requiredKeys) {
     const missingKey = requiredKeys.find((k) => !keys.includes(k));
     if (missingKey) {
@@ -75,7 +125,14 @@ export default class Validator {
     }
   }
 
+  /**
+   * Check is value string or not
+   * @param {any} value - Checked value
+   * @returns {boolean} Is value string or not
+   */
   static isString(value) {
     return Object.prototype.toString.call(value) === '[object String]';
   }
 }
+
+export default Validator;

@@ -1,9 +1,17 @@
-import category from './category';
-import mediaType from './media-type';
-import stereoscopicType from './stereoscopic-type';
+import Category from './category';
+import MediaType from './media-type';
+import StereoscopicType from './stereoscopic-type';
 
-export default {
-  category,
-  mediaType,
-  stereoscopicType,
+/**
+ * @type {Object}
+ */
+const enums = {
+  /** @type {Category} */
+  category: Category,
+  /** @type {MediaType} */
+  mediaType: MediaType,
+  /** @type {StereoscopicType} */
+  stereoscopicType: StereoscopicType,
 };
+
+export default enums;

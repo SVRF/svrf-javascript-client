@@ -1,6 +1,14 @@
 import HttpClient from './http-client';
 
-export default class AppTokenHttpClient extends HttpClient {
+/**
+ * HTTP client which sets x-app-token header in requests
+ * @extends HttpClient
+*/
+class AppTokenHttpClient extends HttpClient {
+  /**
+   * @param {AuthApi} authApi - Authentication API
+   * @param {TokenService} tokenService - Service which provides methods for token storage
+   */
   constructor(authApi, tokenService) {
     super();
 
@@ -12,3 +20,5 @@ export default class AppTokenHttpClient extends HttpClient {
     });
   }
 }
+
+export default AppTokenHttpClient;

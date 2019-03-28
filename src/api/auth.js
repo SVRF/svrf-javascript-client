@@ -1,10 +1,20 @@
-export default class AuthApi {
+/**
+ * Authentication API provider
+*/
+class AuthApi {
   constructor(httpClient, tokenService, apiKey) {
+    /** @private */
     this.httpClient = httpClient;
+    /** @private */
     this.tokenService = tokenService;
+    /** @private */
     this.apiKey = apiKey;
   }
 
+  /**
+   * Authenticates your app: retrieves token and saves it or takes it from the storage.
+   * @returns {Promise<void>}
+   */
   async authenticate() {
     if (this.tokenService.isTokenValid()) {
       return;
@@ -22,3 +32,5 @@ export default class AuthApi {
     });
   }
 }
+
+export default AuthApi;
