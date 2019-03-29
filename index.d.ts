@@ -15,6 +15,12 @@ declare namespace Svrf {
     stereo: Object;
   }
 
+  export interface MediaMetadata {
+    isFaceFilter?: boolean;
+    hasBlendShapes?: boolean;
+    requiresBlendShapes?: boolean;
+  }
+
   export interface Media {
     id: string;
     src: string;
@@ -31,7 +37,7 @@ declare namespace Svrf {
     width: number;
     height: number;
     duration: number | null;
-    metadata: Object;
+    metadata: MediaMetadata;
     files: MediaFiles;
   }
 
@@ -46,6 +52,11 @@ declare namespace Svrf {
     nextPageCursor: string;
     nextPageNum: number;
     pageNum: number;
+  }
+
+  export interface SearchMediaApiResponse extends MultipleMediaApiResponse {
+    tookMs: number;
+    totalNum: number;
   }
 
   export interface AppTokenSetInfo {
@@ -70,8 +81,11 @@ declare namespace Svrf {
 
   export interface HttpRequestParams {
     category?: Category;
+    hasBlendShapes?: boolean;
+    isFaceFilter?: boolean;
     minimumWidth?: number;
     pageNum?: number;
+    requiresBlendShapes?: boolean;
     size?: number;
     stereoscopicType?: StereoscopicType;
     type?: MediaType | Array<MediaType>;
@@ -84,7 +98,7 @@ declare namespace Svrf {
   export interface MediaApi {
     getById(id: number | string): Promise<SingleMediaApiResponse>;
     getTrending(params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
-    search(query: string, params?: HttpRequestParams): Promise<MultipleMediaApiResponse>;
+    search(query: string, params?: HttpRequestParams): Promise<SearchMediaApiResponse>;
   }
 }
 

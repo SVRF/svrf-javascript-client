@@ -25,9 +25,13 @@
 <dd></dd>
 <dt><a href="#MediaFiles">MediaFiles</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#MediaMetadata">MediaMetadata</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#SingleMediaApiResponse">SingleMediaApiResponse</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#MultipleMediaApiResponse">MultipleMediaApiResponse</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#SearchMediaApiResponse">SearchMediaApiResponse</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
 
@@ -86,7 +90,7 @@ Media API provider
 * [MediaApi](#MediaApi)
     * [.getById(id)](#MediaApi+getById) ⇒ [<code>Promise.&lt;SingleMediaApiResponse&gt;</code>](#SingleMediaApiResponse)
     * [.getTrending([params])](#MediaApi+getTrending) ⇒ [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse)
-    * [.search(query, [params])](#MediaApi+search) ⇒ [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse)
+    * [.search(query, [params])](#MediaApi+search) ⇒ [<code>Promise.&lt;SearchMediaApiResponse&gt;</code>](#SearchMediaApiResponse)
 
 <a name="MediaApi+getById"></a>
 
@@ -118,11 +122,11 @@ Get trending media
 
 <a name="MediaApi+search"></a>
 
-### mediaApi.search(query, [params]) ⇒ [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse)
+### mediaApi.search(query, [params]) ⇒ [<code>Promise.&lt;SearchMediaApiResponse&gt;</code>](#SearchMediaApiResponse)
 Get media by query
 
 **Kind**: instance method of [<code>MediaApi</code>](#MediaApi)  
-**Returns**: [<code>Promise.&lt;MultipleMediaApiResponse&gt;</code>](#MultipleMediaApiResponse) - - Found media by query  
+**Returns**: [<code>Promise.&lt;SearchMediaApiResponse&gt;</code>](#SearchMediaApiResponse) - - Found media by query  
 **Throws**:
 
 - <code>Error</code> query should be provided
@@ -164,8 +168,11 @@ Get media by query
 | Name | Type | Description |
 | --- | --- | --- |
 | [category] | <code>String</code> | Media category |
+| [hasBlendShapes] | <code>Boolean</code> |  |
+| [isFaceFilter] | <code>Boolean</code> |  |
 | [minimumWidth] | <code>Number</code> | Media minimum width |
 | [pageNum] | <code>Number</code> | Page number |
+| [requiresBlendShapes] | <code>Boolean</code> |  |
 | [size] | <code>Number</code> | Page size |
 | [stereoscopicType] | <code>String</code> | Media stereoscopic type |
 | [type] | <code>String</code> \| <code>Array.&lt;String&gt;</code> | Media type |
@@ -192,7 +199,7 @@ Get media by query
 | width | <code>Number</code> \| <code>null</code> | Width in pixels |
 | height | <code>Number</code> \| <code>null</code> | Height in pixels |
 | duration | <code>Number</code> \| <code>null</code> | Duration in seconds |
-| metadata | <code>Object</code> |  |
+| metadata | [<code>MediaMetadata</code>](#MediaMetadata) |  |
 | files | [<code>MediaFiles</code>](#MediaFiles) |  |
 
 <a name="MediaFiles"></a>
@@ -206,6 +213,18 @@ Get media by query
 | images | <code>Object</code> | 
 | videos | <code>Object</code> | 
 | stereo | <code>Object</code> | 
+
+<a name="MediaMetadata"></a>
+
+## MediaMetadata : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| [isFaceFilter] | <code>Boolean</code> | 
+| [hasBlendShapes] | <code>Boolean</code> | 
+| [requiresBlendShapes] | <code>Boolean</code> | 
 
 <a name="SingleMediaApiResponse"></a>
 
@@ -231,4 +250,20 @@ Get media by query
 | nextPageCursor | <code>String</code> | 
 | nextPageNum | <code>Number</code> | 
 | pageNum | <code>Number</code> | 
+
+<a name="SearchMediaApiResponse"></a>
+
+## SearchMediaApiResponse : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| success | <code>Boolean</code> | 
+| media | [<code>Array.&lt;Media&gt;</code>](#Media) | 
+| nextPageCursor | <code>String</code> | 
+| nextPageNum | <code>Number</code> | 
+| pageNum | <code>Number</code> | 
+| tookMs | <code>Number</code> | 
+| totalNum | <code>Number</code> | 
 

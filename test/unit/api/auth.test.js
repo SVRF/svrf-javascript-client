@@ -36,10 +36,10 @@ describe('AuthApi', () => {
     expect(httpClient.post).not.toHaveBeenCalled();
   });
 
-  it('throws an error if api key was not provided', () => {
+  it('throws an error if api key was not provided', async () => {
     delete api.apiKey;
 
-    expect(api.authenticate()).rejects.toThrowErrorMatchingSnapshot();
+    await expect(api.authenticate()).rejects.toThrowErrorMatchingSnapshot();
   });
 
   it('makes request with proper params', async () => {

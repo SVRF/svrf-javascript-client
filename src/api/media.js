@@ -3,8 +3,11 @@ import QueryService from '../services/query';
 /**
  * @typedef {Object} HttpRequestParams
  * @prop {String=} category - Media category
+ * @prop {Boolean=} hasBlendShapes
+ * @prop {Boolean=} isFaceFilter
  * @prop {Number=} minimumWidth - Media minimum width
  * @prop {Number=} pageNum - Page number
+ * @prop {Boolean=} requiresBlendShapes
  * @prop {Number=} size - Page size
  * @prop {String=} stereoscopicType - Media stereoscopic type
  * @prop {(String|Array<String>)=} type - Media type
@@ -26,7 +29,7 @@ import QueryService from '../services/query';
  * @prop {Number|null} width - Width in pixels
  * @prop {Number|null} height - Height in pixels
  * @prop {Number|null} duration - Duration in seconds
- * @prop {Object} metadata
+ * @prop {MediaMetadata} metadata
  * @prop {MediaFiles} files
  */
 
@@ -35,6 +38,13 @@ import QueryService from '../services/query';
  * @prop {Object} images
  * @prop {Object} videos
  * @prop {Object} stereo
+ */
+
+/**
+ * @typedef {Object} MediaMetadata
+ * @prop {Boolean=} isFaceFilter
+ * @prop {Boolean=} hasBlendShapes
+ * @prop {Boolean=} requiresBlendShapes
  */
 
 /**
@@ -50,6 +60,17 @@ import QueryService from '../services/query';
  * @prop {String} nextPageCursor
  * @prop {Number} nextPageNum
  * @prop {Number} pageNum
+ */
+
+/**
+ * @typedef {Object} SearchMediaApiResponse
+ * @prop {Boolean} success
+ * @prop {Array<Media>} media
+ * @prop {String} nextPageCursor
+ * @prop {Number} nextPageNum
+ * @prop {Number} pageNum
+ * @prop {Number} tookMs
+ * @prop {Number} totalNum
  */
 
 /**
@@ -91,7 +112,7 @@ class MediaApi {
    * Get media by query
    * @param {String} query - Query for searching media
    * @param {HttpRequestParams=} params - Request params
-   * @returns {Promise<MultipleMediaApiResponse>} - Found media by query
+   * @returns {Promise<SearchMediaApiResponse>} - Found media by query
    * @throws {Error} query should be provided
    */
   async search(query, params) {
