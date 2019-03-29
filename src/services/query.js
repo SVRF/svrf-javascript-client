@@ -5,6 +5,23 @@ import Validator from './validator';
  * HTTP request query handlers provider
 */
 class QueryService {
+  static booleanParams = [
+    'isFaceFilter',
+    'hasBlendShapes',
+    'requiresBlendShapes',
+  ];
+
+
+  static allowedParams = [
+    ...QueryService.booleanParams,
+    'category',
+    'minimumWidth',
+    'pageNum',
+    'size',
+    'stereoscopicType',
+    'type',
+  ].sort();
+
   /**
    * Validate query params using object schema
    * @param {Object} params - Params needed to validate
@@ -15,16 +32,7 @@ class QueryService {
       return;
     }
 
-    Validator.validateObjectSchema('Query Params', params, {
-      allowedKeys: [
-        'category',
-        'minimumWidth',
-        'pageNum',
-        'size',
-        'stereoscopicType',
-        'type',
-      ],
-    });
+    Validator.validateObjectSchema('Query Params', params, {allowedKeys: QueryService.allowedParams});
 
     Validator.validateEnumString('category', params.category, enums.category);
     Validator.validateNumber('minimumWidth', params.minimumWidth);
@@ -51,6 +59,12 @@ class QueryService {
     if (params && Array.isArray(params.type)) {
       preparedParams.type = params.type.join(',');
     }
+
+    QueryService.booleanParams.forEach((key) => {
+      if (preparedParams[key] !== undefined) {
+        preparedParams[key] = !!preparedParams[key];
+      }
+    });
 
     return preparedParams;
   }
