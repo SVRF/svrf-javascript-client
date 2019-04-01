@@ -33,7 +33,7 @@ export default [
     output: {
       file: 'dist/svrf-client.js',
       format: 'iife',
-      name: 'SVRF',
+      name: 'Svrf',
       indent: false,
     },
     plugins: [
@@ -51,7 +51,7 @@ export default [
     output: {
       file: 'dist/svrf-client.min.js',
       format: 'iife',
-      name: 'SVRF',
+      name: 'Svrf',
       indent: false,
     },
     plugins: [

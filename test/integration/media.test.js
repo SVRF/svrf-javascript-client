@@ -1,4 +1,4 @@
-import SVRF from '../../src';
+import Svrf from '../../src';
 import storage from '../../src/storage';
 import TokenService from '../../src/services/token';
 
@@ -6,7 +6,7 @@ const {SVRF_TEST_API_KEY} = process.env;
 const tokenService = new TokenService(storage);
 
 describe('media api', () => {
-  const api = new SVRF(SVRF_TEST_API_KEY);
+  const api = new Svrf(SVRF_TEST_API_KEY);
 
   beforeAll(async () => {
     await api.auth.authenticate();
@@ -95,15 +95,15 @@ describe('media api', () => {
 
   async function testAllOptions(callback) {
     const options = {
-      category: SVRF.enums.category.FACE_FILTERS,
+      category: Svrf.enums.category.FACE_FILTERS,
       hasBlendShapes: false,
       isFaceFilter: true,
       minimumWidth: 1000,
       pageNum: 1,
       requiresBlendShapes: false,
       size: 5,
-      stereoscopicType: SVRF.enums.stereoscopicType.NONE,
-      type: [SVRF.enums.mediaType.PHOTO, SVRF.enums.mediaType.VIDEO],
+      stereoscopicType: Svrf.enums.stereoscopicType.NONE,
+      type: [Svrf.enums.mediaType.PHOTO, Svrf.enums.mediaType.VIDEO],
     };
 
     const result = await callback(options);
@@ -113,14 +113,14 @@ describe('media api', () => {
 
   async function testCategory(callback) {
     const options = {
-      category: SVRF.enums.category.FACE_FILTERS,
+      category: Svrf.enums.category.FACE_FILTERS,
     };
 
     const result = await callback(options);
 
     // Category isn't publicly available, at least check that models are returned.
     result.media.forEach((media) => (
-      expect(media.type).toBe(SVRF.enums.mediaType.MODEL_3D)
+      expect(media.type).toBe(Svrf.enums.mediaType.MODEL_3D)
     ));
   }
 
@@ -145,7 +145,7 @@ describe('media api', () => {
   }
 
   async function testMediaType(callback) {
-    const type = SVRF.enums.mediaType.PHOTO;
+    const type = Svrf.enums.mediaType.PHOTO;
 
     const result = await callback({type});
 
@@ -155,7 +155,7 @@ describe('media api', () => {
   }
 
   async function testMediaTypeArray(callback) {
-    const types = [SVRF.enums.mediaType.PHOTO, SVRF.enums.mediaType.MODEL_3D];
+    const types = [Svrf.enums.mediaType.PHOTO, Svrf.enums.mediaType.MODEL_3D];
 
     const result = await callback({type: types});
 
@@ -205,7 +205,7 @@ describe('media api', () => {
   // Stereoscopic type isn't publicly available, so checking that results
   // are not intercepting.
   async function testStereoscopicType(callback) {
-    const {LEFT_RIGHT, TOP_BOTTOM} = SVRF.enums.stereoscopicType;
+    const {LEFT_RIGHT, TOP_BOTTOM} = Svrf.enums.stereoscopicType;
 
     const {media: leftRightResults} = await callback({stereoscopicType: LEFT_RIGHT});
     const {media: topBottomResults} = await callback({stereoscopicType: TOP_BOTTOM});

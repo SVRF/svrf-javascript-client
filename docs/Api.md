@@ -2,7 +2,7 @@
 
 <dl>
 <dt><a href="#Svrf">Svrf</a></dt>
-<dd><p>SVRF API provider</p>
+<dd><p>Svrf API provider</p>
 </dd>
 <dt><a href="#AuthApi">AuthApi</a></dt>
 <dd><p>Authentication API provider</p>
@@ -38,7 +38,7 @@
 <a name="Svrf"></a>
 
 ## Svrf
-SVRF API provider
+Svrf API provider
 
 **Kind**: global class  
 
@@ -191,7 +191,7 @@ Get media by query
 | description | <code>String</code> |  |
 | authors | <code>Array.&lt;String&gt;</code> |  |
 | site | <code>String</code> | Source site name where the media came from |
-| canonical | <code>String</code> | Canonical URL for the SVRF site |
+| canonical | <code>String</code> | Canonical URL for the Svrf site |
 | embedUrl | <code>String</code> | Embed player URL |
 | embedHtml | <code>String</code> | Ready-to-paste HTML code with embed player |
 | type | <code>String</code> |  |

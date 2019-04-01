@@ -23,7 +23,7 @@ import storage from '../storage';
  */
 
 /**
- * SVRF API provider
+ * Svrf API provider
 */
 class Svrf {
   static enums = enums;

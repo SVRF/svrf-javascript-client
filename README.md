@@ -1,14 +1,14 @@
-# svrf-client - the JavaScript client library for the SVRF API
+# svrf-client - the JavaScript client library for the Svrf API
 
 For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
 
-## About SVRF
+## About Svrf
 
-SVRF's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
+Svrf's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
 
-The SVRF API Documentation is available at <https://developers.svrf.com>.
+The Svrf API Documentation is available at <https://developers.svrf.com>.
 
-## [Api Reference](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Api.md)
+## [Api Reference](https://github.com/Svrf/svrf-javascript-client/blob/master/docs/Api.md)
 
 ## Installation
 
@@ -34,9 +34,9 @@ Using CDN:
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-const SVRF = require('svrf-client');
+const Svrf = require('svrf-client');
 
-const api = new SVRF('your API key');
+const api = new Svrf('your API key');
 
 api.auth.authenticate()
   .then(() => api.media.getTrending())
@@ -68,7 +68,7 @@ However, you may want us to store the token in some other kind of storage. You c
     }
   };
 
-  const api = new SVRF('your API key', options);
+  const api = new Svrf('your API key', options);
 ```
 
 Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
@@ -78,12 +78,12 @@ Note that `set` is gonna be called with an object. And equal object should be re
 You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
 
 ```javascript
-const SVRF = require('svrf-client');
+const Svrf = require('svrf-client');
 
-const api = new SVRF('your API key');
+const api = new Svrf('your API key');
 
 api.auth.authenticate()
-  .then(() => api.media.getTrending({type: SVRF.enums.mediaType.PHOTO}))
+  .then(() => api.media.getTrending({type: Svrf.enums.mediaType.PHOTO}))
   .then(({media}) => /* only photos are here */)
   .catch((err) => console.error(err));
 ```

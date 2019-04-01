@@ -21,7 +21,7 @@ import QueryService from '../services/query';
  * @prop {String} description
  * @prop {Array<String>} authors
  * @prop {String} site - Source site name where the media came from
- * @prop {String} canonical - Canonical URL for the SVRF site
+ * @prop {String} canonical - Canonical URL for the Svrf site
  * @prop {String} embedUrl - Embed player URL
  * @prop {String} embedHtml - Ready-to-paste HTML code with embed player
  * @prop {String} type

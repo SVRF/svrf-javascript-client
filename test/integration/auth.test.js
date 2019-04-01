@@ -1,4 +1,4 @@
-import SVRF from '../../src';
+import Svrf from '../../src';
 import storage from '../../src/storage';
 import TokenService from '../../src/services/token';
 
@@ -11,7 +11,7 @@ describe('authentication', () => {
   });
 
   it('authenticates without errors', async () => {
-    const api = new SVRF(SVRF_TEST_API_KEY);
+    const api = new Svrf(SVRF_TEST_API_KEY);
     await api.auth.authenticate();
   });
 });
