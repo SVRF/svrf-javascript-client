@@ -26,7 +26,7 @@ yarn add svrf-client
 
 Using CDN:
 ```html
-<script src="https://unpkg.com/svrf-client@2.0.0-alpha/dist/svrf-client.min.js"></script>
+<script src="https://unpkg.com/svrf-client@2.0.0-alpha"></script>
 ```
 
 ## Getting Started

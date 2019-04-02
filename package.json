@@ -8,6 +8,7 @@
     "url": "https://github.com/Svrf/svrf-javascript-client.git"
   },
   "main": "lib/svrf-client.js",
+  "unpkg": "dist/svrf-client.min.js",
   "typings": "./index.d.ts",
   "files": [
     "dist",
