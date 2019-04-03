@@ -64,6 +64,7 @@ class Svrf {
 
   /**
    * Authenticates your app: retrieves token and saves it or takes it from the storage.
+   * You should call it only if you passed the isManualAuthentication option.
    * @returns {Promise<void>}
    */
   authenticate() {

@@ -63,6 +63,7 @@ MediaApi instance
 
 ### svrf.authenticate() ⇒ <code>Promise.&lt;void&gt;</code>
 Authenticates your app: retrieves token and saves it or takes it from the storage.
+You should call it only if you passed the isManualAuthentication option.
 
 **Kind**: instance method of [<code>Svrf</code>](#Svrf)  
 <a name="MediaApi"></a>
