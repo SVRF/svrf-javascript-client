@@ -3,14 +3,19 @@ import MediaType from './media-type';
 import StereoscopicType from './stereoscopic-type';
 
 /**
- * @type {Object}
+ * @typedef {Object} Enums
+ * @prop {Category} category
+ * @prop {MediaType} mediaType
+ * @prop {StereoscopicType} stereoscopicType
+ */
+
+/**
+ * @type {Enums}
+ * @private
  */
 const enums = {
-  /** @type {Category} */
   category: Category,
-  /** @type {MediaType} */
   mediaType: MediaType,
-  /** @type {StereoscopicType} */
   stereoscopicType: StereoscopicType,
 };
 

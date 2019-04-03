@@ -76,8 +76,8 @@ declare namespace Svrf {
   }
 
   export interface SvrfOptions {
-    isManualAuthentication: boolean;
-    storage: Storage;
+    isManualAuthentication?: boolean;
+    storage?: Storage;
   }
 
   export interface HttpRequestParams {

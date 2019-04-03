@@ -30,6 +30,8 @@
 <dd></dd>
 <dt><a href="#SearchMediaApiResponse">SearchMediaApiResponse</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#Enums">Enums</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="Svrf"></a>
@@ -41,8 +43,11 @@ Svrf API provider
 
 * [Svrf](#Svrf)
     * [new Svrf(apiKey, [options])](#new_Svrf_new)
-    * [.media](#Svrf+media) : [<code>MediaApi</code>](#MediaApi)
-    * [.authenticate()](#Svrf+authenticate) ⇒ <code>Promise.&lt;void&gt;</code>
+    * _instance_
+        * [.media](#Svrf+media) : [<code>MediaApi</code>](#MediaApi)
+        * [.authenticate()](#Svrf+authenticate) ⇒ <code>Promise.&lt;void&gt;</code>
+    * _static_
+        * [.enums](#Svrf.enums) : [<code>Enums</code>](#Enums)
 
 <a name="new_Svrf_new"></a>
 
@@ -66,6 +71,10 @@ Authenticates your app: retrieves token and saves it or takes it from the storag
 You should call it only if you passed the isManualAuthentication option.
 
 **Kind**: instance method of [<code>Svrf</code>](#Svrf)  
+<a name="Svrf.enums"></a>
+
+### Svrf.enums : [<code>Enums</code>](#Enums)
+**Kind**: static property of [<code>Svrf</code>](#Svrf)  
 <a name="MediaApi"></a>
 
 ## MediaApi
@@ -122,6 +131,46 @@ Get media by query
 | --- | --- | --- |
 | query | <code>string</code> | Query for searching media |
 | [params] | [<code>HttpRequestParams</code>](#HttpRequestParams) | Request params |
+
+<a name="Category"></a>
+
+## Category : <code>enum</code>
+Enum for category
+
+**Kind**: global enum  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| FACE_FILTERS | <code>string</code> | <code>&quot;Face Filters&quot;</code> | 
+
+<a name="MediaType"></a>
+
+## MediaType : <code>enum</code>
+Enum for media types
+
+**Kind**: global enum  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| PHOTO | <code>string</code> | <code>&quot;photo&quot;</code> | 
+| VIDEO | <code>string</code> | <code>&quot;video&quot;</code> | 
+| MODEL_3D | <code>string</code> | <code>&quot;3d&quot;</code> | 
+
+<a name="StereoscopicType"></a>
+
+## StereoscopicType : <code>enum</code>
+Enum for stereoscopic types
+
+**Kind**: global enum  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| NONE | <code>string</code> | <code>&quot;none&quot;</code> | 
+| TOP_BOTTOM | <code>string</code> | <code>&quot;top-bottom&quot;</code> | 
+| LEFT_RIGHT | <code>string</code> | <code>&quot;left-right&quot;</code> | 
 
 <a name="ApiOptions"></a>
 
@@ -253,4 +302,16 @@ Get media by query
 | pageNum | <code>number</code> | 
 | tookMs | <code>number</code> | 
 | totalNum | <code>number</code> | 
+
+<a name="Enums"></a>
+
+## Enums : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| category | [<code>Category</code>](#Category) | 
+| mediaType | [<code>MediaType</code>](#MediaType) | 
+| stereoscopicType | [<code>StereoscopicType</code>](#StereoscopicType) | 
 

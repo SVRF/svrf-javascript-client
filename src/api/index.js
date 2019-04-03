@@ -28,8 +28,6 @@ import storage from '../storage';
  * Svrf API provider
 */
 class Svrf {
-  static enums = enums;
-
   /**
    * @param {String} apiKey - API Key
    * @param {ApiOptions=} options - API options
@@ -71,5 +69,11 @@ class Svrf {
     return this.auth.authenticate();
   }
 }
+
+/**
+ * @type {Enums}
+ * @static
+ */
+Svrf.enums = enums;
 
 export default Svrf;

@@ -19,7 +19,7 @@
   "scripts": {
     "build": "rollup -c && npm run docs",
     "clean": "rimraf lib dist",
-    "docs": "jsdoc2md -f src/api/index.js src/api/media.js > docs/Api.md",
+    "docs": "jsdoc2md -f src/api/index.js src/api/media.js src/enums/*.js > docs/Api.md",
     "lint": "eslint src",
     "test": "npm run test:unit",
     "test:integration": "jest ./test/integration",
