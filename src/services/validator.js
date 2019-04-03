@@ -7,9 +7,9 @@ import ArrayService from './array';
 class Validator {
   /**
    * Validate integer number
-   * @param {String} name - Name of validating value
-   * @param {Number} value - Checked value
-   * @param {{min: Number=, max: Number=}=} range - Specify valid range for number
+   * @param {string} name - Name of validating value
+   * @param {number} value - Checked value
+   * @param {{min: number=, max: number=}=} range - Specify valid range for number
    * @throws {TypeError} Provided value should be an integer
    * @throws {RangeError} Provided value should be equal or more than min in range
    * @throws {RangeError} Provided value should be equal or less than max in range
@@ -32,9 +32,9 @@ class Validator {
 
   /**
    * Validate string which must be in enum
-   * @param {String} name - Name of validating value
-   * @param {String} value - Checked value
-   * @param {Object.<String, String>} enumObject - Checked enum
+   * @param {string} name - Name of validating value
+   * @param {string} value - Checked value
+   * @param {Object.<string, string>} enumObject - Checked enum
    * @throws {TypeError} Provided value should be a string
    * @throws {TypeError} Provided value should be one of enum
    */
@@ -55,9 +55,9 @@ class Validator {
 
   /**
    * Validate string or array of strings which must be in enum
-   * @param {String} name - Name of validating value
-   * @param {String|Array<String>} value - Checked value
-   * @param {Object.<String, String>} enumObject - Checked enum
+   * @param {string} name - Name of validating value
+   * @param {string|Array<string>} value - Checked value
+   * @param {Object.<string, string>} enumObject - Checked enum
    * @throws {TypeError} Provided value should be either an array or a string
    */
   static validateArrayOrSingleEnumString(name, value, enumObject) {
@@ -79,11 +79,11 @@ class Validator {
 
   /**
    * Validate object schema
-   * @param {String} name - Name of validating value
+   * @param {string} name - Name of validating value
    * @param {Object} value - Checked value
    * @param {Object} options - Object keys restrictions
-   * @param {Array<String>} options.allowedKeys - List of allowed keys in object
-   * @param {Array<String>} options.requiredKeys - List of required keys in object
+   * @param {Array<string>} options.allowedKeys - List of allowed keys in object
+   * @param {Array<string>} options.requiredKeys - List of required keys in object
    * @throws {TypeError} Provided value should be an object
    */
   static validateObjectSchema(name, value, {allowedKeys, requiredKeys}) {
@@ -104,9 +104,9 @@ class Validator {
 
   /**
    * Validate object schema
-   * @param {String} name - Name of validating value
+   * @param {string} name - Name of validating value
    * @param {Object} value - Checked value
-   * @param {Array<String>} allowedKeys - List of allowed keys in object
+   * @param {Array<string>} allowedKeys - List of allowed keys in object
    * @throws {TypeError} Some key is not allowed in the object schema
    */
   static validateAllowedKeys(name, keys, allowedKeys) {
@@ -118,9 +118,9 @@ class Validator {
 
   /**
    * Validate object schema
-   * @param {String} name - Name of validating value
+   * @param {string} name - Name of validating value
    * @param {Object} value - Checked value
-   * @param {Array<String>} requiredKeys - List of required keys in object
+   * @param {Array<string>} requiredKeys - List of required keys in object
    * @throws {TypeError} Some key is required in the object schema
    */
   static validateRequiredKeys(name, keys, requiredKeys) {

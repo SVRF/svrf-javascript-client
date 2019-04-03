@@ -2,33 +2,33 @@ import QueryService from '../services/query';
 
 /**
  * @typedef {Object} HttpRequestParams
- * @prop {String=} category - Media category
- * @prop {Boolean=} hasBlendShapes
- * @prop {Boolean=} isFaceFilter
- * @prop {Number=} minimumWidth - Media minimum width
- * @prop {Number=} pageNum - Page number
- * @prop {Boolean=} requiresBlendShapes
- * @prop {Number=} size - Page size
- * @prop {String=} stereoscopicType - Media stereoscopic type
- * @prop {(String|Array<String>)=} type - Media type
+ * @prop {string=} category - Media category
+ * @prop {boolean=} hasBlendShapes
+ * @prop {boolean=} isFaceFilter
+ * @prop {number=} minimumWidth - Media minimum width
+ * @prop {number=} pageNum - Page number
+ * @prop {boolean=} requiresBlendShapes
+ * @prop {number=} size - Page size
+ * @prop {string=} stereoscopicType - Media stereoscopic type
+ * @prop {(string|Array<string>)=} type - Media type
  */
 
 /**
  * @typedef {Object} Media
- * @prop {String} id
- * @prop {String} src - Source file URL with original quality
- * @prop {String} title
- * @prop {String} description
- * @prop {Array<String>} authors
- * @prop {String} site - Source site name where the media came from
- * @prop {String} canonical - Canonical URL for the Svrf site
- * @prop {String} embedUrl - Embed player URL
- * @prop {String} embedHtml - Ready-to-paste HTML code with embed player
- * @prop {String} type
- * @prop {Boolean} adult - Is media only for adults
- * @prop {Number|null} width - Width in pixels
- * @prop {Number|null} height - Height in pixels
- * @prop {Number|null} duration - Duration in seconds
+ * @prop {string} id
+ * @prop {string} src - Source file URL with original quality
+ * @prop {string} title
+ * @prop {string} description
+ * @prop {Array<string>} authors
+ * @prop {string} site - Source site name where the media came from
+ * @prop {string} canonical - Canonical URL for the Svrf site
+ * @prop {string} embedUrl - Embed player URL
+ * @prop {string} embedHtml - Ready-to-paste HTML code with embed player
+ * @prop {string} type
+ * @prop {boolean} adult - Is media only for adults
+ * @prop {number|null} width - Width in pixels
+ * @prop {number|null} height - Height in pixels
+ * @prop {number|null} duration - Duration in seconds
  * @prop {MediaMetadata} metadata
  * @prop {MediaFiles} files
  */
@@ -42,35 +42,35 @@ import QueryService from '../services/query';
 
 /**
  * @typedef {Object} MediaMetadata
- * @prop {Boolean=} isFaceFilter
- * @prop {Boolean=} hasBlendShapes
- * @prop {Boolean=} requiresBlendShapes
+ * @prop {boolean=} isFaceFilter
+ * @prop {boolean=} hasBlendShapes
+ * @prop {boolean=} requiresBlendShapes
  */
 
 /**
  * @typedef {Object} SingleMediaApiResponse
- * @prop {Boolean} success
+ * @prop {boolean} success
  * @prop {Media} media
  */
 
 /**
  * @typedef {Object} MultipleMediaApiResponse
- * @prop {Boolean} success
+ * @prop {boolean} success
  * @prop {Array<Media>} media
- * @prop {String} nextPageCursor
- * @prop {Number} nextPageNum
- * @prop {Number} pageNum
+ * @prop {string} nextPageCursor
+ * @prop {number} nextPageNum
+ * @prop {number} pageNum
  */
 
 /**
  * @typedef {Object} SearchMediaApiResponse
- * @prop {Boolean} success
+ * @prop {boolean} success
  * @prop {Array<Media>} media
- * @prop {String} nextPageCursor
- * @prop {Number} nextPageNum
- * @prop {Number} pageNum
- * @prop {Number} tookMs
- * @prop {Number} totalNum
+ * @prop {string} nextPageCursor
+ * @prop {number} nextPageNum
+ * @prop {number} pageNum
+ * @prop {number} tookMs
+ * @prop {number} totalNum
  */
 
 /**
@@ -84,7 +84,7 @@ class MediaApi {
 
   /**
    * Get media by ID
-   * @param {Number|String} id - ID of media
+   * @param {number|string} id - ID of media
    * @returns {Promise<SingleMediaApiResponse>} Found media by provided ID
    * @throws {Error} Media Id should be provided
    */
@@ -110,7 +110,7 @@ class MediaApi {
 
   /**
    * Get media by query
-   * @param {String} query - Query for searching media
+   * @param {string} query - Query for searching media
    * @param {HttpRequestParams=} params - Request params
    * @returns {Promise<SearchMediaApiResponse>} - Found media by query
    * @throws {Error} query should be provided

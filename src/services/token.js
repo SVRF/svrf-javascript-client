@@ -12,7 +12,7 @@ class TokenService {
 
   /**
    * Check is token in storage valid or not
-   * @returns {Boolean} Is token valid or not
+   * @returns {boolean} Is token valid or not
    */
   isTokenValid() {
     const {appToken, expirationTime} = this.getInfoFromStorage();
@@ -23,7 +23,7 @@ class TokenService {
 
   /**
    * Get app token from storage
-   * @returns {String} App token
+   * @returns {string} App token
    */
   getAppToken() {
     const {appToken} = this.getInfoFromStorage();
@@ -32,7 +32,7 @@ class TokenService {
 
   /**
    * Set app token info to storage
-   * @param {{appToken: String, expiresIn: Number}} appTokenInfo - App token info
+   * @param {{appToken: string, expiresIn: number}} appTokenInfo - App token info
    */
   setAppTokenInfo({appToken, expiresIn}) {
     const expirationTime = Date.now() + expiresIn;
@@ -49,7 +49,7 @@ class TokenService {
 
   /**
    * Get app token info from storage
-   * @returns {{appToken: String, expirationTime: Number}|Object} App token info
+   * @returns {{appToken: string, expirationTime: number}} App token info
    */
   getInfoFromStorage() {
     return this.storage.get() || {};

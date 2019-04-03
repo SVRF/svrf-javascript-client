@@ -3,11 +3,8 @@
 */
 class AuthApi {
   constructor(httpClient, tokenService, apiKey) {
-    /** @private */
     this.httpClient = httpClient;
-    /** @private */
     this.tokenService = tokenService;
-    /** @private */
     this.apiKey = apiKey;
   }
 

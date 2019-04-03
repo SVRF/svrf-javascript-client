@@ -1,6 +1,6 @@
 /**
  * Enum for stereoscopic types
- * @enum {String}
+ * @enum {string}
  */
 const StereoscopicType = {
   NONE: 'none',

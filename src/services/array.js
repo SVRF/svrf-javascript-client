@@ -8,7 +8,7 @@ class ArrayService {
    * Checks if array includes a value.
    * @param {Array} array
    * @param {any} valueToFind
-   * @returns {Boolean} If the array contains particular value.
+   * @returns {boolean} If the array contains particular value.
    */
   static includes(array, valueToFind) {
     if (!Array.isArray(array)) {
@@ -21,7 +21,7 @@ class ArrayService {
   /**
    * @callback findPredicate
    * @param {any} arrayElement
-   * @param {Number} index
+   * @param {number} index
    * @param {Array} sourceArray
    */
 

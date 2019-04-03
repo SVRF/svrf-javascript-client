@@ -1,6 +1,6 @@
 /**
  * Enum for media types
- * @enum {String}
+ * @enum {string}
  */
 const MediaType = {
   PHOTO: 'photo',

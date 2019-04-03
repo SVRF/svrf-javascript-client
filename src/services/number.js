@@ -4,8 +4,8 @@
 class NumberService {
   /**
    * Checks if value is an integer
-   * @param {Number} value
-   * @returns {Boolean} If value is an integer
+   * @param {number} value
+   * @returns {boolean} If value is an integer
    */
   static isInteger(value) {
     return typeof value === 'number'

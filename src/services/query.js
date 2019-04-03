@@ -45,12 +45,12 @@ class QueryService {
   /**
    * Prepare query params for HTTP request
    * @param {Object=} params - Request params
-   * @param {String=} params.category - Media category
-   * @param {Number=} params.minimumWidth - Media minimum width
-   * @param {Number=} params.pageNum - Page number
-   * @param {Number=} params.size - Page size
-   * @param {String=} params.stereoscopicType - Media stereoscopic type
-   * @param {(String|Array<String>)=} params.type - Media type
+   * @param {string=} params.category - Media category
+   * @param {number=} params.minimumWidth - Media minimum width
+   * @param {number=} params.pageNum - Page number
+   * @param {number=} params.size - Page size
+   * @param {string=} params.stereoscopicType - Media stereoscopic type
+   * @param {(string|Array<string>)=} params.type - Media type
    * @returns {Object} Params which are ready for HTTP request
    */
   static prepareQueryParams(params) {
