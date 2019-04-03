@@ -76,6 +76,7 @@ declare namespace Svrf {
   }
 
   export interface SvrfOptions {
+    isManualAuthentication: boolean;
     storage: Storage;
   }
 
@@ -105,8 +106,8 @@ declare namespace Svrf {
 declare class Svrf {
   static enums: Svrf.Enums;
   constructor(apiKey: string, options?: Svrf.SvrfOptions);
-  auth: Svrf.AuthApi;
   media: Svrf.MediaApi;
+  authenticate(): Promise<void>;
 }
 
 export = Svrf;

@@ -41,8 +41,8 @@ Svrf API provider
 
 * [Svrf](#Svrf)
     * [new Svrf(apiKey, [options])](#new_Svrf_new)
-    * [.authenticate](#Svrf+authenticate) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.media](#Svrf+media) : [<code>MediaApi</code>](#MediaApi)
+    * [.authenticate()](#Svrf+authenticate) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_Svrf_new"></a>
 
@@ -53,19 +53,18 @@ Svrf API provider
 | apiKey | <code>String</code> | API Key |
 | [options] | [<code>ApiOptions</code>](#ApiOptions) | API options |
 
-<a name="Svrf+authenticate"></a>
-
-### svrf.authenticate ⇒ <code>Promise.&lt;void&gt;</code>
-Authenticates your app: retrieves token and saves it or takes it from the storage.
-You should call it only in case you passed manualAuthentication option.
-
-**Kind**: instance property of [<code>Svrf</code>](#Svrf)  
 <a name="Svrf+media"></a>
 
 ### svrf.media : [<code>MediaApi</code>](#MediaApi)
 MediaApi instance
 
 **Kind**: instance property of [<code>Svrf</code>](#Svrf)  
+<a name="Svrf+authenticate"></a>
+
+### svrf.authenticate() ⇒ <code>Promise.&lt;void&gt;</code>
+Authenticates your app: retrieves token and saves it or takes it from the storage.
+
+**Kind**: instance method of [<code>Svrf</code>](#Svrf)  
 <a name="MediaApi"></a>
 
 ## MediaApi
@@ -131,7 +130,7 @@ Get media by query
 
 | Name | Type | Description |
 | --- | --- | --- |
-| manualAuthentication | <code>boolean</code> | pass this option if you want to call api.authenticate manually (for example while user IDLE). |
+| isManualAuthentication | <code>boolean</code> | pass this option if you want to call api.authenticate manually (for example while user IDLE). |
 | storage | [<code>Storage</code>](#Storage) | app token storage |
 
 <a name="Storage"></a>

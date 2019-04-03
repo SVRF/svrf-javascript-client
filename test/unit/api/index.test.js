@@ -1,31 +1,67 @@
+/* eslint-disable no-new */
+
 import Svrf from '../../../src/api';
 import Validator from '../../../src/services/validator';
-import AuthApi from '../../../src/api/auth';
 import MediaApi from '../../../src/api/media';
+import TokenService from '../../../src/services/token';
+import storage from '../../../src/storage';
 
 jest.mock('../../../src/services/validator');
+jest.mock('../../../src/services/token');
+jest.mock('../../../src/api/auth');
 
 describe('Svrf', () => {
   const apiKey = 'key';
 
-  it('validates storage if it is provided in options', () => {
-    const storage = {};
+  it('sets all apis and methods', () => {
+    const api = new Svrf(apiKey);
 
-    /* eslint-disable-next-line no-new */
-    new Svrf(apiKey, {storage});
+    expect(api.media).toBeInstanceOf(MediaApi);
+    expect(api.authenticate).toBeDefined();
+  });
 
-    const keys = ['get', 'set', 'clear'];
+  describe('providing a storage', () => {
+    it('validates storage if it is provided in options', () => {
+      const mockStorage = {};
 
-    expect(Validator.validateObjectSchema).toHaveBeenCalledWith('User Storage', storage, {
-      allowedKeys: keys,
-      requiredKeys: keys,
+      new Svrf(apiKey, {storage: mockStorage});
+
+      const keys = ['get', 'set', 'clear'];
+
+      expect(Validator.validateObjectSchema).toHaveBeenCalledWith('User Storage', mockStorage, {
+        allowedKeys: keys,
+        requiredKeys: keys,
+      });
+
+      expect(TokenService).toHaveBeenCalledWith(mockStorage);
+    });
+
+    it('uses default storage if a storage is not provided', () => {
+      new Svrf(apiKey);
+
+      expect(TokenService).toHaveBeenCalledWith(storage);
     });
   });
 
-  it('sets all apis', () => {
-    const api = new Svrf(apiKey);
+  describe('manual auth', () => {
+    beforeEach(() => {
+      jest.spyOn(Svrf.prototype, 'authenticate').mockResolvedValue();
+    });
 
-    expect(api.auth).toBeInstanceOf(AuthApi);
-    expect(api.media).toBeInstanceOf(MediaApi);
+    afterEach(() => {
+      Svrf.prototype.authenticate.mockRestore();
+    });
+
+    it('calls auth automatically if manual auth option is not provided', () => {
+      const api = new Svrf(apiKey);
+
+      expect(api.authenticate).toHaveBeenCalled();
+    });
+
+    it('does not call auth if the manual auth option is provided', () => {
+      const api = new Svrf(apiKey, {isManualAuthentication: true});
+
+      expect(api.authenticate).not.toHaveBeenCalled();
+    });
   });
 });

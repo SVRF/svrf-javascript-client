@@ -38,16 +38,46 @@ const Svrf = require('svrf-client');
 
 const api = new Svrf('your API key');
 
-api.auth.authenticate()
-  .then(() => api.media.getTrending())
+api.media.getTrending()
   .then(({media}) => /* you've got the best of the best media! */)
   .catch((err) => console.error(err));
 
 ```
 
-### Storing the app-token
+### Enums
 
-You need to call `api.auth.authenticate()` only once, then we'll do all authentication magic for you! It means you don't have to worry about storing token and checking its expiration time.
+You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
+
+```javascript
+const Svrf = require('svrf-client');
+
+const api = new Svrf('your API key');
+
+api.media.getTrending({type: Svrf.enums.mediaType.PHOTO})
+  .then(({media}) => /* only photos are here */)
+  .catch((err) => console.error(err));
+```
+
+### Authentication
+
+Once you create `Svrf` instance, it sends authentication request. Don't worry, we'll handle storing retrieved token and checking its expiration time.
+
+However, you may want to postpone initial authentication request. In that case you need to pass `isManualAuthentication: true` option and then call `api.authenticate()` manually whenever you want:
+
+```javascript
+const Svrf = require('svrf-client');
+
+const api = new Svrf('your API key', {isManualAuthentication: true});
+
+// Let's say we know that user is IDLE and we have time to make auth request.
+api.authenticate();
+
+api.media.getTrending()
+  .then(({media}) => /* you've got the best of the best media! */)
+  .catch((err) => console.error(err));
+```
+
+### Storing the app-token
 
 If the `localStorage` is available, we save token there. If it's not available (Node.js for example), we save token in memory.
 
@@ -72,21 +102,6 @@ However, you may want us to store the token in some other kind of storage. You c
 ```
 
 Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
-
-### Enums
-
-You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
-
-```javascript
-const Svrf = require('svrf-client');
-
-const api = new Svrf('your API key');
-
-api.auth.authenticate()
-  .then(() => api.media.getTrending({type: Svrf.enums.mediaType.PHOTO}))
-  .then(({media}) => /* only photos are here */)
-  .catch((err) => console.error(err));
-```
 
 ## IE support
 

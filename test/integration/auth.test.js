@@ -11,7 +11,7 @@ describe('authentication', () => {
   });
 
   it('authenticates without errors', async () => {
-    const api = new Svrf(SVRF_TEST_API_KEY);
-    await api.auth.authenticate();
+    const api = new Svrf(SVRF_TEST_API_KEY, {isManualAuthentication: true});
+    await api.authenticate();
   });
 });

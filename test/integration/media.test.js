@@ -8,10 +8,6 @@ const tokenService = new TokenService(storage);
 describe('media api', () => {
   const api = new Svrf(SVRF_TEST_API_KEY);
 
-  beforeAll(async () => {
-    await api.auth.authenticate();
-  });
-
   afterEach(() => {
     tokenService.clearAppTokenInfo();
   });
