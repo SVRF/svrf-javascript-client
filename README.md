@@ -15,18 +15,18 @@ The Svrf API Documentation is available at <https://developers.svrf.com>.
 Using npm:
 
 ```shell
-npm install svrf-client@2.0.0-beta.1 --save
+npm install svrf-client@beta --save
 ```
 
 Using yarn:
 
 ```shell
-yarn add svrf-client@2.0.0-beta.1
+yarn add svrf-client@beta
 ```
 
 Using CDN:
 ```html
-<script src="https://unpkg.com/svrf-client@2.0.0-beta.1"></script>
+<script src="https://unpkg.com/svrf-client@beta"></script>
 ```
 
 ## Getting Started
