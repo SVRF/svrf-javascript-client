@@ -1,6 +1,6 @@
 {
   "name": "svrf-client",
-  "version": "2.0.0-beta",
+  "version": "2.0.1-beta",
   "description": "Svrf API client",
   "license": "MIT",
   "repository": {
@@ -21,6 +21,7 @@
     "clean": "rimraf lib dist",
     "docs": "jsdoc2md -f src/api/index.js src/api/media.js src/enums/*.js > docs/Api.md",
     "lint": "eslint src",
+    "prepublishOnly": "npm run build",
     "test": "npm run test:unit",
     "test:integration": "jest ./test/integration",
     "test:unit": "jest ./test/unit"
