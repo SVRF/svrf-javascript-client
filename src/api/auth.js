@@ -3,11 +3,8 @@
 */
 class AuthApi {
   constructor(httpClient, tokenService, apiKey) {
-    /** @private */
     this.httpClient = httpClient;
-    /** @private */
     this.tokenService = tokenService;
-    /** @private */
     this.apiKey = apiKey;
   }
 
@@ -24,12 +21,19 @@ class AuthApi {
       throw new Error('Api Key should be provided for authentication');
     }
 
-    const response = await this.httpClient.post('/app/authenticate', {apiKey: this.apiKey});
+    // Preventing multiple requests.
+    if (!this.authPromise) {
+      this.authPromise = this.httpClient.post('/app/authenticate', {apiKey: this.apiKey});
+    }
+
+    const response = await this.authPromise;
 
     this.tokenService.setAppTokenInfo({
       appToken: response.token,
       expiresIn: response.expiresIn,
     });
+
+    delete this.authPromise;
   }
 }
 

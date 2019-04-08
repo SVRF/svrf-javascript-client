@@ -1,6 +1,6 @@
 /**
  * Enum for category
- * @enum {String}
+ * @enum {string}
  */
 const Category = {
   FACE_FILTERS: 'Face Filters',

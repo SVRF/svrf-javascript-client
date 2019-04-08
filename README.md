@@ -1,72 +1,32 @@
-# svrf-client - the JavaScript client library for the SVRF API
+# svrf-client - the JavaScript client library for the Svrf API
 
 For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
 
-## About SVRF
+## About Svrf
 
-SVRF's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
+Svrf's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
 
-The SVRF API Documentation is available at <https://developers.svrf.com>.
+The Svrf API Documentation is available at <https://developers.svrf.com>.
+
+## [Api Reference](https://github.com/Svrf/svrf-javascript-client/blob/master/docs/Api.md)
 
 ## Installation
 
-### For [Node.js](https://nodejs.org/)
-
-#### npm
-
-Install it via:
+Using npm:
 
 ```shell
 npm install svrf-client --save
 ```
 
-or:
+Using yarn:
 
 ```shell
 yarn add svrf-client
 ```
 
-### For browser
-
-#### Simple way
-
+Using CDN:
 ```html
-<script src="https://unpkg.com/svrf-client@2.0.0-alpha/dist/svrf-api.min.js"></script>
-```
-
-#### Browserify
-
-TODO: Test it
-
-The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
-the above steps with Node.js and installing browserify with `npm install -g browserify`,
-perform the following (assuming *main.js* is your entry file, that's to say your javascript file where you actually 
-use this library):
-
-```shell
-browserify main.js > bundle.js
-```
-
-Then include *bundle.js* in the HTML pages.
-
-#### Webpack Configuration
-
-TODO: Is it true?
-
-Using Webpack you may encounter the following error: "Module not found: Error:
-Cannot resolve module", most certainly you should disable AMD loader. Add/merge
-the following section to your webpack config:
-
-```javascript
-module: {
-  rules: [
-    {
-      parser: {
-        amd: false
-      }
-    }
-  ]
-}
+<script src="https://unpkg.com/svrf-client@2.0.0-alpha"></script>
 ```
 
 ## Getting Started
@@ -74,20 +34,50 @@ module: {
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-const SVRF = require('svrf-client');
+const Svrf = require('svrf-client');
 
-const api = new SVRF('your API key');
+const api = new Svrf('your API key');
 
-api.authenticate()
-  .then(() => api.getTrending())
+api.media.getTrending()
   .then(({media}) => /* you've got the best of the best media! */)
   .catch((err) => console.error(err));
 
 ```
 
-### Storing the app-token
+### Enums
 
-You need to call `api.authenticate()` only once, then we'll do all authentication magic for you! It means you don't have to worry about storing token and checking its expiration time.
+You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
+
+```javascript
+const Svrf = require('svrf-client');
+
+const api = new Svrf('your API key');
+
+api.media.getTrending({type: Svrf.enums.mediaType.PHOTO})
+  .then(({media}) => /* only photos are here */)
+  .catch((err) => console.error(err));
+```
+
+### Authentication
+
+Once you create `Svrf` instance, it sends authentication request. Don't worry, we'll handle storing retrieved token and checking its expiration time.
+
+However, you may want to postpone initial authentication request. In that case you need to pass `isManualAuthentication: true` option and then call `api.authenticate()` manually whenever you want:
+
+```javascript
+const Svrf = require('svrf-client');
+
+const api = new Svrf('your API key', {isManualAuthentication: true});
+
+// Let's say we know that user is IDLE and we have time to make auth request.
+api.authenticate();
+
+api.media.getTrending()
+  .then(({media}) => /* you've got the best of the best media! */)
+  .catch((err) => console.error(err));
+```
+
+### Storing the app-token
 
 If the `localStorage` is available, we save token there. If it's not available (Node.js for example), we save token in memory.
 
@@ -108,24 +98,11 @@ However, you may want us to store the token in some other kind of storage. You c
     }
   };
 
-  const api = new SVRF('your API key', options);
+  const api = new Svrf('your API key', options);
 ```
 
 Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
 
-### Enums
+## IE support
 
-You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
-
-```javascript
-const SVRF = require('svrf-client');
-
-const api = new SVRF('your API key');
-
-api.authenticate()
-  .then(() => api.getTrending({type: SVRF.enums.mediaType.PHOTO}))
-  .then(({media}) => /* only photos are here */)
-  .catch((err) => console.error(err));
-```
-
-### [Api Reference](https://github.com/SVRF/svrf-javascript-client/blob/master/docs/Api.md)
+The library uses promises which are not supported by IE11. If you want to support it you have to use a polyfill (for example [es6-promise](https://github.com/stefanpenner/es6-promise))

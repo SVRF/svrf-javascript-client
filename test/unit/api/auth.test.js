@@ -20,6 +20,7 @@ describe('AuthApi', () => {
     api = new AuthApi(httpClient, tokenService, apiKey);
 
     tokenService.isTokenValid.mockReturnValue(false);
+    httpClient.post.mockResolvedValue({token, expiresIn});
   });
 
   it('saves data that is passed to constructor', () => {
@@ -36,15 +37,13 @@ describe('AuthApi', () => {
     expect(httpClient.post).not.toHaveBeenCalled();
   });
 
-  it('throws an error if api key was not provided', () => {
+  it('throws an error if api key was not provided', async () => {
     delete api.apiKey;
 
-    expect(api.authenticate()).rejects.toThrowErrorMatchingSnapshot();
+    await expect(api.authenticate()).rejects.toThrowErrorMatchingSnapshot();
   });
 
   it('makes request with proper params', async () => {
-    httpClient.post.mockResolvedValue({token, expiresIn});
-
     await api.authenticate();
 
     expect(httpClient.post).toHaveBeenCalledWith('/app/authenticate', {apiKey});
@@ -56,5 +55,19 @@ describe('AuthApi', () => {
     await api.authenticate();
 
     expect(tokenService.setAppTokenInfo).toHaveBeenCalledWith({appToken: token, expiresIn});
+  });
+
+  it('reuses existing promise if a request is in progress', () => {
+    api.authenticate();
+    api.authenticate();
+
+    expect(httpClient.post).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not reuse existing promise if there is no request in progress', async () => {
+    await api.authenticate();
+    await api.authenticate();
+
+    expect(httpClient.post).toHaveBeenCalledTimes(2);
   });
 });

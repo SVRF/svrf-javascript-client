@@ -32,7 +32,7 @@ describe('QueryService', () => {
       QueryService.validateParams(params);
 
       expect(Validator.validateObjectSchema).toHaveBeenCalledWith('Query Params', params, {
-        allowedKeys: ['category', 'minimumWidth', 'pageNum', 'size', 'stereoscopicType', 'type'],
+        allowedKeys: QueryService.allowedParams,
       });
 
       expect(Validator.validateArrayOrSingleEnumString)
@@ -75,6 +75,23 @@ describe('QueryService', () => {
       const preparedParams = QueryService.prepareQueryParams(params);
 
       expect(preparedParams).toEqual({...params, type: joinedTypes});
+    });
+
+    it('normalizes boolean params', () => {
+      const params = {
+        isFaceFilter: 5,
+        hasBlendShapes: '',
+        requiresBlendShapes: true,
+      };
+      const preparedParams = QueryService.prepareQueryParams(params);
+
+      const expectedParams = {
+        isFaceFilter: true,
+        hasBlendShapes: false,
+        requiresBlendShapes: true,
+      };
+
+      expect(preparedParams).toEqual(expectedParams);
     });
   });
 });

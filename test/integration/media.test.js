@@ -1,4 +1,4 @@
-import SVRF from '../../src';
+import Svrf from '../../src';
 import storage from '../../src/storage';
 import TokenService from '../../src/services/token';
 
@@ -6,15 +6,53 @@ const {SVRF_TEST_API_KEY} = process.env;
 const tokenService = new TokenService(storage);
 
 describe('media api', () => {
-  const api = new SVRF(SVRF_TEST_API_KEY);
-
-  beforeAll(async () => {
-    await api.auth.authenticate();
-  });
+  const api = new Svrf(SVRF_TEST_API_KEY);
 
   afterEach(() => {
     tokenService.clearAppTokenInfo();
   });
+
+  const mediaFilesSchema = ['images', 'videos', 'stereo'];
+  const mediaSchema = [
+    'id',
+    'src',
+    'title',
+    'description',
+    'authors',
+    'site',
+    'canonical',
+    'url',
+    'embedUrl',
+    'embedHtml',
+    'type',
+    'adult',
+    'width',
+    'height',
+    'duration',
+    'metadata',
+    'files',
+  ];
+
+  const singleMediaApiResponse = ['success', 'media'];
+  const multipleMediaApiResponse = [
+    'success',
+    'media',
+    'nextPageCursor',
+    'nextPageNum',
+    'pageNum',
+  ];
+  const searchMediaApiResponse = [...multipleMediaApiResponse, 'tookMs', 'totalNum'];
+
+  function validateObjectSchema(schema, value) {
+    schema.forEach((key) => {
+      expect(value[key]).toBeDefined();
+    });
+  }
+
+  function validateMediaSchema(media) {
+    validateObjectSchema(mediaSchema, media);
+    validateObjectSchema(mediaFilesSchema, media.files);
+  }
 
   describe('getting media by id', () => {
     it('gets media if id is a string', async () => {
@@ -33,10 +71,19 @@ describe('media api', () => {
       expect(result.media.id).toEqual(mediaId.toString());
     });
 
-    it('handles 404 error', () => {
+    it('handles 404 error', async () => {
       const mediaId = 1;
 
-      expect(api.media.getById(mediaId)).rejects.toThrowErrorMatchingSnapshot();
+      await expect(api.media.getById(mediaId)).rejects.toThrowErrorMatchingSnapshot();
+    });
+
+    it('gets media with defined fields', async () => {
+      const mediaId = 5431660791201792;
+
+      const result = await api.media.getById(mediaId);
+
+      validateObjectSchema(singleMediaApiResponse, result);
+      validateMediaSchema(result.media);
     });
   });
 
@@ -44,12 +91,15 @@ describe('media api', () => {
 
   async function testAllOptions(callback) {
     const options = {
-      category: SVRF.enums.category.FACE_FILTERS,
+      category: Svrf.enums.category.FACE_FILTERS,
+      hasBlendShapes: false,
+      isFaceFilter: true,
       minimumWidth: 1000,
       pageNum: 1,
+      requiresBlendShapes: false,
       size: 5,
-      stereoscopicType: SVRF.enums.stereoscopicType.NONE,
-      type: [SVRF.enums.mediaType.PHOTO, SVRF.enums.mediaType.VIDEO],
+      stereoscopicType: Svrf.enums.stereoscopicType.NONE,
+      type: [Svrf.enums.mediaType.PHOTO, Svrf.enums.mediaType.VIDEO],
     };
 
     const result = await callback(options);
@@ -59,19 +109,39 @@ describe('media api', () => {
 
   async function testCategory(callback) {
     const options = {
-      category: SVRF.enums.category.FACE_FILTERS,
+      category: Svrf.enums.category.FACE_FILTERS,
     };
 
     const result = await callback(options);
 
     // Category isn't publicly available, at least check that models are returned.
     result.media.forEach((media) => (
-      expect(media.type).toBe(SVRF.enums.mediaType.MODEL_3D)
+      expect(media.type).toBe(Svrf.enums.mediaType.MODEL_3D)
     ));
   }
 
+  async function testHasBlendShapes(callback) {
+    const hasBlendShapes = false;
+
+    const result = await callback({hasBlendShapes});
+
+    result.media.forEach((media) => {
+      expect(media.metadata.hasBlendShapes).toEqual(hasBlendShapes);
+    });
+  }
+
+  async function testIsFaceFilter(callback) {
+    const isFaceFilter = true;
+
+    const result = await callback({isFaceFilter});
+
+    result.media.forEach((media) => {
+      expect(media.metadata.isFaceFilter).toEqual(isFaceFilter);
+    });
+  }
+
   async function testMediaType(callback) {
-    const type = SVRF.enums.mediaType.PHOTO;
+    const type = Svrf.enums.mediaType.PHOTO;
 
     const result = await callback({type});
 
@@ -81,7 +151,7 @@ describe('media api', () => {
   }
 
   async function testMediaTypeArray(callback) {
-    const types = [SVRF.enums.mediaType.PHOTO, SVRF.enums.mediaType.MODEL_3D];
+    const types = [Svrf.enums.mediaType.PHOTO, Svrf.enums.mediaType.MODEL_3D];
 
     const result = await callback({type: types});
 
@@ -110,6 +180,16 @@ describe('media api', () => {
     expect(uniqueIds.size).toEqual(firstPage.length + secondPage.length);
   }
 
+  async function testRequiresBlendShapes(callback) {
+    const requiresBlendShapes = false;
+
+    const result = await callback({requiresBlendShapes});
+
+    result.media.forEach((media) => {
+      expect(media.metadata.requiresBlendShapes).toEqual(requiresBlendShapes);
+    });
+  }
+
   async function testSize(callback) {
     const size = 13;
 
@@ -121,7 +201,7 @@ describe('media api', () => {
   // Stereoscopic type isn't publicly available, so checking that results
   // are not intercepting.
   async function testStereoscopicType(callback) {
-    const {LEFT_RIGHT, TOP_BOTTOM} = SVRF.enums.stereoscopicType;
+    const {LEFT_RIGHT, TOP_BOTTOM} = Svrf.enums.stereoscopicType;
 
     const {media: leftRightResults} = await callback({stereoscopicType: LEFT_RIGHT});
     const {media: topBottomResults} = await callback({stereoscopicType: TOP_BOTTOM});
@@ -152,6 +232,16 @@ describe('media api', () => {
     it('gets trending media from particular page', testTrending(testPagination));
     it('gets specified amount of trending media', testTrending(testSize));
     it('gets trending media with specific stereoscopic type', testTrending(testStereoscopicType));
+    it('gets trending media with face filters', testTrending(testIsFaceFilter));
+    it('gets trending media without blend shapes', testTrending(testHasBlendShapes));
+    it('gets trending media without require of blend shapes', testTrending(testRequiresBlendShapes));
+
+    it('gets trending media with defined fields', async () => {
+      const result = await api.media.getTrending();
+
+      validateObjectSchema(multipleMediaApiResponse, result);
+      result.media.forEach((media) => validateMediaSchema(media));
+    });
   });
 
   describe('searching media', () => {
@@ -179,5 +269,15 @@ describe('media api', () => {
     it('searches media from particular page', testSearch(testPagination));
     it('searches specified amount of media', testSearch(testSize));
     it('searches media with specific stereoscopic type', testSearch(testStereoscopicType));
+    it('searches media with face filters', testMaskSearch(testIsFaceFilter));
+    it('searches media without blend shapes', testMaskSearch(testHasBlendShapes));
+    it('searches media without require of blend shapes', testMaskSearch(testRequiresBlendShapes));
+
+    it('searches media with defined fields', async () => {
+      const result = await api.media.search(query);
+
+      validateObjectSchema(searchMediaApiResponse, result);
+      result.media.forEach((media) => validateMediaSchema(media));
+    });
   });
 });

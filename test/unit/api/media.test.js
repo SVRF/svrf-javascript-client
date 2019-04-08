@@ -26,20 +26,20 @@ describe('media api', () => {
       expect(result.media).toEqual(mockMedia);
     });
 
-    it('throws an error if http client throws it', () => {
+    it('throws an error if http client throws it', async () => {
       const mediaId = 1;
 
       httpClient.get.mockRejectedValue('error in http request');
 
-      expect(api.getById(mediaId)).rejects.toThrowErrorMatchingSnapshot();
+      await expect(api.getById(mediaId)).rejects.toThrowErrorMatchingSnapshot();
     });
 
-    it('throws an error if media id is not defined', () => {
-      expect(api.getById()).rejects.toThrowErrorMatchingSnapshot();
+    it('throws an error if media id is not defined', async () => {
+      await expect(api.getById()).rejects.toThrowErrorMatchingSnapshot();
     });
 
-    it('throws an error if media id is empty', () => {
-      expect(api.getById('')).rejects.toThrowErrorMatchingSnapshot();
+    it('throws an error if media id is empty', async () => {
+      await expect(api.getById('')).rejects.toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -104,10 +104,10 @@ describe('media api', () => {
       expect(QueryService.prepareQueryParams).toHaveBeenCalledWith(undefined);
     });
 
-    it('throws an error if http client throws it', () => {
+    it('throws an error if http client throws it', async () => {
       httpClient.get.mockRejectedValue(new Error('error in http request'));
 
-      expect(api.getTrending()).rejects.toThrowErrorMatchingSnapshot();
+      await expect(api.getTrending()).rejects.toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -165,18 +165,18 @@ describe('media api', () => {
       expect(QueryService.prepareQueryParams).toHaveBeenCalledWith(undefined);
     });
 
-    it('throws an error if http client throws it', () => {
+    it('throws an error if http client throws it', async () => {
       httpClient.get.mockRejectedValue(new Error('error in http request'));
 
-      expect(api.search(query)).rejects.toThrowErrorMatchingSnapshot();
+      await expect(api.search(query)).rejects.toThrowErrorMatchingSnapshot();
     });
 
-    it('throws an error if query is undefined', () => {
-      expect(api.search()).rejects.toThrowErrorMatchingSnapshot();
+    it('throws an error if query is undefined', async () => {
+      await expect(api.search()).rejects.toThrowErrorMatchingSnapshot();
     });
 
-    it('throws an error if query is empty', () => {
-      expect(api.search('')).rejects.toThrowErrorMatchingSnapshot();
+    it('throws an error if query is empty', async () => {
+      await expect(api.search('')).rejects.toThrowErrorMatchingSnapshot();
     });
   });
 });

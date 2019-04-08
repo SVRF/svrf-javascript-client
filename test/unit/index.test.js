@@ -1,12 +1,12 @@
-import SVRF from '../../src';
+import Svrf from '../../src';
 
 describe('the main module', () => {
   it('exports api client', () => {
-    expect(SVRF).toBeDefined();
+    expect(Svrf).toBeDefined();
   });
 
   it('exports all enums', () => {
-    const {enums} = SVRF;
+    const {enums} = Svrf;
 
     expect(enums).toBeDefined();
 
