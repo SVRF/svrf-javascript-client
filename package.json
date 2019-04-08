@@ -1,6 +1,6 @@
 {
   "name": "svrf-client",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "description": "Svrf API client",
   "license": "MIT",
   "repository": {
