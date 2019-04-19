@@ -12,7 +12,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'lib/svrf-client.js',
+      file: 'lib/svrf.js',
       format: 'cjs',
       indent: false,
     },
@@ -31,7 +31,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/svrf-client.js',
+      file: 'dist/svrf.js',
       format: 'iife',
       name: 'Svrf',
       indent: false,
@@ -49,7 +49,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'dist/svrf-client.min.js',
+      file: 'dist/svrf.min.js',
       format: 'iife',
       name: 'Svrf',
       indent: false,

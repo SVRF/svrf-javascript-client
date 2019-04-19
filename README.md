@@ -1,4 +1,4 @@
-# svrf-client - the JavaScript client library for the Svrf API
+# svrf - the JavaScript client library for the Svrf API
 
 For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
 
@@ -8,25 +8,25 @@ Svrf's API allows you to supercharge your project or app with the first and larg
 
 The Svrf API Documentation is available at <https://developers.svrf.com>.
 
-## [Api Reference](https://github.com/Svrf/svrf-javascript-client/blob/master/docs/Api.md)
+## [Api Reference](https://github.com/Svrf/svrf-javascript/blob/master/docs/Api.md)
 
 ## Installation
 
 Using npm:
 
 ```shell
-npm install svrf-client@beta --save
+npm install svrf --save
 ```
 
 Using yarn:
 
 ```shell
-yarn add svrf-client@beta
+yarn add svrf
 ```
 
 Using CDN:
 ```html
-<script src="https://unpkg.com/svrf-client@beta"></script>
+<script src="https://unpkg.com/svrf"></script>
 ```
 
 ## Getting Started
@@ -34,7 +34,7 @@ Using CDN:
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-const Svrf = require('svrf-client');
+const Svrf = require('svrf');
 
 const api = new Svrf('your API key');
 
@@ -49,7 +49,7 @@ api.media.getTrending()
 You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
 
 ```javascript
-const Svrf = require('svrf-client');
+const Svrf = require('svrf');
 
 const api = new Svrf('your API key');
 
@@ -65,7 +65,7 @@ Once you create `Svrf` instance, it sends authentication request. Don't worry, w
 However, you may want to postpone initial authentication request. In that case you need to pass `isManualAuthentication: true` option and then call `api.authenticate()` manually whenever you want:
 
 ```javascript
-const Svrf = require('svrf-client');
+const Svrf = require('svrf');
 
 const api = new Svrf('your API key', {isManualAuthentication: true});
 

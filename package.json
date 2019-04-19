@@ -1,14 +1,14 @@
 {
-  "name": "svrf-client",
-  "version": "2.0.0-beta.1",
+  "name": "svrf",
+  "version": "2.0.0",
   "description": "Svrf API client",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Svrf/svrf-javascript-client.git"
+    "url": "https://github.com/Svrf/svrf-javascript.git"
   },
-  "main": "lib/svrf-client.js",
-  "unpkg": "dist/svrf-client.min.js",
+  "main": "lib/svrf.js",
+  "unpkg": "dist/svrf.min.js",
   "typings": "./index.d.ts",
   "files": [
     "dist",
