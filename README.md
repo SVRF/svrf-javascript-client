@@ -1,108 +1,28 @@
-# svrf - the JavaScript client library for the Svrf API
+[![Build Status](https://badge.buildkite.com/53b744d5980c3a727f9e9a912aee0532e1e67c6c3eee4d64c2.svg)](https://buildkite.com/svrf-1/js-client?branch=master)
 
-For more information, please visit [https://github.com/svrf/svrf-api](https://github.com/svrf/svrf-api)
+# Svrf JavaScript SDK
 
-## About Svrf
+Svrf's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web. See our [Node.js/JavaScript Integration Guide] to get started!
 
-Svrf's API allows you to supercharge your project or app with the first and largest search engine for immersive experiences. We make it simple for any developer to incorporate highly immersive experiences with all kinds of applications: virtual reality, augmented reality, mixed reality, mobile, and web.
+### Features
 
-The Svrf API Documentation is available at <https://developers.svrf.com>.
+__Simple Authentication__: Easily manage your Svrf API authentication token.
 
-## [Api Reference](https://github.com/Svrf/svrf-javascript/blob/master/docs/Api.md)
+__Comprehensive Search__: [Search] the entirety of the Svrf immersive experience catalog. Further refine what you're looking for with a variety of [Search Parameters], allowing you to search for 360 photos, videos, Face Filters, or Media that is of a certain resolution.
 
-## Installation
+__Trending Media__: Getting the currently [Trending Media] on Svrf is a breeze. Trending Media are Media that our curators have deemed to be some of the most interesting on the platform. You can further constrain the trending Media with [Trending Media Parameters]. 
 
-Using npm:
+## Contributing
 
-```shell
-npm install svrf --save
-```
+We welcome contributions of any kind including new features, bug fixes, and documentation improvements. Please first open an issue describing what you want to build if it is a major change so that we can discuss how to move forward. Otherwise, go ahead and open a pull request for minor changes such as typo fixes and one liners.
 
-Using yarn:
 
-```shell
-yarn add svrf
-```
+## Running Tests
 
-Using CDN:
-```html
-<script src="https://unpkg.com/svrf"></script>
-```
+Tests can be run with `npm run test`. Make sure tests pass before submitting Pull Requests.
 
-## Getting Started
-
-Please follow the [installation](#installation) instruction and execute the following JS code:
-
-```javascript
-const Svrf = require('svrf');
-
-const api = new Svrf('your API key');
-
-api.media.getTrending()
-  .then(({media}) => /* you've got the best of the best media! */)
-  .catch((err) => console.error(err));
-
-```
-
-### Enums
-
-You don't have to remember or enums values for categories, stereoscopic and media types. You can access them with static `enums` property:
-
-```javascript
-const Svrf = require('svrf');
-
-const api = new Svrf('your API key');
-
-api.media.getTrending({type: Svrf.enums.mediaType.PHOTO})
-  .then(({media}) => /* only photos are here */)
-  .catch((err) => console.error(err));
-```
-
-### Authentication
-
-Once you create `Svrf` instance, it sends authentication request. Don't worry, we'll handle storing retrieved token and checking its expiration time.
-
-However, you may want to postpone initial authentication request. In that case you need to pass `isManualAuthentication: true` option and then call `api.authenticate()` manually whenever you want:
-
-```javascript
-const Svrf = require('svrf');
-
-const api = new Svrf('your API key', {isManualAuthentication: true});
-
-// Let's say we know that user is IDLE and we have time to make auth request.
-api.authenticate();
-
-api.media.getTrending()
-  .then(({media}) => /* you've got the best of the best media! */)
-  .catch((err) => console.error(err));
-```
-
-### Storing the app-token
-
-If the `localStorage` is available, we save token there. If it's not available (Node.js for example), we save token in memory.
-
-However, you may want us to store the token in some other kind of storage. You can pass an object that implements `get`, `set` and `clear` methods as an additional option:
-
-```javascript
-  const options = {
-    storage: {
-      get() {
-        return yourCustomStorage.read();
-      },
-      set(value) {
-        return yourCustomStorage.write(value);
-      },
-      clear() {
-        return yourCustomStorage.clear();
-      }
-    }
-  };
-
-  const api = new Svrf('your API key', options);
-```
-
-Note that `set` is gonna be called with an object. And equal object should be returned from the `get` method.
-
-## IE support
-
-The library uses promises which are not supported by IE11. If you want to support it you have to use a polyfill (for example [es6-promise](https://github.com/stefanpenner/es6-promise))
+[Node.js/JavaScript Integration Guide]: https://docs.svrf.com/docs/web
+[Search]: https://docs.svrf.com/reference/js-mediaapi#js-search
+[Search Parameters]: https://docs.svrf.com/reference/js-mediaapi#js-search
+[Trending Media]: https://docs.svrf.com/reference/js-mediaapi#js-gettrending
+[Trending Media Parameters]: https://docs.svrf.com/reference/js-mediaapi#section-parameters
