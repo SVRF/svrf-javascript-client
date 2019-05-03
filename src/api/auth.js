@@ -23,7 +23,13 @@ class AuthApi {
 
     // Preventing multiple requests.
     if (!this.authPromise) {
-      this.authPromise = this.httpClient.post('/app/authenticate', {apiKey: this.apiKey});
+      const params = {apiKey: this.apiKey};
+      this.authPromise = this.httpClient({
+        method: 'post',
+        url: '/app/authenticate',
+        params: params,
+        qs: params, // Request uses qs key for params
+      });
     }
 
     const response = await this.authPromise;

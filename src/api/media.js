@@ -93,7 +93,11 @@ class MediaApi {
       throw new Error('Media Id should be provided');
     }
 
-    return this.httpClient.get(`/vr/${id}`);
+    return this.httpClient({
+      method: 'get',
+      url: `/vr/${id}`,
+      headers: await this.httpClient._headers(),
+    });
   }
 
   /**
@@ -105,7 +109,13 @@ class MediaApi {
     QueryService.validateParams(params);
     const preparedParams = QueryService.prepareQueryParams(params);
 
-    return this.httpClient.get('/vr/trending', preparedParams);
+    return this.httpClient({
+      method: 'get',
+      url: '/vr/trending',
+      headers: await this.httpClient._headers(),
+      params: preparedParams,
+      qs: preparedParams, // Request uses qs for params
+    });
   }
 
   /**
@@ -122,8 +132,15 @@ class MediaApi {
 
     QueryService.validateParams(params);
     const preparedParams = QueryService.prepareQueryParams(params);
+    const fullParams = {q: query, ...preparedParams};
 
-    return this.httpClient.get('/vr/search', {q: query, ...preparedParams});
+    return this.httpClient({
+      method: 'get',
+      url: '/vr/search',
+      headers: await this.httpClient._headers(),
+      params: fullParams,
+      qs: fullParams, // Request uses qs for params
+    });
   }
 }
 

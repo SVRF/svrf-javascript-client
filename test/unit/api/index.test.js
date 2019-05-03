@@ -8,6 +8,7 @@ import storage from '../../../src/storage';
 
 jest.mock('../../../src/services/validator');
 jest.mock('../../../src/services/token');
+jest.mock('../../../src/api/media');
 jest.mock('../../../src/api/auth');
 
 describe('Svrf', () => {
@@ -45,16 +46,9 @@ describe('Svrf', () => {
 
   describe('providing an http client', () => {
     it('accepts a provided http client', () => {
-      const mockClient = {};
-
-      new Svrf(apiKey, {client: mockClient});
-
-      const keys = ['get', 'post'];
-
-      expect(Validator.validateObjectSchema).toHaveBeenCalledWith('User HTTP Client', mockClient, {
-        allowedKeys: keys,
-        requiredKeys: keys,
-      });
+      const mockClient = jest.fn();
+      const s = new Svrf(apiKey, {client: mockClient});
+      expect(s.httpClient).toBe(mockClient);
     });
   });
 

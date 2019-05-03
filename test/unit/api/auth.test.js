@@ -1,5 +1,4 @@
 import AuthApi from '../../../src/api/auth';
-import HttpClient from '../../../src/http/http-client';
 import TokenService from '../../../src/services/token';
 
 jest.mock('../../../src/http/http-client');
@@ -15,12 +14,12 @@ describe('AuthApi', () => {
   let tokenService;
 
   beforeEach(() => {
-    httpClient = new HttpClient();
+    httpClient = jest.fn();
     tokenService = new TokenService();
     api = new AuthApi(httpClient, tokenService, apiKey);
 
     tokenService.isTokenValid.mockReturnValue(false);
-    httpClient.post.mockResolvedValue({token, expiresIn});
+    httpClient.mockResolvedValue({token, expiresIn});
   });
 
   it('saves data that is passed to constructor', () => {
@@ -34,7 +33,7 @@ describe('AuthApi', () => {
 
     await api.authenticate();
 
-    expect(httpClient.post).not.toHaveBeenCalled();
+    expect(httpClient).not.toHaveBeenCalled();
   });
 
   it('throws an error if api key was not provided', async () => {
@@ -46,11 +45,13 @@ describe('AuthApi', () => {
   it('makes request with proper params', async () => {
     await api.authenticate();
 
-    expect(httpClient.post).toHaveBeenCalledWith('/app/authenticate', {apiKey});
+    expect(httpClient).toHaveBeenCalledWith({
+      method: 'post', params: {apiKey: 'api-key'}, qs: {apiKey: 'api-key'}, url: '/app/authenticate',
+    });
   });
 
   it('saves response to the storage', async () => {
-    httpClient.post.mockResolvedValue({expiresIn, token});
+    httpClient.mockResolvedValue({expiresIn, token});
 
     await api.authenticate();
 
@@ -61,13 +62,13 @@ describe('AuthApi', () => {
     api.authenticate();
     api.authenticate();
 
-    expect(httpClient.post).toHaveBeenCalledTimes(1);
+    expect(httpClient).toHaveBeenCalledTimes(1);
   });
 
   it('does not reuse existing promise if there is no request in progress', async () => {
     await api.authenticate();
     await api.authenticate();
 
-    expect(httpClient.post).toHaveBeenCalledTimes(2);
+    expect(httpClient).toHaveBeenCalledTimes(2);
   });
 });

@@ -1,16 +1,25 @@
 import MediaApi from '../../../src/api/media';
-import HttpClient from '../../../src/http/http-client';
+import AppTokenHttpClient from '../../../src/http/app-token-http-client';
+import TokenService from '../../../src/services/token';
 import QueryService from '../../../src/services/query';
 
 jest.mock('../../../src/http/http-client');
+jest.mock('../../../src/services/token');
+jest.mock('../../../src/api/auth');
 
 describe('media api', () => {
   let api;
   let httpClient;
+  const tokenService = new TokenService();
 
   beforeEach(async () => {
-    httpClient = new HttpClient();
+    tokenService.getAppToken.mockReturnValue('token');
+    httpClient = AppTokenHttpClient(jest.fn(), tokenService);
     api = new MediaApi(httpClient);
+  });
+
+  afterAll(() => {
+    tokenService.getAppToken.mockReset();
   });
 
   describe('getById', () => {
@@ -18,18 +27,18 @@ describe('media api', () => {
       const mediaId = 1;
       const mockMedia = {id: mediaId};
 
-      httpClient.get.mockResolvedValue({media: mockMedia});
+      httpClient.mockResolvedValue({media: mockMedia});
 
       const result = await api.getById(mediaId);
 
-      expect(httpClient.get).toHaveBeenCalledWith(`/vr/${mediaId}`);
+      expect(httpClient).toHaveBeenCalledWith({headers: {'x-app-token': 'token'}, method: 'get', url: '/vr/1'});
       expect(result.media).toEqual(mockMedia);
     });
 
     it('throws an error if http client throws it', async () => {
       const mediaId = 1;
 
-      httpClient.get.mockRejectedValue('error in http request');
+      httpClient.mockRejectedValue('error in http request');
 
       await expect(api.getById(mediaId)).rejects.toThrowErrorMatchingSnapshot();
     });
@@ -63,7 +72,7 @@ describe('media api', () => {
     });
 
     it('gets media if params are not defined', async () => {
-      httpClient.get.mockResolvedValue({media: mediaList});
+      httpClient.mockResolvedValue({media: mediaList});
 
       const result = await api.getTrending();
 
@@ -71,7 +80,7 @@ describe('media api', () => {
     });
 
     it('gets media if params are defined', async () => {
-      httpClient.get.mockResolvedValue({media: mediaList});
+      httpClient.mockResolvedValue({media: mediaList});
 
       const result = await api.getTrending(mockParams);
 
@@ -81,13 +90,17 @@ describe('media api', () => {
     it('invokes http client get method if params are defined', async () => {
       await api.getTrending(mockParams);
 
-      expect(httpClient.get).toHaveBeenCalledWith('/vr/trending', mockParams);
+      expect(httpClient).toHaveBeenCalledWith({
+        headers: {'x-app-token': 'token'}, method: 'get', params: {size: 2}, qs: {size: 2}, url: '/vr/trending',
+      });
     });
 
     it('invokes http client get method if params are not defined', async () => {
       await api.getTrending();
 
-      expect(httpClient.get).toHaveBeenCalledWith('/vr/trending', {});
+      expect(httpClient).toHaveBeenCalledWith({
+        headers: {'x-app-token': 'token'}, method: 'get', params: {}, qs: {}, url: '/vr/trending',
+      });
     });
 
     it('invokes validator and query service methods if params are defined', async () => {
@@ -105,7 +118,7 @@ describe('media api', () => {
     });
 
     it('throws an error if http client throws it', async () => {
-      httpClient.get.mockRejectedValue(new Error('error in http request'));
+      httpClient.mockRejectedValue(new Error('error in http request'));
 
       await expect(api.getTrending()).rejects.toThrowErrorMatchingSnapshot();
     });
@@ -132,7 +145,7 @@ describe('media api', () => {
     });
 
     it('searches media by query', async () => {
-      httpClient.get.mockResolvedValue({media: mediaList});
+      httpClient.mockResolvedValue({media: mediaList});
 
       const result = await api.search(query, mockParams);
 
@@ -142,13 +155,17 @@ describe('media api', () => {
     it('invokes http client get method if params are defined', async () => {
       await api.search(query, mockParams);
 
-      expect(httpClient.get).toHaveBeenCalledWith('/vr/search', {q: query, ...mockParams});
+      expect(httpClient).toHaveBeenCalledWith({
+        headers: {'x-app-token': 'token'}, method: 'get', params: {q: 'query', size: 2}, qs: {q: 'query', size: 2}, url: '/vr/search',
+      });
     });
 
     it('invokes http client get method if params are not defined', async () => {
       await api.search(query);
 
-      expect(httpClient.get).toHaveBeenCalledWith('/vr/search', {q: query});
+      expect(httpClient).toHaveBeenCalledWith({
+        headers: {'x-app-token': 'token'}, method: 'get', params: {q: 'query'}, qs: {q: 'query'}, url: '/vr/search',
+      });
     });
 
     it('invokes validator and query service methods if params are defined', async () => {
@@ -166,7 +183,7 @@ describe('media api', () => {
     });
 
     it('throws an error if http client throws it', async () => {
-      httpClient.get.mockRejectedValue(new Error('error in http request'));
+      httpClient.mockRejectedValue(new Error('error in http request'));
 
       await expect(api.search(query)).rejects.toThrowErrorMatchingSnapshot();
     });

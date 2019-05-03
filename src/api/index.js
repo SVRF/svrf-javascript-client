@@ -43,22 +43,17 @@ class Svrf {
       });
     }
 
-    // Validate that the custom HTTP client supports GET and POST commands
-    if (userClient) {
-      const methodKeys = ['get', 'post'];
-
-      Validator.validateObjectSchema('User HTTP Client', userClient, {
-        allowedKeys: methodKeys,
-        requiredKeys: methodKeys,
-      });
+    // Validate that the custom HTTP client
+    if (!!userClient && typeof userClient !== 'function') {
+      throw new TypeError('Expected `client` to be a function');
     }
 
     const tokenStorage = userStorage || storage;
     const tokenService = new TokenService(tokenStorage);
-    const httpClient = userClient || new HttpClient();
-    this.auth = new AuthApi(httpClient, tokenService, apiKey);
+    this.httpClient = userClient || new HttpClient();
+    this.auth = new AuthApi(this.httpClient, tokenService, apiKey);
 
-    const appTokenHttpClient = new AppTokenHttpClient(this.auth, tokenService);
+    const appTokenHttpClient = AppTokenHttpClient(this.auth, tokenService);
 
     /**
      * MediaApi instance

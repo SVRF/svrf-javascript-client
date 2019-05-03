@@ -1,24 +1,15 @@
-import HttpClient from './http-client';
-
 /**
- * HTTP client which sets x-app-token header in requests
- * @extends HttpClient
-*/
-class AppTokenHttpClient extends HttpClient {
-  /**
-   * @param {AuthApi} authApi - Authentication API
-   * @param {TokenService} tokenService - Service which provides methods for token storage
-   */
-  constructor(authApi, tokenService) {
-    super();
-
-    this.api.interceptors.request.use(async (request) => {
-      await authApi.authenticate();
-      const appToken = tokenService.getAppToken();
-      request.headers['x-app-token'] = appToken;
-      return request;
-    });
+ * AppTokenHttpClient modifies the httpClient, adding a method to fetch the authentication headers
+ * for this client.
+ * @param {Object} httpClient - HTTP Client to communicate with the API
+ * @param {TokenService} tokenService - Service which provides methods for token storage
+ * @returns {Object} - A modified HTTP client
+ */
+export default function AppTokenHttpClient(httpClient, tokenService) {
+  httpClient._headers = () => {
+    return {'x-app-token': tokenService.getAppToken()};
   }
+
+  return httpClient;
 }
 
-export default AppTokenHttpClient;

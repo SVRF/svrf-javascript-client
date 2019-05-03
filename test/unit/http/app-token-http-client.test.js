@@ -7,24 +7,21 @@ jest.mock('../../../src/services/token');
 
 describe('AppTokenHttpClient', () => {
   describe('request interceptor', () => {
-    const request = {headers: {}};
     const token = 'token';
     const authApi = new AuthApi();
     const tokenService = new TokenService();
 
+    let client;
+    let headers;
+
     beforeAll(() => {
       tokenService.getAppToken.mockReturnValue(token);
-      const client = new AppTokenHttpClient(authApi, tokenService);
-
-      client.api.interceptors.request.handlers.forEach((h) => h.fulfilled(request));
+      client = AppTokenHttpClient(authApi, tokenService);
+      headers = client._headers();
     });
 
     afterAll(() => {
       tokenService.getAppToken.mockReset();
-    });
-
-    it('invokes auth api authenticate method in request interceptor', () => {
-      expect(authApi.authenticate).toHaveBeenCalled();
     });
 
     it('invokes token service getAppToken method in request interceptor', () => {
@@ -32,7 +29,7 @@ describe('AppTokenHttpClient', () => {
     });
 
     it('puts x-app-token header', () => {
-      expect(request.headers['x-app-token']).toEqual(token);
+      expect(headers['x-app-token']).toEqual(token);
     });
   });
 });
