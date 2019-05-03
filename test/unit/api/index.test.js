@@ -43,6 +43,21 @@ describe('Svrf', () => {
     });
   });
 
+  describe('providing an http client', () => {
+    it('accepts a provided http client', () => {
+      const mockClient = {};
+
+      new Svrf(apiKey, {client: mockClient});
+
+      const keys = ['get', 'post'];
+
+      expect(Validator.validateObjectSchema).toHaveBeenCalledWith('User HTTP Client', mockClient, {
+        allowedKeys: keys,
+        requiredKeys: keys,
+      });
+    });
+  });
+
   describe('manual auth', () => {
     beforeEach(() => {
       jest.spyOn(Svrf.prototype, 'authenticate').mockResolvedValue();

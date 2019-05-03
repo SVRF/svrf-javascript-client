@@ -32,7 +32,8 @@ class Svrf {
    * @param {String} apiKey - API Key
    * @param {ApiOptions=} options - API options
    */
-  constructor(apiKey, {isManualAuthentication, storage: userStorage} = {}) {
+  constructor(apiKey, {isManualAuthentication, storage: userStorage, client: userClient} = {}) {
+    // Validate that the user's Storage object accepts get, set, and clear methods.
     if (userStorage) {
       const storageKeys = ['get', 'set', 'clear'];
 
@@ -42,9 +43,19 @@ class Svrf {
       });
     }
 
+    // Validate that the custom HTTP client supports GET and POST commands
+    if (userClient) {
+      const methodKeys = ['get', 'post'];
+
+      Validator.validateObjectSchema('User HTTP Client', userClient, {
+        allowedKeys: methodKeys,
+        requiredKeys: methodKeys,
+      });
+    }
+
     const tokenStorage = userStorage || storage;
     const tokenService = new TokenService(tokenStorage);
-    const httpClient = new HttpClient();
+    const httpClient = userClient || new HttpClient();
     this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
     const appTokenHttpClient = new AppTokenHttpClient(this.auth, tokenService);
