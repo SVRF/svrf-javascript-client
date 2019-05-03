@@ -14,7 +14,7 @@ __Trending Media__: Getting the currently [Trending Media] on Svrf is a breeze. 
 
 ## Contributing
 
-We welcome contributions of any kind including new features, bug fixes, and documentation improvements. Please first open an issue describing what you want to build if it is a major change so that we can discuss how to move forward. Otherwise, go ahead and open a pull request for minor changes such as typo fixes and one liners.
+We welcome contributions of any kind including new features, bug fixes, and documentation improvements.  If it is a major change, please open an issue describing what you want to build so that we can discuss how to move forward. Otherwise, go ahead and open a pull request for minor changes such as typo fixes and one-liners.
 
 
 ## Running Tests
