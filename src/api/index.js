@@ -50,8 +50,8 @@ class Svrf {
 
     const tokenStorage = userStorage || storage;
     const tokenService = new TokenService(tokenStorage);
-    this.httpClient = userClient || new HttpClient();
-    this.auth = new AuthApi(this.httpClient, tokenService, apiKey);
+    const httpClient = userClient || HttpClient;
+    this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
     const appTokenHttpClient = AppTokenHttpClient(this.auth, tokenService);
 
