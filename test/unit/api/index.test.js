@@ -1,6 +1,7 @@
 /* eslint-disable no-new */
 
 import Svrf from '../../../src/api';
+import AuthApi from '../../../src/api/auth';
 import Validator from '../../../src/services/validator';
 import MediaApi from '../../../src/api/media';
 import TokenService from '../../../src/services/token';
@@ -45,10 +46,14 @@ describe('Svrf', () => {
   });
 
   describe('providing an http client', () => {
+    beforeEach(() => {
+      AuthApi.mockReset();
+    });
+
     it('accepts a provided http client', () => {
       const mockClient = jest.fn();
-      const s = new Svrf(apiKey, {client: mockClient});
-      expect(s.httpClient).toBe(mockClient);
+      new Svrf(apiKey, {client: mockClient});
+      expect(AuthApi.mock.calls[0][0]).toBe(mockClient);
     });
   });
 

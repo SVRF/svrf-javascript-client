@@ -1,9 +1,8 @@
 import MediaApi from '../../../src/api/media';
-import AppTokenHttpClient from '../../../src/http/app-token-http-client';
+import AttachHeaderService from '../../../src/http/app-token-http-client';
 import TokenService from '../../../src/services/token';
 import QueryService from '../../../src/services/query';
 
-jest.mock('../../../src/http/http-client');
 jest.mock('../../../src/services/token');
 jest.mock('../../../src/api/auth');
 
@@ -14,7 +13,7 @@ describe('media api', () => {
 
   beforeEach(async () => {
     tokenService.getAppToken.mockReturnValue('token');
-    httpClient = AppTokenHttpClient(jest.fn(), tokenService);
+    httpClient = AttachHeaderService(jest.fn(), tokenService);
     api = new MediaApi(httpClient);
   });
 

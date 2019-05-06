@@ -1,7 +1,7 @@
 import AuthApi from './auth';
 import MediaApi from './media';
 
-import AppTokenHttpClient from '../http/app-token-http-client';
+import AttachHeaderService from '../http/app-token-http-client';
 import HttpClient from '../http/http-client';
 
 import TokenService from '../services/token';
@@ -53,13 +53,13 @@ class Svrf {
     const httpClient = userClient || HttpClient;
     this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
-    const appTokenHttpClient = AppTokenHttpClient(this.auth, tokenService);
+    const AttachHeaderService = AttachHeaderService(this.auth, tokenService);
 
     /**
      * MediaApi instance
      * @type {MediaApi}
      */
-    this.media = new MediaApi(appTokenHttpClient);
+    this.media = new MediaApi(AttachHeaderService);
 
     if (!isManualAuthentication) {
       this.authenticate();
