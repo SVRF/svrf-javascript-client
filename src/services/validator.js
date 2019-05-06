@@ -131,12 +131,30 @@ class Validator {
   }
 
   /**
-   * Check is value string or not
+   * Requires value to be a function
+   * @param {any} value - Checked value
+   */
+  static validateFunction(value) {
+    if (!this.isFunction(value)) {
+      throw new TypeError('Function required');
+    }
+  }
+
+  /**
+   * Check if value a string or not
    * @param {any} value - Checked value
    * @returns {boolean} Is value string or not
    */
   static isString(value) {
     return Object.prototype.toString.call(value) === '[object String]';
+  }
+
+  /**
+   * Checks if value is a function
+   * @param {any} value - Checked value
+   */
+  static isFunction(value) {
+    return !!value && typeof value !== 'function';
   }
 }
 

@@ -43,9 +43,9 @@ class Svrf {
       });
     }
 
-    // Validate that the custom HTTP client
-    if (!!userClient && typeof userClient !== 'function') {
-      throw new TypeError('Expected `client` to be a function');
+    // Validate that the custom HTTP client is a function
+    if (userClient) {
+      Validator.validateFunction(userClient);
     }
 
     const tokenStorage = userStorage || storage;
