@@ -50,10 +50,10 @@ class Svrf {
 
     const tokenStorage = userStorage || storage;
     const tokenService = new TokenService(tokenStorage);
-    const httpClient = userClient || HttpClient;
-    this.auth = new AuthApi(httpClient, tokenService, apiKey);
+    let httpClient = userClient || HttpClient;
+    httpClient = AttachHeaderService(httpClient, tokenService);
 
-    const AttachHeaderService = AttachHeaderService(this.auth, tokenService);
+    this.auth = new AuthApi(httpClient, tokenService, apiKey);
 
     /**
      * MediaApi instance
