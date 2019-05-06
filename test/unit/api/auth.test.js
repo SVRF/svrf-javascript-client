@@ -1,7 +1,6 @@
 import AuthApi from '../../../src/api/auth';
 import TokenService from '../../../src/services/token';
 
-jest.mock('../../../src/http/http-client');
 jest.mock('../../../src/services/token');
 
 const apiKey = 'api-key';
@@ -45,9 +44,10 @@ describe('AuthApi', () => {
   it('makes request with proper params', async () => {
     await api.authenticate();
 
-    expect(httpClient).toHaveBeenCalledWith({
-      method: 'post', params: {apiKey: 'api-key'}, qs: {apiKey: 'api-key'}, url: '/app/authenticate',
-    });
+    expect(httpClient).toHaveBeenCalledWith(
+      {method: 'post', url: '/app/authenticate'},
+      {apiKey: 'api-key'}
+    );
   });
 
   it('saves response to the storage', async () => {

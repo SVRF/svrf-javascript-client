@@ -7,8 +7,8 @@ api.defaults.baseURL = BASE_URL;
 /**
  * HTTP client, a wafer-thin wrapper around axios.
  */
-async function HttpClient() {
-  const response = await api(arguments);
+async function HttpClient(...args) {
+  const response = await api(...args);
   return response.data;
 }
 
