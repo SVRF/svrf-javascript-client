@@ -96,7 +96,7 @@ class MediaApi {
     return this.httpClient({
       method: 'get',
       url: `/vr/${id}`,
-      headers: await this.httpClient._headers(),
+      headers: this.httpClient._headers(),
     });
   }
 
@@ -112,7 +112,7 @@ class MediaApi {
     return this.httpClient({
       method: 'get',
       url: '/vr/trending',
-      headers: await this.httpClient._headers(),
+      headers: this.httpClient._headers(),
       params: preparedParams,
       qs: preparedParams, // Request uses qs for params
     });
@@ -137,7 +137,7 @@ class MediaApi {
     return this.httpClient({
       method: 'get',
       url: '/vr/search',
-      headers: await this.httpClient._headers(),
+      headers: this.httpClient._headers(),
       params: fullParams,
       qs: fullParams, // Request uses qs for params
     });
