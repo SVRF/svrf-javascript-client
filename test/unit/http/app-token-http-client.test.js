@@ -1,11 +1,11 @@
-import AttachHeaderService from '../../../src/http/app-token-http-client';
+import MakeAuthenticatedRequests from '../../../src/http/app-token-http-client';
 import AuthApi from '../../../src/api/auth';
 import TokenService from '../../../src/services/token';
 
 jest.mock('../../../src/api/auth');
 jest.mock('../../../src/services/token');
 
-describe('AttachHeaderService', () => {
+describe('MakeAuthenticatedRequests', () => {
   describe('request interceptor', () => {
     const token = 'token';
     const authApi = new AuthApi();
@@ -16,7 +16,7 @@ describe('AttachHeaderService', () => {
 
     beforeAll(() => {
       tokenService.getAppToken.mockReturnValue(token);
-      client = AttachHeaderService(authApi, tokenService);
+      client = MakeAuthenticatedRequests(authApi, tokenService);
       headers = client._headers();
     });
 
