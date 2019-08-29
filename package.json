@@ -27,7 +27,7 @@
     "test:unit": "jest ./test/unit"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -42,6 +42,7 @@
     "eslint": "6.2.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-promise": "^4.1.1",
     "jest": "^24.5.0",
     "jsdoc-to-markdown": "^4.0.1",
     "rimraf": "^2.6.3",
