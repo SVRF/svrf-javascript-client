@@ -1,15 +1,17 @@
 /**
  * App token info storage which uses localStorage
 */
-class LocalStorage {
-  static LOCAL_STORAGE_KEY = 'svrf-app-token';
+export class LocalStorage {
+  constructor(key) {
+    this.key = key;
+  }
 
   /**
    * Gets app token info from the localStorage
    * @returns {Object} App token info
    */
-  static get() {
-    const rawValue = localStorage.getItem(LocalStorage.LOCAL_STORAGE_KEY);
+  get() {
+    const rawValue = localStorage.getItem(this.key);
     return JSON.parse(rawValue);
   }
 
@@ -17,17 +19,20 @@ class LocalStorage {
    * Sets app token info into the localStorage
    * @param {Object} value - App token info
    */
-  static set(value) {
+  set(value) {
     const rawValue = JSON.stringify(value);
-    localStorage.setItem(LocalStorage.LOCAL_STORAGE_KEY, rawValue);
+    localStorage.setItem(this.key, rawValue);
   }
 
   /**
    * Remove app token info from the localStorage
    */
-  static clear() {
-    localStorage.removeItem(LocalStorage.LOCAL_STORAGE_KEY);
+  clear() {
+    localStorage.removeItem(this.key);
   }
 }
 
-export default LocalStorage;
+export const appTokenStorage = new LocalStorage('svrf-app-token');
+export const userTokenStorage = new LocalStorage('svrf-user-token');
+
+export default appTokenStorage;

@@ -42,7 +42,7 @@ class Svrf {
       });
     }
 
-    const tokenStorage = userStorage || storage;
+    const tokenStorage = userStorage || storage.appTokenStorage;
     const tokenService = new TokenService(tokenStorage);
     const httpClient = new HttpClient();
     this.auth = new AuthApi(httpClient, tokenService, apiKey);

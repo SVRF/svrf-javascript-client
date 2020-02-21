@@ -1,16 +1,16 @@
 /**
  * App token info storage which uses memory
 */
-class MemoryStorage {
+export class MemoryStorage {
   /** @private */
-  static appTokenInfo = null;
+  item = null;
 
   /**
    * Get app token info from variable
    * @returns {Object} App token info
    */
   static get() {
-    return MemoryStorage.appTokenInfo;
+    return this.item;
   }
 
   /**
@@ -18,15 +18,18 @@ class MemoryStorage {
    * @param {Object} value - App token info
    */
   static set(value) {
-    MemoryStorage.appTokenInfo = value;
+    this.item = value;
   }
 
   /**
    * Remove app token info from variable
    */
   static clear() {
-    MemoryStorage.appTokenInfo = null;
+    this.item = null;
   }
 }
 
-export default MemoryStorage;
+export const appTokenStorage = new MemoryStorage();
+export const userTokenStorage = new MemoryStorage();
+
+export default appTokenStorage;
