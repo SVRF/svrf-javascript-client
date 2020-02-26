@@ -7,11 +7,12 @@ import {BASE_URL} from '../config';
 class HttpClient {
   /**
    * Create HTTP client
+   * @param {{baseUrl: string}} options - HTTP client options
    */
-  constructor() {
+  constructor({baseUrl = null} = {}) {
     /** @private */
     this.api = axios.create();
-    this.api.defaults.baseURL = BASE_URL;
+    this.api.defaults.baseURL = baseUrl || BASE_URL;
   }
 
   /**
@@ -33,6 +34,17 @@ class HttpClient {
    */
   async post(url, body) {
     const response = await this.api.post(url, body);
+    return response.data;
+  }
+
+  /**
+   * Make custom request
+   * @param {string} method HTTP method to be used
+   * @param {*} url Request URL
+   * @param {*} params Other request params
+   */
+  async request(method, url, params) {
+    const response = await this.api({method, url, ...params});
     return response.data;
   }
 }

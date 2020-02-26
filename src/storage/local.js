@@ -32,7 +32,5 @@ export class LocalStorage {
   }
 }
 
-export const appTokenStorage = new LocalStorage('svrf-app-token');
-export const userTokenStorage = new LocalStorage('svrf-user-token');
-
+const appTokenStorage = new LocalStorage('svrf-app-token');
 export default appTokenStorage;

@@ -8,7 +8,9 @@ import TokenService from '../services/token';
 import Validator from '../services/validator';
 
 import enums from '../enums';
-import storage from '../storage';
+import appTokenStorage from '../storage';
+
+const appTokenVersion = '1';
 
 /**
  * @typedef {Object} ApiOptions
@@ -42,12 +44,11 @@ class Svrf {
       });
     }
 
-    const tokenStorage = userStorage || storage.appTokenStorage;
-    const tokenService = new TokenService(tokenStorage);
+    const appTokenService = new TokenService(userStorage || appTokenStorage, appTokenVersion);
     const httpClient = new HttpClient();
-    this.auth = new AuthApi(httpClient, tokenService, apiKey);
+    this.auth = new AuthApi(httpClient, appTokenService, apiKey);
 
-    const appTokenHttpClient = new AppTokenHttpClient(this.auth, tokenService);
+    const appTokenHttpClient = new AppTokenHttpClient(this.auth, appTokenService);
 
     /**
      * MediaApi instance

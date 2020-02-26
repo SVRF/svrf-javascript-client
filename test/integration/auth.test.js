@@ -7,7 +7,7 @@ const tokenService = new TokenService(storage);
 
 describe('authentication', () => {
   afterEach(() => {
-    tokenService.clearAppTokenInfo();
+    tokenService.clearTokenInfo();
   });
 
   it('authenticates without errors', async () => {

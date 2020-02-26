@@ -29,7 +29,5 @@ export class MemoryStorage {
   }
 }
 
-export const appTokenStorage = new MemoryStorage();
-export const userTokenStorage = new MemoryStorage();
-
+const appTokenStorage = new MemoryStorage();
 export default appTokenStorage;

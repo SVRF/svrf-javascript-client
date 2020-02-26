@@ -2,9 +2,9 @@
  * Authentication API provider
 */
 class AuthApi {
-  constructor(httpClient, tokenService, apiKey) {
+  constructor(httpClient, appTokenService, apiKey) {
     this.httpClient = httpClient;
-    this.tokenService = tokenService;
+    this.appTokenService = appTokenService;
     this.apiKey = apiKey;
   }
 
@@ -13,7 +13,7 @@ class AuthApi {
    * @returns {Promise<void>}
    */
   async authenticate() {
-    if (this.tokenService.isTokenValid()) {
+    if (this.appTokenService.isTokenValid()) {
       return;
     }
 
@@ -28,9 +28,9 @@ class AuthApi {
 
     const response = await this.authPromise;
 
-    this.tokenService.setAppTokenInfo({
-      appToken: response.token,
-      expiresIn: response.expiresIn,
+    this.appTokenService.setTokenInfo({
+      token: response.token,
+      expiresAt: Date.now() + response.expiresIn,
     });
 
     delete this.authPromise;

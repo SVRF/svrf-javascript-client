@@ -9,7 +9,7 @@ describe('media api', () => {
   const api = new Svrf(SVRF_TEST_API_KEY);
 
   afterEach(() => {
-    tokenService.clearAppTokenInfo();
+    tokenService.clearTokenInfo();
   });
 
   const mediaFilesSchema = ['images', 'videos', 'stereo'];

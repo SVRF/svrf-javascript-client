@@ -1,13 +1,17 @@
 /**
- * Service for token storage
+ * Service for token storage and validation
 */
 class TokenService {
   /**
    * @param {Storage} storage - Token storage
+   * @param {string} tokenVersion - Version of token system. It's used to force re-authentication
+   *                                in case something is changed in the auth process.
    */
-  constructor(storage) {
+  constructor(storage, tokenVersion) {
     /** @private */
     this.storage = storage;
+    /** @private */
+    this.tokenVersion = tokenVersion;
   }
 
   /**
@@ -15,41 +19,42 @@ class TokenService {
    * @returns {boolean} Is token valid or not
    */
   isTokenValid() {
-    const {appToken, expirationTime} = this.getInfoFromStorage();
-    const isTokenValid = appToken && expirationTime && (expirationTime > Date.now());
+    const {token, expiresAt, version} = this.getInfoFromStorage();
+    const isTokenValid = token
+      && version === this.version
+      && expiresAt
+      && (expiresAt > Date.now());
 
     return !!isTokenValid;
   }
 
   /**
-   * Get app token from storage
-   * @returns {string} App token
+   * Get token from storage
+   * @returns {string} Token
    */
-  getAppToken() {
-    const {appToken} = this.getInfoFromStorage();
-    return appToken;
+  getToken() {
+    const {token} = this.getInfoFromStorage();
+    return token;
   }
 
   /**
-   * Set app token info to storage
-   * @param {{appToken: string, expiresIn: number}} appTokenInfo - App token info
+   * Set token info to storage
+   * @param {{token: string, expiresAt: number}} tokenInfo - Token info
    */
-  setAppTokenInfo({appToken, expiresIn}) {
-    const expirationTime = Date.now() + expiresIn;
-
-    this.storage.set({appToken, expirationTime});
+  setTokenInfo({token, expiresAt}) {
+    this.storage.set({token, expiresAt, version: this.version});
   }
 
   /**
-   * Clear app token info in storage
+   * Clear token info in storage
    */
-  clearAppTokenInfo() {
+  clearTokenInfo() {
     this.storage.clear();
   }
 
   /**
-   * Get app token info from storage
-   * @returns {{appToken: string, expirationTime: number}} App token info
+   * Get token info from storage
+   * @returns {{token: string, expiresAt: number}} Token info
    */
   getInfoFromStorage() {
     return this.storage.get() || {};
