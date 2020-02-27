@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 
-import Storage from '../../../src/storage';
-import LocalStorage from '../../../src/storage/local';
+import storage from '../../../src/storage';
+import storageLocal from '../../../src/storage/local';
 
 describe('Storage at the browser environment', () => {
   it('chooses local storage', () => {
-    expect(Storage).toEqual(LocalStorage);
+    expect(storage).toEqual(storageLocal);
   });
 });

@@ -1,32 +1,43 @@
-import MemoryStorage from '../../../src/storage/memory';
+import {MemoryStorage} from '../../../src/storage/memory';
 
 const testValue = {a: 1, b: '2'};
 
 describe('MemoryStorage', () => {
+  let storage;
   beforeEach(() => {
-    MemoryStorage.storage = {};
+    storage = new MemoryStorage();
   });
 
   it('gets value', () => {
-    MemoryStorage.appTokenInfo = testValue;
+    storage.data = testValue;
 
-    const value = MemoryStorage.get();
+    const value = storage.get();
     expect(value).toEqual(testValue);
   });
 
   it('sets value', () => {
-    MemoryStorage.set(testValue);
+    storage.set(testValue);
 
-    const value = MemoryStorage.appTokenInfo;
+    const value = storage.data;
     expect(value).toEqual(testValue);
   });
 
   it('clears value', () => {
-    MemoryStorage.appTokenInfo = testValue;
+    storage.data = testValue;
 
-    MemoryStorage.clear();
+    storage.clear();
 
-    const value = MemoryStorage.appTokenInfo;
+    const value = storage.data;
     expect(value).toBeFalsy();
+  });
+
+  it('does not shares data between instances', () => {
+    const anotherStorage = new MemoryStorage();
+    const anotherTestValue = {another: 'test value'};
+
+    storage.set(testValue);
+    anotherStorage.set(anotherTestValue);
+
+    expect(storage.get()).not.toEqual(anotherStorage.get());
   });
 });

@@ -26,7 +26,7 @@ describe('AuthApi', () => {
   it('saves data that is passed to constructor', () => {
     expect(api.apiKey).toBe(apiKey);
     expect(api.httpClient).toBe(httpClient);
-    expect(api.tokenService).toBe(tokenService);
+    expect(api.appTokenService).toBe(tokenService);
   });
 
   it('does not perform request if there is valid token', async () => {
@@ -49,12 +49,16 @@ describe('AuthApi', () => {
     expect(httpClient.post).toHaveBeenCalledWith('/app/authenticate', {apiKey});
   });
 
-  it('saves response to the storage', async () => {
-    httpClient.post.mockResolvedValue({expiresIn, token});
+  it('sets modified response to the storage', async () => {
+    const now = Date.now();
+    jest.spyOn(Date, 'now').mockReturnValue(now);
+    const expiresAt = Date.now() + expiresIn;
 
     await api.authenticate();
 
-    expect(tokenService.setAppTokenInfo).toHaveBeenCalledWith({appToken: token, expiresIn});
+    expect(tokenService.setTokenInfo).toHaveBeenCalledWith({token, expiresAt});
+
+    Date.now.mockRestore();
   });
 
   it('reuses existing promise if a request is in progress', () => {

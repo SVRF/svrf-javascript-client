@@ -33,13 +33,13 @@ describe('Svrf', () => {
         requiredKeys: keys,
       });
 
-      expect(TokenService).toHaveBeenCalledWith(mockStorage);
+      expect(TokenService).toHaveBeenCalledWith(mockStorage, expect.any(String));
     });
 
     it('uses default storage if a storage is not provided', () => {
       new Svrf(apiKey);
 
-      expect(TokenService).toHaveBeenCalledWith(storage);
+      expect(TokenService).toHaveBeenCalledWith(storage, expect.any(String));
     });
   });
 

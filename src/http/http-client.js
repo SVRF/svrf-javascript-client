@@ -44,7 +44,7 @@ class HttpClient {
    * @param {*} params Other request params
    */
   async request(method, url, params) {
-    const response = await this.api({method, url, ...params});
+    const response = await this.api.request({method, url, ...params});
     return response.data;
   }
 }

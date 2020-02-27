@@ -3,11 +3,13 @@ import storage from '../../../src/storage';
 
 jest.mock('../../../src/storage');
 
+const version = '1';
+
 describe('TokenService', () => {
   let tokenService;
 
   beforeAll(() => {
-    tokenService = new TokenService(storage);
+    tokenService = new TokenService(storage, version);
   });
 
   afterEach(() => {
@@ -16,48 +18,45 @@ describe('TokenService', () => {
     storage.clear.mockReset();
   });
 
-  it('gets app token', () => {
-    const appTokenInfo = {appToken: 'appToken'};
-    jest.spyOn(tokenService, 'getInfoFromStorage').mockReturnValue(appTokenInfo);
+  it('gets token', () => {
+    const tokenInfo = {appToken: 'appToken'};
+    jest.spyOn(tokenService, 'getInfoFromStorage').mockReturnValue(tokenInfo);
 
-    const appToken = tokenService.getAppToken();
+    const appToken = tokenService.getToken();
 
     expect(tokenService.getInfoFromStorage).toHaveBeenCalled();
-    expect(appToken).toEqual(appTokenInfo.appToken);
+    expect(appToken).toEqual(tokenInfo.token);
 
     tokenService.getInfoFromStorage.mockRestore();
   });
 
-  it('sets app token info', () => {
-    const now = Date.now();
-    jest.spyOn(Date, 'now').mockReturnValue(now);
+  it('sets token info', () => {
+    const expiresAt = Date.now() + 10000;
 
-    const appTokenInfo = {appToken: 'appToken', expiresIn: 100};
+    const tokenInfo = {token: 'appToken', expiresAt};
 
-    tokenService.setAppTokenInfo(appTokenInfo);
+    tokenService.setTokenInfo(tokenInfo);
 
-    expect(Date.now).toHaveBeenCalled();
     expect(storage.set).toHaveBeenCalledWith({
-      appToken: appTokenInfo.appToken,
-      expirationTime: now + appTokenInfo.expiresIn,
+      token: tokenInfo.token,
+      expiresAt,
+      version,
     });
-
-    Date.now.mockRestore();
   });
 
   it('clears storage', () => {
-    tokenService.clearAppTokenInfo();
+    tokenService.clearTokenInfo();
 
     expect(storage.clear).toHaveBeenCalled();
   });
 
   describe('isTokenValid', () => {
     const now = Date.now();
-    const appTokenInfo = {appToken: 'appToken', expirationTime: 100};
+    const tokenInfo = {token: 'appToken', expiresAt: now + 10000, version};
 
     beforeEach(() => {
       jest.spyOn(Date, 'now').mockReturnValue(now);
-      jest.spyOn(tokenService, 'getInfoFromStorage').mockReturnValue(appTokenInfo);
+      jest.spyOn(tokenService, 'getInfoFromStorage').mockReturnValue(tokenInfo);
     });
 
     afterEach(() => {
@@ -71,32 +70,52 @@ describe('TokenService', () => {
       expect(tokenService.getInfoFromStorage).toHaveBeenCalled();
     });
 
-    it('returns false if appToken is not defined', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({expiresIn: 100});
-      const isTokenValid = tokenService.isTokenValid();
-
-      expect(isTokenValid).toEqual(false);
-    });
-
-    it('returns false if expirationTime is not defined', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({appToken: 'appToken'});
-      const isTokenValid = tokenService.isTokenValid();
-
-      expect(isTokenValid).toEqual(false);
-    });
-
-    it('returns false if expiration time is less than current time', () => {
-      Date.now.mockReturnValue(150);
-      const isTokenValid = tokenService.isTokenValid();
-
-      expect(isTokenValid).toEqual(false);
-    });
-
-    it('returns true if expiration time is bigger than current time', () => {
-      Date.now.mockReturnValue(50);
+    it('returns true if everything is ok', () => {
       const isTokenValid = tokenService.isTokenValid();
 
       expect(isTokenValid).toEqual(true);
+    });
+
+    it('returns false if appToken is not defined', () => {
+      tokenService.getInfoFromStorage.mockReturnValue({expiresAt: tokenInfo.expiresAt, version});
+      const isTokenValid = tokenService.isTokenValid();
+
+      expect(isTokenValid).toEqual(false);
+    });
+
+    it('returns false if expiresAt is not defined', () => {
+      tokenService.getInfoFromStorage.mockReturnValue({token: tokenInfo.token, version});
+      const isTokenValid = tokenService.isTokenValid();
+
+      expect(isTokenValid).toEqual(false);
+    });
+
+    it('returns false if expiresAt is less than current time', () => {
+      Date.now.mockReturnValue(tokenInfo.expiresAt + 100);
+      const isTokenValid = tokenService.isTokenValid();
+
+      expect(isTokenValid).toEqual(false);
+    });
+
+    it('returns false if a version is not provided', () => {
+      tokenService.getInfoFromStorage.mockReturnValue({
+        expiresAt: tokenInfo.expiresAt,
+        token: tokenInfo.token,
+      });
+      const isTokenValid = tokenService.isTokenValid();
+
+      expect(isTokenValid).toEqual(false);
+    });
+
+    it('returns false if a version does not match current version', () => {
+      tokenService.getInfoFromStorage.mockReturnValue({
+        expiresAt: tokenInfo.expiresAt,
+        token: tokenInfo.token,
+        version: `${version} new`,
+      });
+      const isTokenValid = tokenService.isTokenValid();
+
+      expect(isTokenValid).toEqual(false);
     });
   });
 
@@ -108,7 +127,7 @@ describe('TokenService', () => {
     });
 
     it('returns an object which was returned by storage', () => {
-      const testObject = {ket: 'value'};
+      const testObject = {key: 'value'};
 
       storage.get.mockReturnValue(testObject);
 

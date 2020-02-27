@@ -1,9 +1,12 @@
-import LocalStorage from '../../../src/storage/local';
+import {LocalStorage} from '../../../src/storage/local';
 
 const testValueString = '{a: 1, b: "2"}';
 const testValue = {a: 1, b: '2'};
 
 describe('LocalStorage', () => {
+  const key = 'local-storage-key';
+  let storage;
+
   beforeAll(() => {
     // It's impossible to mock localStorage methods directly in the jsdom:
     // https://github.com/facebook/jest/issues/6798
@@ -15,6 +18,8 @@ describe('LocalStorage', () => {
     jest.spyOn(JSON, 'parse').mockReturnValue(testValue);
     jest.spyOn(JSON, 'stringify').mockReturnValue(testValueString);
   });
+
+  beforeEach(() => { storage = new LocalStorage(key); });
 
   afterEach(() => {
     localStorage.getItem.mockClear();
@@ -35,24 +40,24 @@ describe('LocalStorage', () => {
   });
 
   it('gets value', () => {
-    const value = LocalStorage.get();
+    const value = storage.get();
 
     expect(value).toEqual(testValue);
     expect(JSON.parse).toHaveBeenCalledWith(testValueString);
-    expect(localStorage.getItem).toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY);
+    expect(localStorage.getItem).toHaveBeenCalledWith(key);
   });
 
   it('sets value', () => {
-    LocalStorage.set(testValue);
+    storage.set(testValue);
 
     expect(JSON.stringify).toHaveBeenCalledWith(testValue);
     expect(localStorage.setItem)
-      .toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY, testValueString);
+      .toHaveBeenCalledWith(key, testValueString);
   });
 
   it('clears value', () => {
-    LocalStorage.clear();
+    storage.clear();
 
-    expect(localStorage.removeItem).toHaveBeenCalledWith(LocalStorage.LOCAL_STORAGE_KEY);
+    expect(localStorage.removeItem).toHaveBeenCalledWith(key);
   });
 });

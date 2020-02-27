@@ -11,7 +11,7 @@ class TokenService {
     /** @private */
     this.storage = storage;
     /** @private */
-    this.tokenVersion = tokenVersion;
+    this.version = tokenVersion;
   }
 
   /**

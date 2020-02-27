@@ -13,22 +13,22 @@ describe('AppTokenHttpClient', () => {
     const tokenService = new TokenService();
 
     beforeAll(() => {
-      tokenService.getAppToken.mockReturnValue(token);
+      tokenService.getToken.mockReturnValue(token);
       const client = new AppTokenHttpClient(authApi, tokenService);
 
       client.api.interceptors.request.handlers.forEach((h) => h.fulfilled(request));
     });
 
     afterAll(() => {
-      tokenService.getAppToken.mockReset();
+      tokenService.getToken.mockReset();
     });
 
     it('invokes auth api authenticate method in request interceptor', () => {
       expect(authApi.authenticate).toHaveBeenCalled();
     });
 
-    it('invokes token service getAppToken method in request interceptor', () => {
-      expect(tokenService.getAppToken).toHaveBeenCalled();
+    it('invokes token service getToken method in request interceptor', () => {
+      expect(tokenService.getToken).toHaveBeenCalled();
     });
 
     it('puts x-app-token header', () => {
