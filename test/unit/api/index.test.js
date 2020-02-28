@@ -5,6 +5,8 @@ import Validator from '../../../src/services/validator';
 import MediaApi from '../../../src/api/media';
 import TokenService from '../../../src/services/token';
 import storage from '../../../src/storage';
+import HttpClient from '../../../src/http/http-client';
+import AppTokenHttpClient from '../../../src/http/app-token-http-client';
 
 jest.mock('../../../src/services/validator');
 jest.mock('../../../src/services/token');
@@ -20,6 +22,22 @@ describe('Svrf', () => {
 
     expect(api.media).toBeInstanceOf(MediaApi);
     expect(api.authenticate).toBeDefined();
+  });
+
+  it('passes baseUrl to HttpClient', () => {
+    const options = {isManualAuthentication: true, baseUrl: 'https://google.com'};
+    new Svrf(apiKey, options);
+
+    expect(HttpClient).toHaveBeenCalledWith({baseUrl: options.baseUrl});
+  });
+
+  it('passes all necessary params to AppTokenHttpClient', () => {
+    const options = {isManualAuthentication: true, baseUrl: 'https://google.com'};
+    const api = new Svrf(apiKey, options);
+
+    expect(AppTokenHttpClient).toHaveBeenCalledWith(
+      api.auth, expect.any(TokenService), {baseUrl: options.baseUrl},
+    );
   });
 
   describe('providing a storage', () => {
