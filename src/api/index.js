@@ -34,7 +34,7 @@ class Svrf {
    * @param {String} apiKey - API Key
    * @param {ApiOptions=} options - API options
    */
-  constructor(apiKey, {isManualAuthentication, storage: userStorage} = {}) {
+  constructor(apiKey, {isManualAuthentication, storage: userStorage, baseUrl} = {}) {
     if (userStorage) {
       const storageKeys = ['get', 'set', 'clear'];
 
@@ -45,16 +45,16 @@ class Svrf {
     }
 
     const appTokenService = new TokenService(userStorage || appTokenStorage, appTokenVersion);
-    const httpClient = new HttpClient();
+    const httpClient = new HttpClient({baseUrl});
     this.auth = new AuthApi(httpClient, appTokenService, apiKey);
 
-    const appTokenHttpClient = new AppTokenHttpClient(this.auth, appTokenService);
+    this.appTokenHttpClient = new AppTokenHttpClient(this.auth, appTokenService, {baseUrl});
 
     /**
      * MediaApi instance
      * @type {MediaApi}
      */
-    this.media = new MediaApi(appTokenHttpClient);
+    this.media = new MediaApi(this.appTokenHttpClient);
 
     if (!isManualAuthentication) {
       this.authenticate();
@@ -68,6 +68,14 @@ class Svrf {
    */
   authenticate() {
     return this.auth.authenticate();
+  }
+
+  /**
+   * Method for custom requests (probably with custom HTTP client).
+   * @private
+   */
+  request(method, url, {httpClient = this.appTokenHttpClient, ...requestOptions} = {}) {
+    return httpClient.request(method, url, requestOptions);
   }
 }
 

@@ -9,6 +9,8 @@ import storage from '../../../src/storage';
 jest.mock('../../../src/services/validator');
 jest.mock('../../../src/services/token');
 jest.mock('../../../src/api/auth');
+jest.mock('../../../src/http/http-client');
+jest.mock('../../../src/http/app-token-http-client');
 
 describe('Svrf', () => {
   const apiKey = 'key';
@@ -62,6 +64,32 @@ describe('Svrf', () => {
       const api = new Svrf(apiKey, {isManualAuthentication: true});
 
       expect(api.authenticate).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('custom request', () => {
+    const api = new Svrf(apiKey);
+
+    const method = 'get';
+    const url = 'https://google.com';
+    const options = {query: {a: 1}};
+
+    afterEach(() => {
+      api.appTokenHttpClient.request.mockClear();
+    });
+
+    it('calls appTokenHttpClient by default with provided options', async () => {
+      await api.request(method, url, options);
+
+      expect(api.appTokenHttpClient.request).toHaveBeenCalledWith(method, url, options);
+    });
+
+    it('uses custom http client', async () => {
+      const httpClient = {request: jest.fn()};
+      await api.request(method, url, {...options, httpClient});
+
+      expect(api.appTokenHttpClient.request).not.toHaveBeenCalled();
+      expect(httpClient.request).toHaveBeenCalledWith(method, url, options);
     });
   });
 });

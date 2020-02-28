@@ -41,10 +41,10 @@ class HttpClient {
    * Make custom request
    * @param {string} method HTTP method to be used
    * @param {*} url Request URL
-   * @param {*} params Other request params
+   * @param {*} options Other request options
    */
-  async request(method, url, params) {
-    const response = await this.api.request({method, url, ...params});
+  async request(method, url, options) {
+    const response = await this.api.request({method, url, ...options});
     return response.data;
   }
 }

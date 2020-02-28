@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom request svrf.request uses provided http client 1`] = `"Request failed with status code 401"`;
