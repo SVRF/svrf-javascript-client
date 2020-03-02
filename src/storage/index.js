@@ -1,7 +1,12 @@
-import storageLocal from './local';
-import memoryStorage from './memory';
+import storageLocal, {LocalStorage} from './local';
+import memoryStorage, {MemoryStorage} from './memory';
+
+const isMemoryStorage = typeof localStorage === 'undefined';
+
+/** @constant Storage class for creating custom storage */
+export const Storage = isMemoryStorage ? MemoryStorage : LocalStorage;
 
 /** @constant {Storage} App token info storage */
-const storage = typeof localStorage === 'undefined' ? memoryStorage : storageLocal;
+const appTokenStorage = isMemoryStorage ? memoryStorage : storageLocal;
 
-export default storage;
+export default appTokenStorage;
