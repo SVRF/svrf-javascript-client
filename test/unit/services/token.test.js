@@ -3,13 +3,11 @@ import storage from '../../../src/storage';
 
 jest.mock('../../../src/storage');
 
-const version = '1';
-
 describe('TokenService', () => {
   let tokenService;
 
   beforeAll(() => {
-    tokenService = new TokenService(storage, version);
+    tokenService = new TokenService(storage);
   });
 
   afterEach(() => {
@@ -40,7 +38,6 @@ describe('TokenService', () => {
     expect(storage.set).toHaveBeenCalledWith({
       token: tokenInfo.token,
       expiresAt,
-      version,
     });
   });
 
@@ -52,7 +49,7 @@ describe('TokenService', () => {
 
   describe('isTokenValid', () => {
     const now = Date.now();
-    const tokenInfo = {token: 'appToken', expiresAt: now + 10000, version};
+    const tokenInfo = {token: 'appToken', expiresAt: now + 10000};
 
     beforeEach(() => {
       jest.spyOn(Date, 'now').mockReturnValue(now);
@@ -77,14 +74,14 @@ describe('TokenService', () => {
     });
 
     it('returns false if appToken is not defined', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({expiresAt: tokenInfo.expiresAt, version});
+      tokenService.getInfoFromStorage.mockReturnValue({expiresAt: tokenInfo.expiresAt});
       const isTokenValid = tokenService.isTokenValid();
 
       expect(isTokenValid).toEqual(false);
     });
 
     it('returns false if expiresAt is not defined', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({token: tokenInfo.token, version});
+      tokenService.getInfoFromStorage.mockReturnValue({token: tokenInfo.token});
       const isTokenValid = tokenService.isTokenValid();
 
       expect(isTokenValid).toEqual(false);
@@ -92,27 +89,6 @@ describe('TokenService', () => {
 
     it('returns false if expiresAt is less than current time', () => {
       Date.now.mockReturnValue(tokenInfo.expiresAt + 100);
-      const isTokenValid = tokenService.isTokenValid();
-
-      expect(isTokenValid).toEqual(false);
-    });
-
-    it('returns false if a version is not provided', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({
-        expiresAt: tokenInfo.expiresAt,
-        token: tokenInfo.token,
-      });
-      const isTokenValid = tokenService.isTokenValid();
-
-      expect(isTokenValid).toEqual(false);
-    });
-
-    it('returns false if a version does not match current version', () => {
-      tokenService.getInfoFromStorage.mockReturnValue({
-        expiresAt: tokenInfo.expiresAt,
-        token: tokenInfo.token,
-        version: `${version} new`,
-      });
       const isTokenValid = tokenService.isTokenValid();
 
       expect(isTokenValid).toEqual(false);

@@ -4,14 +4,10 @@
 class TokenService {
   /**
    * @param {Storage} storage - Token storage
-   * @param {string} tokenVersion - Version of token system. It's used to force re-authentication
-   *                                in case something is changed in the auth process.
    */
-  constructor(storage, tokenVersion) {
+  constructor(storage) {
     /** @private */
     this.storage = storage;
-    /** @private */
-    this.version = tokenVersion;
   }
 
   /**
@@ -19,9 +15,8 @@ class TokenService {
    * @returns {boolean} Is token valid or not
    */
   isTokenValid() {
-    const {token, expiresAt, version} = this.getInfoFromStorage();
+    const {token, expiresAt} = this.getInfoFromStorage();
     const isTokenValid = token
-      && version === this.version
       && expiresAt
       && (expiresAt > Date.now());
 
@@ -42,7 +37,7 @@ class TokenService {
    * @param {{token: string, expiresAt: number}} tokenInfo - Token info
    */
   setTokenInfo({token, expiresAt}) {
-    this.storage.set({token, expiresAt, version: this.version});
+    this.storage.set({token, expiresAt});
   }
 
   /**

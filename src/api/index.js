@@ -10,8 +10,6 @@ import Validator from '../services/validator';
 import enums from '../enums';
 import appTokenStorage from '../storage';
 
-const appTokenVersion = '1';
-
 /**
  * @typedef {Object} ApiOptions
  * @prop {boolean} isManualAuthentication - pass this option if you want to call api.authenticate
@@ -44,7 +42,7 @@ class Svrf {
       });
     }
 
-    const appTokenService = new TokenService(userStorage || appTokenStorage, appTokenVersion);
+    const appTokenService = new TokenService(userStorage || appTokenStorage);
     const httpClient = new HttpClient({baseUrl});
     this.auth = new AuthApi(httpClient, appTokenService, apiKey);
 
